@@ -37,21 +37,21 @@ import org.joml.Vector2fc;
 
 /**
  * Represents a 2D circle using double-precision floating-point numbers.
- * 
+ *
  * @author Kai Burjack
  */
-public class Circled implements Externalizable {
+public class Circled implements Externalizable, Circledc {
 
     /**
      * The x coordiante of the circle's center.
      */
     public double x;
-    
+
     /**
      * The y coordiante of the circle's center.
      */
     public double y;
-    
+
     /**
      * The radius of the circle.
      */
@@ -65,7 +65,7 @@ public class Circled implements Externalizable {
 
     /**
      * Create a new {@link Circled} as a copy of the given <code>source</code>.
-     * 
+     *
      * @param source
      *          the {@link Circled} to copy from
      */
@@ -77,7 +77,7 @@ public class Circled implements Externalizable {
 
     /**
      * Create a new {@link Circled} with center position <code>(x, y)</code> and radius <code>r</code>.
-     * 
+     *
      * @param x
      *          the x coordinate of the circle's center
      * @param y
@@ -93,7 +93,7 @@ public class Circled implements Externalizable {
 
     /**
      * Translate <code>this</code> by the given vector <code>xy</code>.
-     * 
+     *
      * @param xy
      *          the vector to translate by
      * @return this
@@ -104,7 +104,7 @@ public class Circled implements Externalizable {
 
     /**
      * Translate <code>this</code> by the given vector <code>xy</code> and store the result in <code>dest</code>.
-     * 
+     *
      * @param xy
      *          the vector to translate by
      * @param dest
@@ -117,7 +117,7 @@ public class Circled implements Externalizable {
 
     /**
      * Translate <code>this</code> by the given vector <code>xy</code>.
-     * 
+     *
      * @param xy
      *          the vector to translate by
      * @return this
@@ -128,7 +128,7 @@ public class Circled implements Externalizable {
 
     /**
      * Translate <code>this</code> by the given vector <code>xy</code> and store the result in <code>dest</code>.
-     * 
+     *
      * @param xy
      *          the vector to translate by
      * @param dest
@@ -141,7 +141,7 @@ public class Circled implements Externalizable {
 
     /**
      * Translate <code>this</code> by the vector <code>(x, y)</code>.
-     * 
+     *
      * @param x
      *          the x coordinate to translate by
      * @param y
@@ -154,7 +154,7 @@ public class Circled implements Externalizable {
 
     /**
      * Translate <code>this</code> by the vector <code>(x, y)</code> and store the result in <code>dest</code>.
-     * 
+     *
      * @param x
      *          the x coordinate to translate by
      * @param y
@@ -203,7 +203,7 @@ public class Circled implements Externalizable {
      * Return a string representation of this circle.
      * <p>
      * This method creates a new {@link DecimalFormat} on every invocation with the format string "<code>0.000E0;-</code>".
-     * 
+     *
      * @return the string representation
      */
     public String toString() {
@@ -212,7 +212,7 @@ public class Circled implements Externalizable {
 
     /**
      * Return a string representation of this circle by formatting the vector components with the given {@link NumberFormat}.
-     * 
+     *
      * @param formatter
      *          the {@link NumberFormat} used to format the components with
      * @return the string representation

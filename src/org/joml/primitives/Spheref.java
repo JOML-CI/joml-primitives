@@ -32,14 +32,16 @@ import java.text.NumberFormat;
 
 import org.joml.Options;
 import org.joml.Runtime;
+import org.joml.Vector2d;
+import org.joml.Vector3dc;
 import org.joml.Vector3fc;
 
 /**
  * Represents a 3D sphere.
- * 
+ *
  * @author Kai Burjack
  */
-public class Spheref implements Externalizable {
+public class Spheref implements Externalizable, Spherefc {
 
     /**
      * The x coordinate of the sphere's center.
@@ -66,7 +68,7 @@ public class Spheref implements Externalizable {
 
     /**
      * Create a new {@link Spheref} as a copy of the given <code>source</code>.
-     * 
+     *
      * @param source
      *          the {@link Spheref} to copy from
      */
@@ -79,7 +81,7 @@ public class Spheref implements Externalizable {
 
     /**
      * Create a new {@link Spheref} with center position <code>c</code> and radius <code>r</code>.
-     * 
+     *
      * @param c
      *          the center position of the sphere
      * @param r
@@ -94,7 +96,7 @@ public class Spheref implements Externalizable {
 
     /**
      * Create a new {@link Spheref} with center position <code>(x, y, z)</code> and radius <code>r</code>.
-     * 
+     *
      * @param x
      *          the x coordinate of the sphere's center
      * @param y
@@ -111,9 +113,25 @@ public class Spheref implements Externalizable {
         this.r = r;
     }
 
+    public float x() {
+        return this.x;
+    }
+
+    public float y() {
+        return this.y;
+    }
+
+    public float z() {
+        return this.z;
+    }
+
+    public float r() {
+        return this.r;
+    }
+
     /**
      * Translate <code>this</code> by the given vector <code>xyz</code>.
-     * 
+     *
      * @param xyz
      *          the vector to translate by
      * @return this
@@ -122,22 +140,14 @@ public class Spheref implements Externalizable {
         return translate(xyz.x(), xyz.y(), xyz.z(), this);
     }
 
-    /**
-     * Translate <code>this</code> by the given vector <code>xyz</code> and store the result in <code>dest</code>.
-     * 
-     * @param xyz
-     *          the vector to translate by
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
+
     public Spheref translate(Vector3fc xyz, Spheref dest) {
         return translate(xyz.x(), xyz.y(), xyz.z(), dest);
     }
 
     /**
      * Translate <code>this</code> by the vector <code>(x, y, z)</code>.
-     * 
+     *
      * @param x
      *          the x coordinate to translate by
      * @param y
@@ -150,24 +160,76 @@ public class Spheref implements Externalizable {
         return translate(x, y, z, this);
     }
 
-    /**
-     * Translate <code>this</code> by the vector <code>(x, y, z)</code> and store the result in <code>dest</code>.
-     * 
-     * @param x
-     *          the x coordinate to translate by
-     * @param y
-     *          the y coordinate to translate by
-     * @param z
-     *          the z coordinate to translate by
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
     public Spheref translate(float x, float y, float z, Spheref dest) {
         dest.x = this.x + x;
         dest.y = this.y + y;
         dest.z = this.z + z;
         return dest;
+    }
+
+
+    public boolean containsPoint(double x, double y, double z) {
+        return false;
+    }
+
+    public boolean containsPoint(float x, float y, float z) {
+        return false;
+    }
+
+    public boolean containsPoint(Vector3dc point) {
+        return false;
+    }
+
+    public boolean intersectsPlane(double a, double b, double c, double d) {
+        return false;
+    }
+
+    public boolean intersectsPlane(Planed plane) {
+        return false;
+    }
+
+    public boolean intersectsAABB(AABBdc other) {
+        return false;
+    }
+
+    public boolean intersectsAABB(AABBfc other) {
+        return false;
+    }
+
+    public boolean intersectsAABB(AABBd other) {
+        return false;
+    }
+
+    public boolean intersectsSphere(double centerX, double centerY, double centerZ, double radiusSquared) {
+        return false;
+    }
+
+    public boolean intersectsSphere(Spheref sphere) {
+        return false;
+    }
+
+    public boolean intersectsRay(double originX, double originY, double originZ, double dirX, double dirY, double dirZ) {
+        return false;
+    }
+
+    public boolean intersectsRay(Rayd ray) {
+        return false;
+    }
+
+    public boolean intersectsRay(double originX, double originY, double originZ, double dirX, double dirY, double dirZ, Vector2d result) {
+        return false;
+    }
+
+    public boolean intersectsRay(Rayd ray, Vector2d result) {
+        return false;
+    }
+
+    public int intersectsLineSegment(double p0X, double p0Y, double p0Z, double p1X, double p1Y, double p1Z, Vector2d result) {
+        return 0;
+    }
+
+    public int intersectsLineSegment(LineSegmentf lineSegment, Vector2d result) {
+        return 0;
     }
 
     public int hashCode() {
@@ -203,7 +265,7 @@ public class Spheref implements Externalizable {
      * Return a string representation of this sphere.
      * <p>
      * This method creates a new {@link DecimalFormat} on every invocation with the format string "<code>0.000E0;-</code>".
-     * 
+     *
      * @return the string representation
      */
     public String toString() {
@@ -212,7 +274,7 @@ public class Spheref implements Externalizable {
 
     /**
      * Return a string representation of this sphere by formatting the components with the given {@link NumberFormat}.
-     * 
+     *
      * @param formatter
      *          the {@link NumberFormat} used to format the components with
      * @return the string representation
@@ -234,5 +296,4 @@ public class Spheref implements Externalizable {
         z = in.readFloat();
         r = in.readFloat();
     }
-
 }

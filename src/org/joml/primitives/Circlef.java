@@ -36,21 +36,21 @@ import org.joml.Vector2fc;
 
 /**
  * Represents a 2D circle using single-precision floating-point numbers.
- * 
+ *
  * @author Kai Burjack
  */
-public class Circlef implements Externalizable {
+public class Circlef implements Externalizable, Circlefc {
 
     /**
      * The x coordiante of the circle's center.
      */
     public float x;
-    
+
     /**
      * The y coordiante of the circle's center.
      */
     public float y;
-    
+
     /**
      * The radius of the circle.
      */
@@ -64,7 +64,7 @@ public class Circlef implements Externalizable {
 
     /**
      * Create a new {@link Circlef} as a copy of the given <code>source</code>.
-     * 
+     *
      * @param source
      *          the {@link Circlef} to copy from
      */
@@ -76,7 +76,7 @@ public class Circlef implements Externalizable {
 
     /**
      * Create a new {@link Circlef} with center position <code>(x, y)</code> and radius <code>r</code>.
-     * 
+     *
      * @param x
      *          the x coordinate of the circle's center
      * @param y
@@ -92,7 +92,7 @@ public class Circlef implements Externalizable {
 
     /**
      * Translate <code>this</code> by the given vector <code>xy</code>.
-     * 
+     *
      * @param xy
      *          the vector to translate by
      * @return this
@@ -103,7 +103,7 @@ public class Circlef implements Externalizable {
 
     /**
      * Translate <code>this</code> by the given vector <code>xy</code> and store the result in <code>dest</code>.
-     * 
+     *
      * @param xy
      *          the vector to translate by
      * @param dest
@@ -116,7 +116,7 @@ public class Circlef implements Externalizable {
 
     /**
      * Translate <code>this</code> by the vector <code>(x, y)</code>.
-     * 
+     *
      * @param x
      *          the x coordinate to translate by
      * @param y
@@ -129,7 +129,7 @@ public class Circlef implements Externalizable {
 
     /**
      * Translate <code>this</code> by the vector <code>(x, y)</code> and store the result in <code>dest</code>.
-     * 
+     *
      * @param x
      *          the x coordinate to translate by
      * @param y
@@ -142,6 +142,27 @@ public class Circlef implements Externalizable {
         dest.x = this.x + x;
         dest.y = this.y + y;
         return dest;
+    }
+
+
+    public boolean intersectsRectangle(Rectangledc other) {
+        return false;
+    }
+
+    public boolean intersectsRectangle(Rectanglefc other) {
+        return false;
+    }
+
+    public boolean intersectsRectangle(Rectangleic other) {
+        return false;
+    }
+
+    public boolean intersectsCircle(Circlefc other) {
+        return false;
+    }
+
+    public boolean intersectsCircle(Circledc other) {
+        return false;
     }
 
     public int hashCode() {
@@ -174,7 +195,7 @@ public class Circlef implements Externalizable {
      * Return a string representation of this circle.
      * <p>
      * This method creates a new {@link DecimalFormat} on every invocation with the format string "<code>0.000E0;-</code>".
-     * 
+     *
      * @return the string representation
      */
     public String toString() {
@@ -183,7 +204,7 @@ public class Circlef implements Externalizable {
 
     /**
      * Return a string representation of this circle by formatting the vector components with the given {@link NumberFormat}.
-     * 
+     *
      * @param formatter
      *          the {@link NumberFormat} used to format the components with
      * @return the string representation

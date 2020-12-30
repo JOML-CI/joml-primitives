@@ -39,10 +39,10 @@ import org.joml.Vector2ic;
 
 /**
  * Represents a 2D axis-aligned rectangle.
- * 
+ *
  * @author Kai Burjack
  */
-public class Rectanglei implements Externalizable {
+public class Rectanglei implements Externalizable, Rectangleic {
 
     /**
      * The x coordinate of the minimum corner.
@@ -69,7 +69,7 @@ public class Rectanglei implements Externalizable {
 
     /**
      * Create a new {@link Rectanglei} as a copy of the given <code>source</code>.
-     * 
+     *
      * @param source
      *          the {@link Rectanglei} to copy from
      */
@@ -82,7 +82,7 @@ public class Rectanglei implements Externalizable {
 
     /**
      * Create a new {@link Rectanglei} with the given <code>min</code> and <code>max</code> corner coordinates.
-     * 
+     *
      * @param min
      *          the minimum coordinates
      * @param max
@@ -97,7 +97,7 @@ public class Rectanglei implements Externalizable {
 
     /**
      * Create a new {@link Rectanglei} with the given minimum and maximum corner coordinates.
-     * 
+     *
      * @param minX
      *          the x coordinate of the minimum corner
      * @param minY
@@ -114,6 +114,22 @@ public class Rectanglei implements Externalizable {
         this.maxY = maxY;
     }
 
+    public int minX() {
+        return this.minX;
+    }
+
+    public int minY() {
+        return this.minY;
+    }
+
+    public int maxX() {
+        return this.maxX;
+    }
+
+    public int maxY() {
+        return this.maxY;
+    }
+
     /**
      * Set this {@link Rectanglei} to be a clone of <code>source</code>.
      *
@@ -121,11 +137,11 @@ public class Rectanglei implements Externalizable {
      *            the {@link Rectanglei} to copy from
      * @return this
      */
-    public Rectanglei set(Rectanglei source){
-        this.minX = source.minX;
-        this.minY = source.minY;
-        this.maxX = source.maxX;
-        this.maxY = source.maxY;
+    public Rectanglei set(Rectangleic source){
+        this.minX = source.minX();
+        this.minY = source.minY();
+        this.maxX = source.maxX();
+        this.maxY = source.maxY();
         return this;
     }
 
@@ -190,6 +206,7 @@ public class Rectanglei implements Externalizable {
      * Return the length of the rectangle in the X dimension.
      *
      * @return length in the X dimension
+     * @deprecated use {@link #getSizeX()}
      */
     public int lengthX() {
         return maxX - minX;
@@ -199,18 +216,22 @@ public class Rectanglei implements Externalizable {
      * Return the length of the rectangle in the Y dimension.
      *
      * @return length in the Y dimension
+     * @deprecated use {@link #getSizeY()}
      */
     public int lengthY() {
         return maxY - minY;
     }
 
-    /**
-     * Return the area of the rectangle
-     *
-     * @return area
-     */
+    public int getSizeX() {
+        return maxX - minX;
+    }
+
+    public int getSizeY() {
+        return maxY - minY;
+    }
+
     public int area() {
-        return lengthX() * lengthY();
+        return getSizeX() * getSizeY();
     }
 
     /**
@@ -238,17 +259,7 @@ public class Rectanglei implements Externalizable {
         return union(p.x(), p.y(), this);
     }
 
-    /**
-     * Compute the union of <code>this</code> and the given point <code>(x, y, z)</code> and store the result in <code>dest</code>.
-     *
-     * @param x
-     *          the x coordinate of the point
-     * @param y
-     *          the y coordinate of the point
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
+
     public Rectanglei union(int x, int y, Rectanglei dest) {
         dest.minX = this.minX < x ? this.minX : x;
         dest.minY = this.minY < y ? this.minY : y;
@@ -257,15 +268,6 @@ public class Rectanglei implements Externalizable {
         return dest;
     }
 
-    /**
-     * Compute the union of <code>this</code> and the given point <code>p</code> and store the result in <code>dest</code>.
-     *
-     * @param p
-     *          the point
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
     public Rectanglei union(Vector2ic p, Rectanglei dest) {
         return union(p.x(), p.y(), dest);
     }
@@ -281,15 +283,7 @@ public class Rectanglei implements Externalizable {
         return this.union(other, this);
     }
 
-    /**
-     * Compute the union of <code>this</code> and <code>other</code> and store the result in <code>dest</code>.
-     *
-     * @param other
-     *          the other {@link Rectanglei}
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
+
     public Rectanglei union(Rectanglei other, Rectanglei dest) {
         dest.minX = this.minX < other.minX ? this.minX : other.minX;
         dest.minY = this.minY < other.minY ? this.minY : other.minY;
@@ -299,40 +293,19 @@ public class Rectanglei implements Externalizable {
     }
 
 
-    /**
-     * Check if this and the given rectangle intersect.
-     * 
-     * @param other
-     *          the other rectangle
-     * @return <code>true</code> iff both rectangles intersect; <code>false</code> otherwise
-     */
-    public boolean intersectsRectangle(Rectangled other) {
-        return minX <= other.maxX && maxX >= other.minX &&
-               maxY >= other.minY && minY <= other.maxY;
+    public boolean intersectsRectangle(Rectangledc other) {
+        return minX <= other.maxX() && maxX >= other.minX() &&
+               maxY >= other.minY() && minY <= other.maxY();
     }
 
-    /**
-     * Check if this and the given rectangle intersect.
-     * 
-     * @param other
-     *          the other rectangle
-     * @return <code>true</code> iff both rectangles intersect; <code>false</code> otherwise
-     */
-    public boolean intersectsRectangle(Rectanglef other) {
-        return minX <= other.maxX && maxX >= other.minX &&
-               maxY >= other.minY && minY <= other.maxY;
+    public boolean intersectsRectangle(Rectanglefc other) {
+        return minX <= other.maxX() && maxX >= other.minX() &&
+               maxY >= other.minY() && minY <= other.maxY();
     }
 
-    /**
-     * Check if this and the given rectangle intersect.
-     * 
-     * @param other
-     *          the other rectangle
-     * @return <code>true</code> iff both rectangles intersect; <code>false</code> otherwise
-     */
-    public boolean intersectsRectangle(Rectanglei other) {
-        return minX <= other.maxX && maxX >= other.minX &&
-               maxY >= other.minY && minY <= other.maxY;
+    public boolean intersectsRectangle(Rectangleic other) {
+        return minX <= other.maxX() && maxX >= other.minX() &&
+               maxY >= other.minY() && minY <= other.maxY();
     }
 
     private Rectanglei validate() {
@@ -347,7 +320,7 @@ public class Rectanglei implements Externalizable {
 
     /**
      * Check whether <code>this</code> rectangle represents a valid rectangle.
-     * 
+     *
      * @return <code>true</code> iff this rectangle is valid; <code>false</code> otherwise
      */
     public boolean isValid() {
@@ -358,9 +331,9 @@ public class Rectanglei implements Externalizable {
      * Compute the rectangle of intersection between <code>this</code> and the given rectangle.
      * <p>
      * If the two rectangles do not intersect, then the minimum coordinates of <code>this</code>
-     * will have a value of {@link Integer#MAX_VALUE} and the maximum coordinates will have a value of 
+     * will have a value of {@link Integer#MAX_VALUE} and the maximum coordinates will have a value of
      * {@link Integer#MIN_VALUE}.
-     * 
+     *
      * @param other
      *          the other rectangle
      * @return this
@@ -374,9 +347,9 @@ public class Rectanglei implements Externalizable {
      * store the result in <code>dest</code>.
      * <p>
      * If the two rectangles do not intersect, then the minimum coordinates of <code>dest</code>
-     * will have a value of {@link Integer#MAX_VALUE} and the maximum coordinates will have a value of 
+     * will have a value of {@link Integer#MAX_VALUE} and the maximum coordinates will have a value of
      * {@link Integer#MIN_VALUE}.
-     * 
+     *
      * @param other
      *          the other rectangle
      * @param dest
@@ -393,7 +366,7 @@ public class Rectanglei implements Externalizable {
 
     /**
      * Return the length of this rectangle in the X and Y dimensions and store the result in <code>dest</code>.
-     * 
+     *
      * @param dest
      *          will hold the result
      * @return dest
@@ -404,7 +377,7 @@ public class Rectanglei implements Externalizable {
 
     /**
      * Check if this rectangle contains the given <code>rectangle</code>.
-     * 
+     *
      * @param rectangle
      *          the rectangle to test
      * @return <code>true</code> iff this rectangle contains the rectangle; <code>false</code> otherwise
@@ -416,7 +389,7 @@ public class Rectanglei implements Externalizable {
 
     /**
      * Check if this rectangle contains the given <code>rectangle</code>.
-     * 
+     *
      * @param rectangle
      *          the rectangle to test
      * @return <code>true</code> iff this rectangle contains the rectangle; <code>false</code> otherwise
@@ -428,7 +401,7 @@ public class Rectanglei implements Externalizable {
 
     /**
      * Check if this rectangle contains the given <code>rectangle</code>.
-     * 
+     *
      * @param rectangle
      *          the rectangle to test
      * @return <code>true</code> iff this rectangle contains the rectangle; <code>false</code> otherwise
@@ -440,7 +413,7 @@ public class Rectanglei implements Externalizable {
 
     /**
      * Check if this rectangle contains the given <code>point</code>.
-     * 
+     *
      * @param point
      *          the point to test
      * @return <code>true</code> iff this rectangle contains the point; <code>false</code> otherwise
@@ -474,7 +447,7 @@ public class Rectanglei implements Externalizable {
 
     /**
      * Check if this rectangle contains the given point <code>(x, y)</code>.
-     * 
+     *
      * @param x
      *          the x coordinate of the point to check
      * @param y
@@ -487,7 +460,7 @@ public class Rectanglei implements Externalizable {
 
     /**
      * Translate <code>this</code> by the given vector <code>xy</code>.
-     * 
+     *
      * @param xy
      *          the vector to translate by
      * @return this
@@ -498,7 +471,7 @@ public class Rectanglei implements Externalizable {
 
     /**
      * Translate <code>this</code> by the given vector <code>xy</code> and store the result in <code>dest</code>.
-     * 
+     *
      * @param xy
      *          the vector to translate by
      * @param dest
@@ -511,7 +484,7 @@ public class Rectanglei implements Externalizable {
 
     /**
      * Translate <code>this</code> by the vector <code>(x, y)</code>.
-     * 
+     *
      * @param x
      *          the x coordinate to translate by
      * @param y
@@ -524,7 +497,7 @@ public class Rectanglei implements Externalizable {
 
     /**
      * Translate <code>this</code> by the vector <code>(x, y)</code> and store the result in <code>dest</code>.
-     * 
+     *
      * @param x
      *          the x coordinate to translate by
      * @param y
@@ -817,7 +790,7 @@ public class Rectanglei implements Externalizable {
      * Return a string representation of this rectangle.
      * <p>
      * This method creates a new {@link DecimalFormat} on every invocation with the format string "<code>0.000E0;-</code>".
-     * 
+     *
      * @return the string representation
      */
     public String toString() {
@@ -826,7 +799,7 @@ public class Rectanglei implements Externalizable {
 
     /**
      * Return a string representation of this rectangle by formatting the vector components with the given {@link NumberFormat}.
-     * 
+     *
      * @param formatter
      *          the {@link NumberFormat} used to format the vector components with
      * @return the string representation

@@ -39,10 +39,10 @@ import org.joml.Vector2fc;
 
 /**
  * Represents a 2D axis-aligned rectangle.
- * 
+ *
  * @author Kai Burjack
  */
-public class Rectangled implements Externalizable {
+public class Rectangled implements Externalizable, Rectangledc {
 
     /**
      * The x coordinate of the minimum corner.
@@ -69,7 +69,7 @@ public class Rectangled implements Externalizable {
 
     /**
      * Create a new {@link Rectangled} as a copy of the given <code>source</code>.
-     * 
+     *
      * @param source
      *          the {@link Rectangled} to copy from
      */
@@ -82,7 +82,7 @@ public class Rectangled implements Externalizable {
 
     /**
      * Create a new {@link Rectangled} with the given <code>min</code> and <code>max</code> corner coordinates.
-     * 
+     *
      * @param min
      *          the minimum coordinates
      * @param max
@@ -97,7 +97,7 @@ public class Rectangled implements Externalizable {
 
     /**
      * Create a new {@link Rectangled} with the given minimum and maximum corner coordinates.
-     * 
+     *
      * @param minX
      *          the x coordinate of the minimum corner
      * @param minY
@@ -112,6 +112,42 @@ public class Rectangled implements Externalizable {
         this.minY = minY;
         this.maxX = maxX;
         this.maxY = maxY;
+    }
+
+
+    public double minX() {
+        return this.minX;
+    }
+
+    public double minY() {
+        return this.minY;
+    }
+
+    public double maxX() {
+        return this.maxX;
+    }
+
+    public double maxY() {
+        return this.maxY;
+    }
+
+    public double getSizeX() {
+        return this.maxX - this.minX;
+    }
+
+    public double getSizeY() {
+        return this.maxY - this.minY;
+    }
+
+    /**
+     * Return the length of this rectangle in the X and Y dimensions and store the result in <code>dest</code>.
+     *
+     * @param dest
+     *          will hold the result
+     * @return dest
+     */
+    public Vector2d getSize(Vector2d dest) {
+        return dest.set(lengthX(), lengthY());
     }
 
     /**
@@ -190,6 +226,7 @@ public class Rectangled implements Externalizable {
      * Return the length of the rectangle in the X dimension.
      *
      * @return length in the X dimension
+     * @deprecated
      */
     public double lengthX() {
         return maxX - minX;
@@ -199,6 +236,7 @@ public class Rectangled implements Externalizable {
      * Return the length of the rectangle in the Y dimension.
      *
      * @return length in the Y dimension
+     * @deprecated
      */
     public double lengthY() {
         return maxY - minY;
@@ -225,7 +263,7 @@ public class Rectangled implements Externalizable {
 
     /**
      * Check whether <code>this</code> rectangle represents a valid rectangle.
-     * 
+     *
      * @return <code>true</code> iff this rectangle is valid; <code>false</code> otherwise
      */
     public boolean isValid() {
@@ -237,7 +275,7 @@ public class Rectangled implements Externalizable {
      * <p>
      * If the two rectangles do not intersect, then {@link Double#NaN} is stored in each component
      * of <code>dest</code>.
-     * 
+     *
      * @param other
      *          the other rectangle
      * @return this
@@ -246,19 +284,7 @@ public class Rectangled implements Externalizable {
         return intersection(other, this);
     }
 
-    /**
-     * Compute the rectangle of intersection between <code>this</code> and the given rectangle and
-     * store the result in <code>dest</code>.
-     * <p>
-     * If the two rectangles do not intersect, then {@link Double#NaN} is stored in each component
-     * of <code>dest</code>.
-     * 
-     * @param other
-     *          the other rectangle
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
+
     public Rectangled intersection(Rectangled other, Rectangled dest) {
         dest.minX = Math.max(minX, other.minX);
         dest.minY = Math.max(minY, other.minY);
@@ -267,19 +293,6 @@ public class Rectangled implements Externalizable {
         return dest.validate();
     }
 
-    /**
-     * Compute the rectangle of intersection between <code>this</code> and the given rectangle and
-     * store the result in <code>dest</code>.
-     * <p>
-     * If the two rectangles do not intersect, then {@link Double#NaN} is stored in each component
-     * of <code>dest</code>.
-     * 
-     * @param other
-     *          the other rectangle
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
     public Rectangled intersection(Rectanglef other, Rectangled dest) {
         dest.minX = Math.max(minX, other.minX);
         dest.minY = Math.max(minY, other.minY);
@@ -288,19 +301,6 @@ public class Rectangled implements Externalizable {
         return dest.validate();
     }
 
-    /**
-     * Compute the rectangle of intersection between <code>this</code> and the given rectangle and
-     * store the result in <code>dest</code>.
-     * <p>
-     * If the two rectangles do not intersect, then {@link Double#NaN} is stored in each component
-     * of <code>dest</code>.
-     * 
-     * @param other
-     *          the other rectangle
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
     public Rectangled intersection(Rectanglei other, Rectangled dest) {
         dest.minX = Math.max(minX, other.minX);
         dest.minY = Math.max(minY, other.minY);
@@ -311,7 +311,7 @@ public class Rectangled implements Externalizable {
 
     /**
      * Return the length of this rectangle in the X and Y dimensions and store the result in <code>dest</code>.
-     * 
+     *
      * @param dest
      *          will hold the result
      * @return dest
@@ -320,40 +320,41 @@ public class Rectangled implements Externalizable {
         return dest.set(lengthX(), lengthY());
     }
 
+
     /**
      * Check if this rectangle contains the given <code>rectangle</code>.
-     * 
+     *
      * @param rectangle
      *          the rectangle to test
      * @return <code>true</code> iff this rectangle contains the rectangle; <code>false</code> otherwise
      */
-    public boolean containsRectangle(Rectangled rectangle) {
-        return rectangle.minX >= minX && rectangle.maxX <= maxX &&
-               rectangle.minY >= minY && rectangle.maxY <= maxY;
+    public boolean containsRectangle(Rectangledc rectangle) {
+        return rectangle.minX() >= minX && rectangle.maxX() <= maxX &&
+               rectangle.minY() >= minY && rectangle.maxY() <= maxY;
     }
 
     /**
      * Check if this rectangle contains the given <code>rectangle</code>.
-     * 
+     *
      * @param rectangle
      *          the rectangle to test
      * @return <code>true</code> iff this rectangle contains the rectangle; <code>false</code> otherwise
      */
-    public boolean containsRectangle(Rectanglef rectangle) {
-        return rectangle.minX >= minX && rectangle.maxX <= maxX &&
-               rectangle.minY >= minY && rectangle.maxY <= maxY;
+    public boolean containsRectangle(Rectanglefc rectangle) {
+        return rectangle.minX() >= minX && rectangle.maxX() <= maxX &&
+               rectangle.minY() >= minY && rectangle.maxY() <= maxY;
     }
 
     /**
      * Check if this rectangle contains the given <code>rectangle</code>.
-     * 
+     *
      * @param rectangle
      *          the rectangle to test
      * @return <code>true</code> iff this rectangle contains the rectangle; <code>false</code> otherwise
      */
-    public boolean containsRectangle(Rectanglei rectangle) {
-        return rectangle.minX >= minX && rectangle.maxX <= maxX &&
-               rectangle.minY >= minY && rectangle.maxY <= maxY;
+    public boolean containsRectangle(Rectangleic rectangle) {
+        return rectangle.minX() >= minX && rectangle.maxX() <= maxX &&
+               rectangle.minY() >= minY && rectangle.maxY() <= maxY;
     }
 
     /**
@@ -380,17 +381,6 @@ public class Rectangled implements Externalizable {
         return union(p.x(), p.y(), this);
     }
 
-    /**
-     * Compute the union of <code>this</code> and the given point <code>(x, y, z)</code> and store the result in <code>dest</code>.
-     *
-     * @param x
-     *          the x coordinate of the point
-     * @param y
-     *          the y coordinate of the point
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
     public Rectangled union(double x, double y, Rectangled dest) {
         dest.minX = this.minX < x ? this.minX : x;
         dest.minY = this.minY < y ? this.minY : y;
@@ -399,15 +389,6 @@ public class Rectangled implements Externalizable {
         return dest;
     }
 
-    /**
-     * Compute the union of <code>this</code> and the given point <code>p</code> and store the result in <code>dest</code>.
-     *
-     * @param p
-     *          the point
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
     public Rectangled union(Vector2dc p, Rectangled dest) {
         return union(p.x(), p.y(), dest);
     }
@@ -419,90 +400,57 @@ public class Rectangled implements Externalizable {
      *          the other {@link Rectanglef}
      * @return this
      */
-    public Rectangled union(Rectangled other) {
+    public Rectangled union(Rectangledc other) {
         return this.union(other, this);
     }
 
-    /**
-     * Compute the union of <code>this</code> and <code>other</code> and store the result in <code>dest</code>.
-     *
-     * @param other
-     *          the other {@link Rectangled}
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
-    public Rectangled union(Rectangled other, Rectangled dest) {
-        dest.minX = this.minX < other.minX ? this.minX : other.minX;
-        dest.minY = this.minY < other.minY ? this.minY : other.minY;
-        dest.maxX = this.maxX > other.maxX ? this.maxX : other.maxX;
-        dest.maxY = this.maxY > other.maxY ? this.maxY : other.maxY;
+
+    public Rectangled union(Rectangledc other, Rectangled dest) {
+        dest.minX = this.minX < other.minX() ? this.minX : other.minX();
+        dest.minY = this.minY < other.minY() ? this.minY : other.minY();
+        dest.maxX = this.maxX > other.maxX() ? this.maxX : other.maxX();
+        dest.maxY = this.maxY > other.maxY() ? this.maxY : other.maxY();
         return dest;
     }
 
-    /**
-     * Check if this and the given rectangle intersect.
-     * 
-     * @param other
-     *          the other rectangle
-     * @return <code>true</code> iff both rectangles intersect; <code>false</code> otherwise
-     */
-    public boolean intersectsRectangle(Rectangled other) {
-        return minX < other.maxX && maxX > other.minX &&
-               maxY > other.minY && minY < other.maxY;
+    public boolean intersectsRectangle(Rectangledc other) {
+        return minX < other.maxX() && maxX > other.minX() &&
+               maxY > other.minY() && minY < other.maxY();
     }
 
-    /**
-     * Check if this and the given rectangle intersect.
-     * 
-     * @param other
-     *          the other rectangle
-     * @return <code>true</code> iff both rectangles intersect; <code>false</code> otherwise
-     */
-    public boolean intersectsRectangle(Rectanglef other) {
-        return minX < other.maxX && maxX > other.minX &&
-               maxY > other.minY && minY < other.maxY;
+    public boolean intersectsRectangle(Rectanglefc other) {
+        return minX < other.maxX() && maxX > other.minX() &&
+               maxY > other.minY() && minY < other.maxY();
     }
 
-    /**
-     * Check if this and the given rectangle intersect.
-     * 
-     * @param other
-     *          the other rectangle
-     * @return <code>true</code> iff both rectangles intersect; <code>false</code> otherwise
-     */
-    public boolean intersectsRectangle(Rectanglei other) {
-        return minX < other.maxX && maxX > other.minX &&
-               maxY > other.minY && minY < other.maxY;
+    public boolean intersectsRectangle(Rectangleic other) {
+        return minX < other.maxX() && maxX > other.minX() &&
+               maxY > other.minY() && minY < other.maxY();
     }
 
-    /**
-     * Check if this rectangle contains the given <code>point</code>.
-     * 
-     * @param point
-     *          the point to test
-     * @return <code>true</code> iff this rectangle contains the point; <code>false</code> otherwise
-     */
+    public boolean intersectsCircle(Circlefc other) {
+        return false;
+    }
+
+    public boolean intersectsCircle(Circledc other) {
+        return false;
+    }
+
     public boolean containsPoint(Vector2dc point) {
         return containsPoint(point.x(), point.y());
     }
 
-    /**
-     * Check if this rectangle contains the given point <code>(x, y)</code>.
-     * 
-     * @param x
-     *          the x coordinate of the point to check
-     * @param y
-     *          the y coordinate of the point to check
-     * @return <code>true</code> iff this rectangle contains the point; <code>false</code> otherwise
-     */
     public boolean containsPoint(double x, double y) {
+        return x > minX && y > minY && x < maxX && y < maxY;
+    }
+
+    public boolean containsPoint(float x, float y) {
         return x > minX && y > minY && x < maxX && y < maxY;
     }
 
     /**
      * Translate <code>this</code> by the given vector <code>xy</code>.
-     * 
+     *
      * @param xy
      *          the vector to translate by
      * @return this
@@ -511,22 +459,14 @@ public class Rectangled implements Externalizable {
         return translate(xy.x(), xy.y(), this);
     }
 
-    /**
-     * Translate <code>this</code> by the given vector <code>xy</code> and store the result in <code>dest</code>.
-     * 
-     * @param xy
-     *          the vector to translate by
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
+
     public Rectangled translate(Vector2dc xy, Rectangled dest) {
         return translate(xy.x(), xy.y(), dest);
     }
 
     /**
      * Translate <code>this</code> by the given vector <code>xy</code>.
-     * 
+     *
      * @param xy
      *          the vector to translate by
      * @return this
@@ -535,22 +475,13 @@ public class Rectangled implements Externalizable {
         return translate(xy.x(), xy.y(), this);
     }
 
-    /**
-     * Translate <code>this</code> by the given vector <code>xy</code> and store the result in <code>dest</code>.
-     * 
-     * @param xy
-     *          the vector to translate by
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
     public Rectangled translate(Vector2fc xy, Rectangled dest) {
         return translate(xy.x(), xy.y(), dest);
     }
 
     /**
      * Translate <code>this</code> by the vector <code>(x, y)</code>.
-     * 
+     *
      * @param x
      *          the x coordinate to translate by
      * @param y
@@ -561,17 +492,7 @@ public class Rectangled implements Externalizable {
         return translate(x, y, this);
     }
 
-    /**
-     * Translate <code>this</code> by the vector <code>(x, y)</code> and store the result in <code>dest</code>.
-     * 
-     * @param x
-     *          the x coordinate to translate by
-     * @param y
-     *          the y coordinate to translate by
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
+
     public Rectangled translate(double x, double y, Rectangled dest) {
         dest.minX = minX + x;
         dest.minY = minY + y;
@@ -591,15 +512,6 @@ public class Rectangled implements Externalizable {
         return scale(sf, sf);
     }
 
-    /**
-     * Scale <code>this</code> about the origin and store the result in <code>dest</code>.
-     *
-     * @param sf
-     *          the scaling factor in the x and y axis
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
     public Rectangled scale(double sf, Rectangled dest) {
         return scale(sf, sf, dest);
     }
@@ -655,19 +567,6 @@ public class Rectangled implements Externalizable {
         return scale(sf, anchor.x(), anchor.y());
     }
 
-    /**
-     * Scale <code>this</code> about an anchor and store the result in <code>dest</code>.
-     * <p>
-     * This is equivalent to <code>translate(anchor.negate(), dest).scale(sf).translate(anchor.negate())</code>
-     *
-     * @param sf
-     *          the scaling factor in the x and y axis
-     * @param anchor
-     *          the location of the anchor
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
     public Rectangled scale(double sf, Vector2dc anchor, Rectangled dest) {
         return scale(sf, anchor.x(), anchor.y(), dest);
     }
@@ -740,23 +639,6 @@ public class Rectangled implements Externalizable {
         return scale(sx, sy, anchor.x(), anchor.y());
     }
 
-    /**
-     * Scale <code>this</code> about an anchor and store the result in <code>dest</code>.
-     * <p>
-     * This is equivalent to <code>translate(-ax, -ay, dest).scale(sx, sy).translate(ax, ay)</code>
-     *
-     * @param sx
-     *          the scaling factor on the x axis
-     * @param sy
-     *          the scaling factor on the y axis
-     * @param ax
-     *          the x coordinate of the anchor
-     * @param ay
-     *          the y coordinate of the anchor
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
     public Rectangled scale(double sx, double sy, double ax, double ay, Rectangled dest) {
         dest.minX = (minX - ax) * sx + ax;
         dest.minY = (minY - ay) * sy + ay;
@@ -765,21 +647,6 @@ public class Rectangled implements Externalizable {
         return dest;
     }
 
-    /**
-     * Scale <code>this</code> about an anchor and store the result in <code>dest</code>.
-     * <p>
-     * This is equivalent to <code>translate(anchor.negate(), dest).scale(sx, sy).translate(anchor.negate())</code>
-     *
-     * @param sx
-     *          the scaling factor on the x axis
-     * @param sy
-     *          the scaling factor on the y axis
-     * @param anchor
-     *          the location of the anchor
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
     public Rectangled scale(double sx, double sy, Vector2dc anchor, Rectangled dest) {
         return scale(sx, sy, anchor.x(), anchor.y(), dest);
     }
@@ -822,7 +689,7 @@ public class Rectangled implements Externalizable {
      * Return a string representation of this rectangle.
      * <p>
      * This method creates a new {@link DecimalFormat} on every invocation with the format string "<code>0.000E0;-</code>".
-     * 
+     *
      * @return the string representation
      */
     public String toString() {
@@ -831,7 +698,7 @@ public class Rectangled implements Externalizable {
 
     /**
      * Return a string representation of this rectangle by formatting the vector components with the given {@link NumberFormat}.
-     * 
+     *
      * @param formatter
      *          the {@link NumberFormat} used to format the vector components with
      * @return the string representation

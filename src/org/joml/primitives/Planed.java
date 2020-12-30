@@ -40,10 +40,10 @@ import org.joml.Vector4d;
 
 /**
  * Represents a 3D plane using double-precision floating-point numbers.
- * 
+ *
  * @author Kai Burjack
  */
-public class Planed implements Externalizable {
+public class Planed implements Externalizable, Planedc {
 
     /**
      * The factor <code>a</code> in the plane equation <code>a*x + b*y + c*z + d = 0</code>.
@@ -70,7 +70,7 @@ public class Planed implements Externalizable {
 
     /**
      * Create a new {@link Planed} as a copy of the given <code>source</code>.
-     * 
+     *
      * @param source
      *          the {@link Planed} to copy from
      */
@@ -83,7 +83,7 @@ public class Planed implements Externalizable {
 
     /**
      * Create a new {@link Planed} from the given <code>point</code> lying on the plane and the given <code>normal</code>.
-     * 
+     *
      * @param point
      *          any point lying on the plane
      * @param normal
@@ -98,7 +98,7 @@ public class Planed implements Externalizable {
 
     /**
      * Create a new {@link Planed} with the plane equation <code>a*x + b*y + c*z + d = 0</code>.
-     * 
+     *
      * @param a
      *          the x factor in the plane equation
      * @param b
@@ -119,7 +119,7 @@ public class Planed implements Externalizable {
      * Create a new {@link Planef} from the given three points lying on the plane.
      * <p>
      * The resulting plane is not necessarily {@link #normalize() normalized}.
-     * 
+     *
      * @param pointA
      *          the first point
      * @param pointB
@@ -140,7 +140,7 @@ public class Planed implements Externalizable {
      * Create a new {@link Planef} from the given three points lying on the plane.
      * <p>
      * The resulting plane is not necessarily {@link #normalize() normalized}.
-     * 
+     *
      * @param pointA
      *          the first point
      * @param pointB
@@ -158,8 +158,8 @@ public class Planed implements Externalizable {
     }
 
     /**
-     * Set the components of this plane. 
-     * 
+     * Set the components of this plane.
+     *
      * @param a
      *          the x factor in the plane equation
      * @param b
@@ -180,7 +180,7 @@ public class Planed implements Externalizable {
 
     /**
      * Normalize this plane.
-     * 
+     *
      * @return this
      */
     public Planed normalize() {
@@ -189,7 +189,7 @@ public class Planed implements Externalizable {
 
     /**
      * Normalize this plane and store the result in <code>dest</code>.
-     * 
+     *
      * @param dest
      *          will hold the result
      * @return dest
@@ -205,7 +205,7 @@ public class Planed implements Externalizable {
 
     /**
      * Compute the signed distance between this plane and the given point.
-     * 
+     *
      * @param x
      *          the x coordinate of the point
      * @param y
@@ -223,7 +223,7 @@ public class Planed implements Externalizable {
      * <code>a*x + b*y + c*z + d = 0</code> from the given three points on the plane, and write the values
      * to the <code>x</code>, <code>y</code>, <code>z</code> and <code>w</code> components, respectively, of the given
      * <code>dest</code> vector.
-     * 
+     *
      * @param v0
      *          the first point on the plane
      * @param v1
@@ -243,9 +243,9 @@ public class Planed implements Externalizable {
     /**
      * Compute the factors <code>a</code>, <code>b</code>, <code>c</code> and <code>d</code> in the plane equation
      * <code>a*x + b*y + c*z + d = 0</code> from the three points <code>(v0X, v0Y, v0Z)</code>, <code>(v1X, v1Y, v1Z)</code> and
-     * <code>(v2X, v2Y, v2Z)</code> on the plane, and write the values to the <code>x</code>, <code>y</code>, <code>z</code> 
+     * <code>(v2X, v2Y, v2Z)</code> on the plane, and write the values to the <code>x</code>, <code>y</code>, <code>z</code>
      * and <code>w</code> components, respectively, of the given <code>dest</code> vector.
-     * 
+     *
      * @param v0X
      *          the x coordinate of the first point on the plane
      * @param v0Y
@@ -326,7 +326,7 @@ public class Planed implements Externalizable {
      * Return a string representation of this plane.
      * <p>
      * This method creates a new {@link DecimalFormat} on every invocation with the format string "<code>0.000E0;-</code>".
-     * 
+     *
      * @return the string representation
      */
     public String toString() {
@@ -335,7 +335,7 @@ public class Planed implements Externalizable {
 
     /**
      * Return a string representation of this plane by formatting the components with the given {@link NumberFormat}.
-     * 
+     *
      * @param formatter
      *          the {@link NumberFormat} used to format the components with
      * @return the string representation

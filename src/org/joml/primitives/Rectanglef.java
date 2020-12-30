@@ -33,16 +33,17 @@ import java.text.NumberFormat;
 import org.joml.Math;
 import org.joml.Options;
 import org.joml.Runtime;
+import org.joml.Vector2dc;
 import org.joml.Vector2f;
 import org.joml.Vector2fc;
 import org.joml.Vector2ic;
 
 /**
  * Represents a 2D axis-aligned rectangle.
- * 
+ *
  * @author Kai Burjack
  */
-public class Rectanglef implements Externalizable {
+public class Rectanglef implements Externalizable, Rectanglefc {
 
     /**
      * The x coordinate of the minimum corner.
@@ -69,7 +70,7 @@ public class Rectanglef implements Externalizable {
 
     /**
      * Create a new {@link Rectanglef} as a copy of the given <code>source</code>.
-     * 
+     *
      * @param source
      *          the {@link Rectanglef} to copy from
      */
@@ -82,7 +83,7 @@ public class Rectanglef implements Externalizable {
 
     /**
      * Create a new {@link Rectanglef} with the given <code>min</code> and <code>max</code> corner coordinates.
-     * 
+     *
      * @param min
      *          the minimum coordinates
      * @param max
@@ -97,7 +98,7 @@ public class Rectanglef implements Externalizable {
 
     /**
      * Create a new {@link Rectanglef} with the given minimum and maximum corner coordinates.
-     * 
+     *
      * @param minX
      *          the x coordinate of the minimum corner
      * @param minY
@@ -112,6 +113,34 @@ public class Rectanglef implements Externalizable {
         this.minY = minY;
         this.maxX = maxX;
         this.maxY = maxY;
+    }
+
+    public float minX() {
+        return this.minX;
+    }
+
+    public float minY() {
+        return this.minY;
+    }
+
+    public float maxX() {
+        return this.maxX;
+    }
+
+    public float maxY() {
+        return this.maxY;
+    }
+
+    public float getSizeX() {
+        return maxX - minX;
+    }
+
+    public float getSizeY() {
+        return maxY - minY;
+    }
+    
+    public Vector2f getSize(Vector2f dest) {
+        return dest.set(maxX - minX, maxY - minY);
     }
 
     /**
@@ -299,7 +328,7 @@ public class Rectanglef implements Externalizable {
 
     /**
      * Check if this and the given rectangle intersect.
-     * 
+     *
      * @param other
      *          the other rectangle
      * @return <code>true</code> iff both rectangles intersect; <code>false</code> otherwise
@@ -311,7 +340,7 @@ public class Rectanglef implements Externalizable {
 
     /**
      * Check if this and the given rectangle intersect.
-     * 
+     *
      * @param other
      *          the other rectangle
      * @return <code>true</code> iff both rectangles intersect; <code>false</code> otherwise
@@ -323,7 +352,7 @@ public class Rectanglef implements Externalizable {
 
     /**
      * Check if this and the given rectangle intersect.
-     * 
+     *
      * @param other
      *          the other rectangle
      * @return <code>true</code> iff both rectangles intersect; <code>false</code> otherwise
@@ -345,7 +374,7 @@ public class Rectanglef implements Externalizable {
 
     /**
      * Check whether <code>this</code> rectangle represents a valid rectangle.
-     * 
+     *
      * @return <code>true</code> iff this rectangle is valid; <code>false</code> otherwise
      */
     public boolean isValid() {
@@ -357,7 +386,7 @@ public class Rectanglef implements Externalizable {
      * <p>
      * If the two rectangles do not intersect, then {@link Float#NaN} is stored in each component
      * of <code>dest</code>.
-     * 
+     *
      * @param other
      *          the other rectangle
      * @return this
@@ -371,7 +400,7 @@ public class Rectanglef implements Externalizable {
      * <p>
      * If the two rectangles do not intersect, then {@link Float#NaN} is stored in each component
      * of <code>dest</code>.
-     * 
+     *
      * @param other
      *          the other rectangle
      * @return this
@@ -386,7 +415,7 @@ public class Rectanglef implements Externalizable {
      * <p>
      * If the two rectangles do not intersect, then {@link Float#NaN} is stored in each component
      * of <code>dest</code>.
-     * 
+     *
      * @param other
      *          the other rectangle
      * @param dest
@@ -407,7 +436,7 @@ public class Rectanglef implements Externalizable {
      * <p>
      * If the two rectangles do not intersect, then {@link Double#NaN} is stored in each component
      * of <code>dest</code>.
-     * 
+     *
      * @param other
      *          the other rectangle
      * @param dest
@@ -424,7 +453,7 @@ public class Rectanglef implements Externalizable {
 
     /**
      * Return the length of this rectangle in the X and Y dimensions and store the result in <code>dest</code>.
-     * 
+     *
      * @param dest
      *          will hold the result
      * @return dest
@@ -435,67 +464,43 @@ public class Rectanglef implements Externalizable {
 
     /**
      * Check if this rectangle contains the given <code>rectangle</code>.
-     * 
+     *
      * @param rectangle
      *          the rectangle to test
      * @return <code>true</code> iff this rectangle contains the rectangle; <code>false</code> otherwise
      */
-    public boolean containsRectangle(Rectangled rectangle) {
-        return rectangle.minX >= minX && rectangle.maxX <= maxX &&
-               rectangle.minY >= minY && rectangle.maxY <= maxY;
+    public boolean containsRectangle(Rectangledc rectangle) {
+        return rectangle.minX() >= minX && rectangle.maxX() <= maxX &&
+               rectangle.minY() >= minY && rectangle.maxY() <= maxY;
     }
 
     /**
      * Check if this rectangle contains the given <code>rectangle</code>.
-     * 
+     *
      * @param rectangle
      *          the rectangle to test
      * @return <code>true</code> iff this rectangle contains the rectangle; <code>false</code> otherwise
      */
-    public boolean containsRectangle(Rectanglef rectangle) {
-        return rectangle.minX >= minX && rectangle.maxX <= maxX &&
-               rectangle.minY >= minY && rectangle.maxY <= maxY;
+    public boolean containsRectangle(Rectanglefc rectangle) {
+        return rectangle.minX() >= minX && rectangle.maxX() <= maxX &&
+               rectangle.minY() >= minY && rectangle.maxY() <= maxY;
     }
 
     /**
      * Check if this rectangle contains the given <code>rectangle</code>.
-     * 
+     *
      * @param rectangle
      *          the rectangle to test
      * @return <code>true</code> iff this rectangle contains the rectangle; <code>false</code> otherwise
      */
-    public boolean containsRectangle(Rectanglei rectangle) {
-        return rectangle.minX >= minX && rectangle.maxX <= maxX &&
-               rectangle.minY >= minY && rectangle.maxY <= maxY;
-    }
-
-    /**
-     * Check if this rectangle contains the given <code>point</code>.
-     * 
-     * @param point
-     *          the point to test
-     * @return <code>true</code> iff this rectangle contains the point; <code>false</code> otherwise
-     */
-    public boolean containsPoint(Vector2fc point) {
-        return containsPoint(point.x(), point.y());
-    }
-
-    /**
-     * Check if this rectangle contains the given point <code>(x, y)</code>.
-     * 
-     * @param x
-     *          the x coordinate of the point to check
-     * @param y
-     *          the y coordinate of the point to check
-     * @return <code>true</code> iff this rectangle contains the point; <code>false</code> otherwise
-     */
-    public boolean containsPoint(float x, float y) {
-        return x > minX && y > minY && x < maxX && y < maxY;
+    public boolean containsRectangle(Rectangleic rectangle) {
+        return rectangle.minX() >= minX && rectangle.maxX() <= maxX &&
+               rectangle.minY() >= minY && rectangle.maxY() <= maxY;
     }
 
     /**
      * Translate <code>this</code> by the given vector <code>xy</code>.
-     * 
+     *
      * @param xy
      *          the vector to translate by
      * @return this
@@ -504,22 +509,13 @@ public class Rectanglef implements Externalizable {
         return translate(xy.x(), xy.y(), this);
     }
 
-    /**
-     * Translate <code>this</code> by the given vector <code>xy</code> and store the result in <code>dest</code>.
-     * 
-     * @param xy
-     *          the vector to translate by
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
     public Rectanglef translate(Vector2fc xy, Rectanglef dest) {
         return translate(xy.x(), xy.y(), dest);
     }
 
     /**
      * Translate <code>this</code> by the vector <code>(x, y)</code>.
-     * 
+     *
      * @param x
      *          the x coordinate to translate by
      * @param y
@@ -530,17 +526,6 @@ public class Rectanglef implements Externalizable {
         return translate(x, y, this);
     }
 
-    /**
-     * Translate <code>this</code> by the vector <code>(x, y)</code> and store the result in <code>dest</code>.
-     * 
-     * @param x
-     *          the x coordinate to translate by
-     * @param y
-     *          the y coordinate to translate by
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
     public Rectanglef translate(float x, float y, Rectanglef dest) {
         dest.minX = minX + x;
         dest.minY = minY + y;
@@ -560,15 +545,6 @@ public class Rectanglef implements Externalizable {
         return scale(sf, sf);
     }
 
-    /**
-     * Scale <code>this</code> about the origin and store the result in <code>dest</code>.
-     *
-     * @param sf
-     *          the scaling factor in the x and y axis
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
     public Rectanglef scale(float sf, Rectanglef dest) {
         return scale(sf, sf, dest);
     }
@@ -590,21 +566,6 @@ public class Rectanglef implements Externalizable {
         return scale(sf, sf, ax, ay);
     }
 
-    /**
-     * Scale <code>this</code> about an anchor and store the result in <code>dest</code>.
-     * <p>
-     * This is equivalent to <code>translate(-ax, -ay, dest).scale(sf).translate(ax, ay)</code>
-     *
-     * @param sf
-     *          the scaling factor in the x and y axis
-     * @param ax
-     *          the x coordinate of the anchor
-     * @param ay
-     *          the y coordinate of the anchor
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
     public Rectanglef scale(float sf, float ax, float ay, Rectanglef dest) {
         return scale(sf, sf, ax, ay, dest);
     }
@@ -624,19 +585,6 @@ public class Rectanglef implements Externalizable {
         return scale(sf, anchor.x(), anchor.y());
     }
 
-    /**
-     * Scale <code>this</code> about an anchor and store the result in <code>dest</code>.
-     * <p>
-     * This is equivalent to <code>translate(anchor.negate(), dest).scale(sf).translate(anchor.negate())</code>
-     *
-     * @param sf
-     *          the scaling factor in the x and y axis
-     * @param anchor
-     *          the location of the anchor
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
     public Rectanglef scale(float sf, Vector2fc anchor, Rectanglef dest) {
         return scale(sf, anchor.x(), anchor.y(), dest);
     }
@@ -709,23 +657,7 @@ public class Rectanglef implements Externalizable {
         return scale(sx, sy, anchor.x(), anchor.y());
     }
 
-    /**
-     * Scale <code>this</code> about an anchor and store the result in <code>dest</code>.
-     * <p>
-     * This is equivalent to <code>translate(-ax, -ay, dest).scale(sx, sy).translate(ax, ay)</code>
-     *
-     * @param sx
-     *          the scaling factor on the x axis
-     * @param sy
-     *          the scaling factor on the y axis
-     * @param ax
-     *          the x coordinate of the anchor
-     * @param ay
-     *          the y coordinate of the anchor
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
+
     public Rectanglef scale(float sx, float sy, float ax, float ay, Rectanglef dest) {
         dest.minX = (minX - ax) * sx + ax;
         dest.minY = (minY - ay) * sy + ay;
@@ -734,23 +666,61 @@ public class Rectanglef implements Externalizable {
         return dest;
     }
 
-    /**
-     * Scale <code>this</code> about an anchor and store the result in <code>dest</code>.
-     * <p>
-     * This is equivalent to <code>translate(anchor.negate(), dest).scale(sx, sy).translate(anchor.negate())</code>
-     *
-     * @param sx
-     *          the scaling factor on the x axis
-     * @param sy
-     *          the scaling factor on the y axis
-     * @param anchor
-     *          the location of the anchor
-     * @param dest
-     *          will hold the result
-     * @return dest
-     */
+
     public Rectanglef scale(float sx, float sy, Vector2fc anchor, Rectanglef dest) {
         return scale(sx, sy, anchor.x(), anchor.y(), dest);
+    }
+
+    /**
+     * Check if this rectangle contains the given <code>point</code>.
+     *
+     * @param point
+     *          the point to test
+     * @return <code>true</code> iff this rectangle contains the point; <code>false</code> otherwise
+     */
+    public boolean containsPoint(Vector2fc point) {
+        return containsPoint(point.x(), point.y());
+    }
+
+    public boolean containsPoint(double x, double y) {
+        return false;
+    }
+
+    /**
+     * Check if this rectangle contains the given point <code>(x, y)</code>.
+     *
+     * @param x
+     *          the x coordinate of the point to check
+     * @param y
+     *          the y coordinate of the point to check
+     * @return <code>true</code> iff this rectangle contains the point; <code>false</code> otherwise
+     */
+    public boolean containsPoint(float x, float y) {
+        return x > minX && y > minY && x < maxX && y < maxY;
+    }
+
+    public boolean containsPoint(Vector2dc point) {
+        return false;
+    }
+
+    public boolean intersectsRectangle(Rectangledc other) {
+        return false;
+    }
+
+    public boolean intersectsRectangle(Rectanglefc other) {
+        return false;
+    }
+
+    public boolean intersectsRectangle(Rectangleic other) {
+        return false;
+    }
+
+    public boolean intersectsCircle(Circlefc other) {
+        return false;
+    }
+
+    public boolean intersectsCircle(Circledc other) {
+        return false;
     }
 
     public int hashCode() {
@@ -786,7 +756,7 @@ public class Rectanglef implements Externalizable {
      * Return a string representation of this rectangle.
      * <p>
      * This method creates a new {@link DecimalFormat} on every invocation with the format string "<code>0.000E0;-</code>".
-     * 
+     *
      * @return the string representation
      */
     public String toString() {
@@ -795,7 +765,7 @@ public class Rectanglef implements Externalizable {
 
     /**
      * Return a string representation of this rectangle by formatting the vector components with the given {@link NumberFormat}.
-     * 
+     *
      * @param formatter
      *          the {@link NumberFormat} used to format the vector components with
      * @return the string representation

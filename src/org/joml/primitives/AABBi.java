@@ -40,7 +40,7 @@ import org.joml.Vector3ic;
 
 /**
  * Represents an axis-aligned box defined via the minimum and maximum corner coordinates as ints.
- * 
+ *
  * @author Kai Burjack
  */
 public class AABBi implements Externalizable, AABBic {
@@ -536,7 +536,7 @@ public class AABBi implements Externalizable, AABBic {
             aabb.minZ() >= minZ && aabb.maxZ() <= maxZ;
     }
 
-    public boolean containsPoint(int x, int y, int z){
+    public boolean containsPoint(double x, double y, double z){
         return x > minX && y > minY && z > minZ && x < maxX && y < maxY && z < maxZ;
     }
 
