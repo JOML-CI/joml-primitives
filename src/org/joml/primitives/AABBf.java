@@ -34,14 +34,16 @@ import org.joml.Math;
 import org.joml.Matrix4fc;
 import org.joml.Options;
 import org.joml.Runtime;
+import org.joml.Vector2d;
 import org.joml.Vector2f;
 import org.joml.Vector3d;
+import org.joml.Vector3dc;
 import org.joml.Vector3f;
 import org.joml.Vector3fc;
 
 /**
  * Represents an axis-aligned box defined via the minimum and maximum corner coordinates as single-precision floats.
- * 
+ *
  * @author Kai Burjack
  */
 public class AABBf implements Externalizable, AABBfc {
@@ -80,7 +82,7 @@ public class AABBf implements Externalizable, AABBfc {
 
     /**
      * Create a new {@link AABBf} as a copy of the given <code>source</code>.
-     * 
+     *
      * @param source
      *          the {@link AABBf} to copy from
      */
@@ -95,7 +97,7 @@ public class AABBf implements Externalizable, AABBfc {
 
     /**
      * Create a new {@link AABBf} with the given minimum and maximum corner coordinates.
-     * 
+     *
      * @param min
      *          the minimum coordinates
      * @param max
@@ -112,7 +114,7 @@ public class AABBf implements Externalizable, AABBfc {
 
     /**
      * Create a new {@link AABBf} with the given minimum and maximum corner coordinates.
-     * 
+     *
      * @param minX
      *          the x coordinate of the minimum corner
      * @param minY
@@ -195,7 +197,7 @@ public class AABBf implements Externalizable, AABBfc {
 
     /**
      * Set the minimum corner coordinates.
-     * 
+     *
      * @param minX
      *          the x coordinate of the minimum corner
      * @param minY
@@ -213,7 +215,7 @@ public class AABBf implements Externalizable, AABBfc {
 
     /**
      * Set the maximum corner coordinates.
-     * 
+     *
      * @param maxX
      *          the x coordinate of the maximum corner
      * @param maxY
@@ -231,7 +233,7 @@ public class AABBf implements Externalizable, AABBfc {
 
     /**
      * Set the minimum corner coordinates.
-     * 
+     *
      * @param min
      *          the minimum coordinates
      * @return this
@@ -242,7 +244,7 @@ public class AABBf implements Externalizable, AABBfc {
 
     /**
      * Set the maximum corner coordinates.
-     * 
+     *
      * @param max
      *          the maximum coordinates
      * @return this
@@ -344,7 +346,7 @@ public class AABBf implements Externalizable, AABBfc {
 
     /**
      * Set <code>this</code> to the union of <code>this</code> and the given point <code>(x, y, z)</code>.
-     * 
+     *
      * @param x
      *          the x coordinate of the point
      * @param y
@@ -359,7 +361,7 @@ public class AABBf implements Externalizable, AABBfc {
 
     /**
      * Set <code>this</code> to the union of <code>this</code> and the given point <code>p</code>.
-     * 
+     *
      * @param p
      *          the point
      * @return this
@@ -384,7 +386,7 @@ public class AABBf implements Externalizable, AABBfc {
 
     /**
      * Set <code>this</code> to the union of <code>this</code> and <code>other</code>.
-     * 
+     *
      * @param other
      *          the other {@link AABBf}
      * @return this
@@ -406,7 +408,7 @@ public class AABBf implements Externalizable, AABBfc {
     /**
      * Ensure that the minimum coordinates are strictly less than or equal to the maximum coordinates by swapping
      * them if necessary.
-     * 
+     *
      * @return this
      */
     public AABBf correctBounds() {
@@ -431,7 +433,7 @@ public class AABBf implements Externalizable, AABBfc {
 
     /**
      * Translate <code>this</code> by the given vector <code>xyz</code>.
-     * 
+     *
      * @param xyz
      *          the vector to translate by
      * @return this
@@ -446,7 +448,7 @@ public class AABBf implements Externalizable, AABBfc {
 
     /**
      * Translate <code>this</code> by the vector <code>(x, y, z)</code>.
-     * 
+     *
      * @param x
      *          the x coordinate to translate by
      * @param y
@@ -513,9 +515,30 @@ public class AABBf implements Externalizable, AABBfc {
             aabb.minZ() >= minZ && aabb.maxZ() <= maxZ;
     }
 
+    public boolean containsPoint(double x, double y, double z) {
+        return false;
+    }
+
     public boolean containsPoint(float x, float y, float z) {
         return x > minX && y > minY && z > minZ && x < maxX && y < maxY && z < maxZ;
     }
+
+    public boolean containsPoint(Vector3dc point) {
+        return false;
+    }
+
+    public boolean intersectsPlane(double a, double b, double c, double d) {
+        return false;
+    }
+
+    public boolean intersectsPlane(Planed plane) {
+        return false;
+    }
+
+    public boolean intersectsAABB(AABBdc other) {
+        return false;
+    }
+
 
     public boolean containsPoint(Vector3fc point) {
         return containsPoint(point.x(), point.y(), point.z());
@@ -534,12 +557,48 @@ public class AABBf implements Externalizable, AABBfc {
                this.minX <= other.maxX() && this.minY <= other.maxY() && this.minZ <= other.maxZ();
     }
 
+    public boolean intersectsSphere(double centerX, double centerY, double centerZ, double radiusSquared) {
+        return false;
+    }
+
     public boolean intersectsSphere(float centerX, float centerY, float centerZ, float radiusSquared) {
         return Intersectionf.testAabSphere(minX, minY, minZ, maxX, maxY, maxZ, centerX, centerY, centerZ, radiusSquared);
     }
 
     public boolean intersectsSphere(Spheref sphere) {
-        return Intersectionf.testAabSphere(this, sphere);
+        return Intersectionf.testAabSphere(this.minX, this.minY, this.minZ, this.maxX, this.maxY, this.maxZ, sphere.x, sphere.y, sphere.z, sphere.r*sphere.r);
+    }
+
+    public boolean intersectsSphere(Sphered sphere) {
+        return Intersectiond.testAabSphere(this.minX, this.minY, this.minZ, this.maxX, this.maxY, this.maxZ, sphere.x, sphere.y, sphere.z, sphere.r * sphere.r);
+    }
+
+    public boolean intersectsRay(double originX, double originY, double originZ, double dirX, double dirY, double dirZ) {
+        return false;
+    }
+
+    public boolean intersectsRay(Rayd ray) {
+        return false;
+    }
+
+    public boolean intersectsRay(double originX, double originY, double originZ, double dirX, double dirY, double dirZ, Vector2d result) {
+        return false;
+    }
+
+    public boolean intersectsRay(Rayd ray, Vector2d result) {
+        return false;
+    }
+
+    public int intersectsLineSegment(double p0X, double p0Y, double p0Z, double p1X, double p1Y, double p1Z, Vector2d result) {
+        return Intersectiond.intersectLineSegmentAab(p0X, p0Y, p0Z, p1X, p1Y, p1Z, minX, minY, minZ, maxX,  maxY, maxZ, result);
+    }
+
+    public int intersectsLineSegment(float p0X, float p0Y, float p0Z, float p1X, float p1Y, float p1Z, Vector2f result) {
+        return Intersectionf.intersectLineSegmentAab(p0X, p0Y, p0Z, p1X, p1Y, p1Z, minX, minY, minZ, maxX, maxY, maxZ, result);
+    }
+
+    public int intersectsLineSegment(LineSegmentf lineSegment, Vector2d result) {
+        return 0;
     }
 
     public boolean intersectsRay(float originX, float originY, float originZ, float dirX, float dirY, float dirZ) {
@@ -558,9 +617,7 @@ public class AABBf implements Externalizable, AABBfc {
         return Intersectionf.intersectRayAab(ray, this, result);
     }
 
-    public int intersectsLineSegment(float p0X, float p0Y, float p0Z, float p1X, float p1Y, float p1Z, Vector2f result) {
-        return Intersectionf.intersectLineSegmentAab(p0X, p0Y, p0Z, p1X, p1Y, p1Z, minX, minY, minZ, maxX, maxY, maxZ, result);
-    }
+
 
     public int intersectsLineSegment(LineSegmentf lineSegment, Vector2f result) {
         return Intersectionf.intersectLineSegmentAab(lineSegment, this, result);
@@ -570,7 +627,7 @@ public class AABBf implements Externalizable, AABBfc {
      * Apply the given {@link Matrix4fc#isAffine() affine} transformation to this {@link AABBf}.
      * <p>
      * The matrix in <code>m</code> <i>must</i> be {@link Matrix4fc#isAffine() affine}.
-     * 
+     *
      * @param m
      *          the affine transformation matrix
      * @return this
@@ -643,7 +700,7 @@ public class AABBf implements Externalizable, AABBfc {
      * Return a string representation of this AABB.
      * <p>
      * This method creates a new {@link DecimalFormat} on every invocation with the format string "<code>0.000E0;-</code>".
-     * 
+     *
      * @return the string representation
      */
     public String toString() {

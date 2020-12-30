@@ -35,6 +35,7 @@ import org.joml.Matrix4dc;
 import org.joml.Options;
 import org.joml.Runtime;
 import org.joml.Vector2d;
+import org.joml.Vector2f;
 import org.joml.Vector3d;
 import org.joml.Vector3dc;
 import org.joml.Vector3f;
@@ -42,7 +43,7 @@ import org.joml.Vector3fc;
 
 /**
  * Represents an axis-aligned box defined via the minimum and maximum corner coordinates as double-precision floats.
- * 
+ *
  * @author Kai Burjack
  */
 public class AABBd implements Externalizable, AABBdc {
@@ -81,7 +82,7 @@ public class AABBd implements Externalizable, AABBdc {
 
     /**
      * Create a new {@link AABBd} as a copy of the given <code>source</code>.
-     * 
+     *
      * @param source
      *          the {@link AABBd} to copy from
      */
@@ -96,7 +97,7 @@ public class AABBd implements Externalizable, AABBdc {
 
     /**
      * Create a new {@link AABBd} with the given minimum and maximum corner coordinates.
-     * 
+     *
      * @param min
      *          the minimum coordinates
      * @param max
@@ -113,7 +114,7 @@ public class AABBd implements Externalizable, AABBdc {
 
     /**
      * Create a new {@link AABBd} with the given minimum and maximum corner coordinates.
-     * 
+     *
      * @param min
      *          the minimum coordinates
      * @param max
@@ -130,7 +131,7 @@ public class AABBd implements Externalizable, AABBdc {
 
     /**
      * Create a new {@link AABBd} with the given minimum and maximum corner coordinates.
-     * 
+     *
      * @param minX
      *          the x coordinate of the minimum corner
      * @param minY
@@ -232,7 +233,7 @@ public class AABBd implements Externalizable, AABBdc {
 
     /**
      * Set the maximum corner coordinates.
-     * 
+     *
      * @param maxX
      *          the x coordinate of the maximum corner
      * @param maxY
@@ -250,7 +251,7 @@ public class AABBd implements Externalizable, AABBdc {
 
     /**
      * Set the minimum corner coordinates.
-     * 
+     *
      * @param min
      *          the minimum coordinates
      * @return this
@@ -261,7 +262,7 @@ public class AABBd implements Externalizable, AABBdc {
 
     /**
      * Set the maximum corner coordinates.
-     * 
+     *
      * @param max
      *          the maximum coordinates
      * @return this
@@ -363,7 +364,7 @@ public class AABBd implements Externalizable, AABBdc {
 
     /**
      * Set <code>this</code> to the union of <code>this</code> and the given point <code>(x, y, z)</code>.
-     * 
+     *
      * @param x
      *          the x coordinate of the point
      * @param y
@@ -378,7 +379,7 @@ public class AABBd implements Externalizable, AABBdc {
 
     /**
      * Set <code>this</code> to the union of <code>this</code> and the given point <code>p</code>.
-     * 
+     *
      * @param p
      *          the point
      * @return this
@@ -403,7 +404,7 @@ public class AABBd implements Externalizable, AABBdc {
 
     /**
      * Set <code>this</code> to the union of <code>this</code> and <code>other</code>.
-     * 
+     *
      * @param other
      *          the other {@link AABBd}
      * @return this
@@ -425,7 +426,7 @@ public class AABBd implements Externalizable, AABBdc {
     /**
      * Ensure that the minimum coordinates are strictly less than or equal to the maximum coordinates by swapping
      * them if necessary.
-     * 
+     *
      * @return this
      */
     public AABBd correctBounds() {
@@ -450,7 +451,7 @@ public class AABBd implements Externalizable, AABBdc {
 
     /**
      * Translate <code>this</code> by the given vector <code>xyz</code>.
-     * 
+     *
      * @param xyz
      *          the vector to translate by
      * @return this
@@ -465,7 +466,7 @@ public class AABBd implements Externalizable, AABBdc {
 
     /**
      * Translate <code>this</code> by the given vector <code>xyz</code>.
-     * 
+     *
      * @param xyz
      *          the vector to translate by
      * @return this
@@ -480,7 +481,7 @@ public class AABBd implements Externalizable, AABBdc {
 
     /**
      * Translate <code>this</code> by the vector <code>(x, y, z)</code>.
-     * 
+     *
      * @param x
      *          the x coordinate to translate by
      * @param y
@@ -548,19 +549,49 @@ public class AABBd implements Externalizable, AABBdc {
     }
 
     public boolean containsPoint(double x, double y, double z) {
-        return x > minX && y > minY && z > minZ && x < maxX && y < maxY && z < maxZ;
+        return x >= minX && y >= minY && z >= minZ && x <= maxX && y <= maxY && z <= maxZ;
+    }
+
+    @Override
+    public boolean containsPoint(float x, float y, float z) {
+        return x >= minX && y >= minY && z >= minZ && x <= maxX && y <= maxY && z <= maxZ;
     }
 
     public boolean containsPoint(Vector3dc point) {
         return containsPoint(point.x(), point.y(), point.z());
     }
 
+    @Override
+    public boolean containsPoint(Vector3fc point) {
+        return false;
+    }
+
     public boolean intersectsPlane(double a, double b, double c, double d) {
         return Intersectiond.testAabPlane(minX, minY, minZ, maxX, maxY, maxZ, a, b, c, d);
     }
 
+    @Override
+    public boolean intersectsPlane(float a, float b, float c, float d) {
+        return false;
+    }
+
+    @Override
+    public boolean intersectsPlane(Planef plane) {
+        return false;
+    }
+
     public boolean intersectsPlane(Planed plane) {
         return Intersectiond.testAabPlane(this, plane);
+    }
+
+    @Override
+    public boolean intersectsAABB(AABBdc other) {
+        return false;
+    }
+
+    @Override
+    public boolean intersectsAABB(AABBfc other) {
+        return false;
     }
 
     public boolean intersectsAABB(AABBd other) {
@@ -572,8 +603,23 @@ public class AABBd implements Externalizable, AABBdc {
         return Intersectiond.testAabSphere(minX, minY, minZ, maxX, maxY, maxZ, centerX, centerY, centerZ, radiusSquared);
     }
 
+    @Override
+    public boolean intersectsSphere(float centerX, float centerY, float centerZ, float radiusSquared) {
+        return false;
+    }
+
     public boolean intersectsSphere(Spheref sphere) {
         return Intersectiond.testAabSphere(this, sphere);
+    }
+
+    @Override
+    public boolean intersectsSphere(Sphered sphere) {
+        return false;
+    }
+
+    @Override
+    public boolean intersectsRay(float originX, float originY, float originZ, float dirX, float dirY, float dirZ) {
+        return false;
     }
 
     public boolean intersectsRay(double originX, double originY, double originZ, double dirX, double dirY, double dirZ) {
@@ -584,8 +630,23 @@ public class AABBd implements Externalizable, AABBdc {
         return Intersectiond.testRayAab(ray, this);
     }
 
+    @Override
+    public boolean intersectsRay(Rayf ray) {
+        return false;
+    }
+
     public boolean intersectsRay(double originX, double originY, double originZ, double dirX, double dirY, double dirZ, Vector2d result) {
         return Intersectiond.intersectRayAab(originX, originY, originZ, dirX, dirY, dirZ, minX, minY, minZ, maxX, maxY, maxZ, result);
+    }
+
+    @Override
+    public boolean intersectsRay(float originX, float originY, float originZ, float dirX, float dirY, float dirZ, Vector2f result) {
+        return false;
+    }
+
+    @Override
+    public boolean intersectsRay(Rayf ray, Vector2f result) {
+        return false;
     }
 
     public boolean intersectsRay(Rayd ray, Vector2d result) {
@@ -684,7 +745,7 @@ public class AABBd implements Externalizable, AABBdc {
      * Return a string representation of this AABB.
      * <p>
      * This method creates a new {@link DecimalFormat} on every invocation with the format string "<code>0.000E0;-</code>".
-     * 
+     *
      * @return the string representation
      */
     public String toString() {
@@ -693,7 +754,7 @@ public class AABBd implements Externalizable, AABBdc {
 
     /**
      * Return a string representation of this AABB by formatting the vector components with the given {@link NumberFormat}.
-     * 
+     *
      * @param formatter
      *          the {@link NumberFormat} used to format the vector components with
      * @return the string representation

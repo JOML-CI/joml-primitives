@@ -35,6 +35,7 @@ import org.joml.Options;
 import org.joml.Runtime;
 import org.joml.Vector2d;
 import org.joml.Vector2dc;
+import org.joml.Vector2f;
 import org.joml.Vector2fc;
 
 /**
@@ -147,7 +148,20 @@ public class Rectangled implements Externalizable, Rectangledc {
      * @return dest
      */
     public Vector2d getSize(Vector2d dest) {
-        return dest.set(lengthX(), lengthY());
+        return dest.set(getSizeX(), getSizeY());
+    }
+
+
+    public Vector2f getSize(Vector2f dest) {
+        return dest.set(getSizeX(), getSizeY());
+    }
+
+    public Vector2f center(Vector2f dest) {
+        return dest.set(minX + ((maxX - minX) / 2.0f) , minY + (maxY - minY) / 2.0f);
+    }
+
+    public Vector2d center(Vector2d dest) {
+        return dest.set(minX + ((maxX - minX) / 2.0) , minY + (maxY - minY) / 2.0);
     }
 
     /**

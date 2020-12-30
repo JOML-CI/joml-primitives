@@ -33,6 +33,7 @@ import java.text.NumberFormat;
 import org.joml.Options;
 import org.joml.Runtime;
 import org.joml.Vector2d;
+import org.joml.Vector2f;
 import org.joml.Vector3dc;
 import org.joml.Vector3fc;
 
@@ -198,6 +199,123 @@ public class Sphered implements Externalizable, Spheredc {
         return dest;
     }
 
+    public boolean containsPoint(double x, double y, double z) {
+        double dx = this.x - x;
+        double dy = this.y - y;
+        double dz = this.z - z;
+        double d = dx * dx + dy * dy + dz * dz;
+        return r * r <= d;
+    }
+
+    public boolean containsPoint(float x, float y, float z) {
+        double dx = this.x - x;
+        double dy = this.y - y;
+        double dz = this.z - z;
+        double d = dx * dx + dy * dy + dz * dz;
+        return r * r <= d;
+    }
+
+    public boolean containsPoint(Vector3dc point) {
+        double dx = this.x - point.x();
+        double dy = this.y - point.y();
+        double dz = this.z - point.z();
+        double d = dx * dx + dy * dy + dz * dz;
+        return r * r <= d;
+    }
+
+    public boolean containsPoint(Vector3fc point) {
+        double dx = this.x - point.x();
+        double dy = this.y - point.y();
+        double dz = this.z - point.z();
+        double d = dx * dx + dy * dy + dz * dz;
+        return r * r <= d;
+    }
+
+    public boolean intersectsPlane(double a, double b, double c, double d) {
+        return false;
+    }
+
+    public boolean intersectsPlane(float a, float b, float c, float d) {
+        return false;
+    }
+
+    public boolean intersectsPlane(Planef plane) {
+        return false;
+    }
+
+    public boolean intersectsPlane(Planed plane) {
+        return false;
+    }
+
+    public boolean intersectsAABB(AABBdc other) {
+        return false;
+    }
+
+    public boolean intersectsAABB(AABBfc other) {
+        return false;
+    }
+
+    public boolean intersectsSphere(double centerX, double centerY, double centerZ, double radiusSquared) {
+        return false;
+    }
+
+    public boolean intersectsSphere(float centerX, float centerY, float centerZ, float radiusSquared) {
+        return false;
+    }
+
+    public boolean intersectsSphere(Spheref sphere) {
+        return false;
+    }
+
+    public boolean intersectsSphere(Sphered sphere) {
+        return false;
+    }
+
+    public boolean intersectsRay(float originX, float originY, float originZ, float dirX, float dirY, float dirZ) {
+        return false;
+    }
+
+    public boolean intersectsRay(double originX, double originY, double originZ, double dirX, double dirY, double dirZ) {
+        return false;
+    }
+
+    public boolean intersectsRay(Rayd ray) {
+        return false;
+    }
+
+    public boolean intersectsRay(Rayf ray) {
+        return false;
+    }
+
+    public boolean intersectsRay(double originX, double originY, double originZ, double dirX, double dirY, double dirZ, Vector2d result) {
+        return false;
+    }
+
+    public boolean intersectsRay(float originX, float originY, float originZ, float dirX, float dirY, float dirZ, Vector2f result) {
+        return false;
+    }
+
+    public boolean intersectsRay(Rayf ray, Vector2f result) {
+        return false;
+    }
+
+    public boolean intersectsRay(Rayd ray, Vector2d result) {
+        return false;
+    }
+
+    public int intersectsLineSegment(double p0X, double p0Y, double p0Z, double p1X, double p1Y, double p1Z, Vector2d result) {
+        return 0;
+    }
+
+    public int intersectsLineSegment(float p0X, float p0Y, float p0Z, float p1X, float p1Y, float p1Z, Vector2f result) {
+        return 0;
+    }
+
+    public int intersectsLineSegment(LineSegmentf lineSegment, Vector2d result) {
+        return 0;
+    }
+
+
     public int hashCode() {
         final int prime = 31;
         int result = 1;
@@ -273,77 +391,5 @@ public class Sphered implements Externalizable, Spheredc {
         y = in.readDouble();
         z = in.readDouble();
         r = in.readDouble();
-    }
-
-    public boolean containsPoint(double x, double y, double z) {
-        double dx = this.x - x;
-        double dy = this.y - y;
-        double dz = this.z - z;
-        double d = dx * dx + dy * dy + dz * dz;
-        return r * r <= d;
-    }
-
-    public boolean containsPoint(float x, float y, float z) {
-        double dx = this.x - x;
-        double dy = this.y - y;
-        double dz = this.z - z;
-        double d = dx * dx + dy * dy + dz * dz;
-        return r * r <= d;
-    }
-
-    public boolean containsPoint(Vector3dc point) {
-        double dx = this.x - point.x();
-        double dy = this.y - point.y();
-        double dz = this.z - point.z();
-        double d = dx * dx + dy * dy + dz * dz;
-        return r * r <= d;
-    }
-
-    public boolean intersectsPlane(double a, double b, double c, double d) {
-        return false;
-    }
-
-    public boolean intersectsPlane(Planed plane) {
-        return false;
-    }
-
-    public boolean intersectsAABB(AABBdc other) {
-        return false;
-    }
-
-    public boolean intersectsAABB(AABBfc other) {
-        return false;
-    }
-
-    public boolean intersectsSphere(double centerX, double centerY, double centerZ, double radiusSquared) {
-        return false;
-    }
-
-    public boolean intersectsSphere(Spheref sphere) {
-        return false;
-    }
-
-    public boolean intersectsRay(double originX, double originY, double originZ, double dirX, double dirY, double dirZ) {
-        return false;
-    }
-
-    public boolean intersectsRay(Rayd ray) {
-        return false;
-    }
-
-    public boolean intersectsRay(double originX, double originY, double originZ, double dirX, double dirY, double dirZ, Vector2d result) {
-        return false;
-    }
-
-    public boolean intersectsRay(Rayd ray, Vector2d result) {
-        return false;
-    }
-
-    public int intersectsLineSegment(double p0X, double p0Y, double p0Z, double p1X, double p1Y, double p1Z, Vector2d result) {
-        return 0;
-    }
-
-    public int intersectsLineSegment(LineSegmentf lineSegment, Vector2d result) {
-        return 0;
     }
 }

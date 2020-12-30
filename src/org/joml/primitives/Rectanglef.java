@@ -33,6 +33,7 @@ import java.text.NumberFormat;
 import org.joml.Math;
 import org.joml.Options;
 import org.joml.Runtime;
+import org.joml.Vector2d;
 import org.joml.Vector2dc;
 import org.joml.Vector2f;
 import org.joml.Vector2fc;
@@ -138,9 +139,17 @@ public class Rectanglef implements Externalizable, Rectanglefc {
     public float getSizeY() {
         return maxY - minY;
     }
-    
+
     public Vector2f getSize(Vector2f dest) {
         return dest.set(maxX - minX, maxY - minY);
+    }
+
+    public  Vector2f center(Vector2f dest) {
+        return dest.set(minX + ((maxX - minX) / 2.0f) , minY + (maxY - minY) / 2.0f);
+    }
+
+    public Vector2d center(Vector2d dest) {
+        return dest.set(minX + ((maxX - minX) / 2.0) , minY + (maxY - minY) / 2.0);
     }
 
     /**

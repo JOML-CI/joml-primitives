@@ -3,6 +3,7 @@ package org.joml.primitives;
 import org.joml.Math;
 import org.joml.Vector2d;
 import org.joml.Vector2dc;
+import org.joml.Vector2f;
 import org.joml.Vector2fc;
 import org.joml.Vector3d;
 
@@ -19,7 +20,15 @@ public interface Rectangledc extends Shape2D {
 
     double getSizeY();
 
+
+    Vector2f getSize(Vector2f dest);
+
     Vector2d getSize(Vector2d dest);
+
+
+    Vector2f center(Vector2f dest);
+
+    Vector2d center(Vector2d dest);
 
     /**
      * Check if this rectangle contains the given <code>rectangle</code>.

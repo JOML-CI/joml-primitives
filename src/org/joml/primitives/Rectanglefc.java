@@ -1,5 +1,6 @@
 package org.joml.primitives;
 
+import org.joml.Vector2d;
 import org.joml.Vector2f;
 import org.joml.Vector2fc;
 
@@ -23,12 +24,15 @@ public interface Rectanglefc extends Shape2D{
     /**
      * Return the length of the rectangle in the X dimension.
      *
-     * @return length in the X dimension
+     * @return size in the Y dimension
      */
     float getSizeY();
 
-
     Vector2f getSize(Vector2f dest);
+
+    Vector2f center(Vector2f dest);
+
+    Vector2d center(Vector2d dest);
 
     /**
      * Scale <code>this</code> about an anchor and store the result in <code>dest</code>.

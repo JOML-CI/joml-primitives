@@ -31,8 +31,10 @@ import java.io.ObjectOutput;
 import org.joml.Math;
 import org.joml.Matrix4fc;
 import org.joml.RoundingMode;
+import org.joml.Vector2d;
 import org.joml.Vector2f;
 import org.joml.Vector3d;
+import org.joml.Vector3dc;
 import org.joml.Vector3f;
 import org.joml.Vector3fc;
 import org.joml.Vector3i;
@@ -544,6 +546,11 @@ public class AABBi implements Externalizable, AABBic {
         return x > minX && y > minY && z > minZ && x < maxX && y < maxY && z < maxZ;
     }
 
+    @Override
+    public boolean containsPoint(Vector3dc point) {
+        return false;
+    }
+
     public boolean containsPoint(Vector3ic point) {
         return containsPoint(point.x(), point.y(), point.z());
     }
@@ -552,12 +559,27 @@ public class AABBi implements Externalizable, AABBic {
         return containsPoint(point.x(), point.y(), point.z());
     }
 
+    @Override
+    public boolean intersectsPlane(double a, double b, double c, double d) {
+        return false;
+    }
+
     public boolean intersectsPlane(float a, float b, float c, float d) {
         return Intersectionf.testAabPlane(minX, minY, minZ, maxX, maxY, maxZ, a, b, c, d);
     }
 
     public boolean intersectsPlane(Planef plane) {
         return Intersectionf.testAabPlane(this, plane);
+    }
+
+    @Override
+    public boolean intersectsPlane(Planed plane) {
+        return false;
+    }
+
+    @Override
+    public boolean intersectsAABB(AABBdc other) {
+        return false;
     }
 
     public boolean intersectsAABB(AABBic other) {
@@ -570,6 +592,11 @@ public class AABBi implements Externalizable, AABBic {
             this.minX <= other.maxX() && this.minY <= other.maxY() && this.minZ <= other.maxZ();
     }
 
+    @Override
+    public boolean intersectsSphere(double centerX, double centerY, double centerZ, double radiusSquared) {
+        return false;
+    }
+
     public boolean intersectsSphere(float centerX, float centerY, float centerZ, float radiusSquared) {
         return Intersectionf.testAabSphere(minX, minY, minZ, maxX, maxY, maxZ, centerX, centerY, centerZ, radiusSquared);
     }
@@ -578,12 +605,32 @@ public class AABBi implements Externalizable, AABBic {
         return Intersectionf.testAabSphere(this, sphere);
     }
 
+    @Override
+    public boolean intersectsSphere(Sphered sphere) {
+        return false;
+    }
+
     public boolean intersectsRay(float originX, float originY, float originZ, float dirX, float dirY, float dirZ) {
         return Intersectionf.testRayAab(originX, originY, originZ, dirX, dirY, dirZ, minX, minY, minZ, maxX, maxY, maxZ);
     }
 
+    @Override
+    public boolean intersectsRay(double originX, double originY, double originZ, double dirX, double dirY, double dirZ) {
+        return false;
+    }
+
+    @Override
+    public boolean intersectsRay(Rayd ray) {
+        return false;
+    }
+
     public boolean intersectsRay(Rayf ray) {
         return Intersectionf.testRayAab(ray, this);
+    }
+
+    @Override
+    public boolean intersectsRay(double originX, double originY, double originZ, double dirX, double dirY, double dirZ, Vector2d result) {
+        return false;
     }
 
     public boolean intersectsRay(float originX, float originY, float originZ, float dirX, float dirY, float dirZ, Vector2f result) {
@@ -592,6 +639,26 @@ public class AABBi implements Externalizable, AABBic {
 
     public boolean intersectsRay(Rayf ray, Vector2f result) {
         return Intersectionf.intersectRayAab(ray, this, result);
+    }
+
+    @Override
+    public boolean intersectsRay(Rayd ray, Vector2d result) {
+        return false;
+    }
+
+    @Override
+    public int intersectsLineSegment(double p0X, double p0Y, double p0Z, double p1X, double p1Y, double p1Z, Vector2d result) {
+        return 0;
+    }
+
+    @Override
+    public int intersectsLineSegment(float p0X, float p0Y, float p0Z, float p1X, float p1Y, float p1Z, Vector2f result) {
+        return 0;
+    }
+
+    @Override
+    public int intersectsLineSegment(LineSegmentf lineSegment, Vector2d result) {
+        return 0;
     }
 
     public int intersectLineSegment(float p0X, float p0Y, float p0Z, float p1X, float p1Y, float p1Z, Vector2f result) {

@@ -33,6 +33,7 @@ import java.text.NumberFormat;
 import org.joml.Options;
 import org.joml.Runtime;
 import org.joml.Vector2d;
+import org.joml.Vector2f;
 import org.joml.Vector3dc;
 import org.joml.Vector3fc;
 
@@ -64,6 +65,19 @@ public class Spheref implements Externalizable, Spherefc {
      * Create a new {@link Spheref} with center position <code>(0, 0, 0)</code> and radius = <code>0</code>.
      */
     public Spheref() {
+    }
+
+    /**
+     * Create a new {@link Spheref} as a copy of the given <code>source</code>.
+     *
+     * @param source
+     *          the {@link Spheref} to copy from
+     */
+    public Spheref(Sphered source) {
+        this.x = (float) source.x;
+        this.y = (float) source.y;
+        this.z = (float) source.z;
+        this.r = (float) source.r;
     }
 
     /**
@@ -169,67 +183,111 @@ public class Spheref implements Externalizable, Spherefc {
 
 
     public boolean containsPoint(double x, double y, double z) {
-        return false;
+        float dx = (float) (this.x - x);
+        float dy = (float) (this.y - y);
+        float dz = (float) (this.z - z);
+        float d = dx * dx + dy * dy + dz * dz;
+        return r * r <= d;
     }
 
     public boolean containsPoint(float x, float y, float z) {
-        return false;
+        float dx = this.x - x;
+        float dy = this.y - y;
+        float dz = this.z - z;
+        float d = dx * dx + dy * dy + dz * dz;
+        return r * r <= d;
     }
 
     public boolean containsPoint(Vector3dc point) {
-        return false;
+        float dx = (float) (this.x - point.x());
+        float dy = (float) (this.y - point.y());
+        float dz = (float) (this.z - point.z());
+        float d = dx * dx + dy * dy + dz * dz;
+        return r * r <= d;
+    }
+
+    public boolean containsPoint(Vector3fc point) {
+        float dx = this.x - point.x();
+        float dy = this.y - point.y();
+        float dz = this.z - point.z();
+        float d = dx * dx + dy * dy + dz * dz;
+        return r * r <= d;
     }
 
     public boolean intersectsPlane(double a, double b, double c, double d) {
-        return false;
+        return Intersectiond.testPlaneSphere(a, b, c, d, x, y, z, r);
+    }
+
+    public boolean intersectsPlane(float a, float b, float c, float d) {
+        return Intersectionf.testPlaneSphere(a, b, c, d, x, y, z, r);
+    }
+
+    public boolean intersectsPlane(Planef plane) {
+        return Intersectionf.testPlaneSphere(plane.a, plane.b, plane.c, plane.d, x, y, z, r);
     }
 
     public boolean intersectsPlane(Planed plane) {
-        return false;
+        return Intersectiond.testPlaneSphere(plane.a, plane.b, plane.c, plane.d, x, y, z, r);
     }
 
     public boolean intersectsAABB(AABBdc other) {
-        return false;
+        return Intersectiond.testAabSphere(other.minX(), other.minY(), other.minZ(), other.maxX(), other.maxY(), other.maxZ(), x, y, z, r * r);
     }
 
     public boolean intersectsAABB(AABBfc other) {
-        return false;
+        return Intersectionf.testAabSphere(other.minX(), other.minY(), other.minZ(), other.maxX(), other.maxY(), other.maxZ(), x, y, z, r * r);
     }
 
     public boolean intersectsAABB(AABBd other) {
-        return false;
+        return Intersectiond.testAabSphere(other.minX(), other.minY(), other.minZ(), other.maxX(), other.maxY(), other.maxZ(), x, y, z, r * r);
     }
 
     public boolean intersectsSphere(double centerX, double centerY, double centerZ, double radiusSquared) {
-        return false;
+        return Intersectiond.testSphereSphere(x, y, z, r * r, centerX, centerY, centerZ, radiusSquared);
+    }
+
+    public boolean intersectsSphere(float centerX, float centerY, float centerZ, float radiusSquared) {
+        return Intersectionf.testSphereSphere(x, y, z, r * r, centerX, centerY, centerZ, radiusSquared);
     }
 
     public boolean intersectsSphere(Spheref sphere) {
-        return false;
+        return Intersectionf.testSphereSphere(x, y, z, r * r, sphere.x(), sphere.y(), sphere.z(), sphere.r() * sphere.r());
+    }
+
+    public boolean intersectsSphere(Sphered sphere) {
+        return Intersectiond.testSphereSphere(x, y, z, r * r, sphere.x(), sphere.y(), sphere.z(), sphere.r() * sphere.r());
+    }
+
+    public boolean intersectsRay(float originX, float originY, float originZ, float dirX, float dirY, float dirZ) {
+        return Intersectionf.testRaySphere(originX, originY, originZ, dirX, dirY, dirZ, x, y, z, r * r);
     }
 
     public boolean intersectsRay(double originX, double originY, double originZ, double dirX, double dirY, double dirZ) {
-        return false;
+        return Intersectiond.testRaySphere(originX, originY, originZ, dirX, dirY, dirZ, x, y, z, r * r);
     }
 
     public boolean intersectsRay(Rayd ray) {
-        return false;
+        return Intersectiond.testRaySphere(ray.oX, ray.oY, ray.oZ, ray.dX, ray.dY, ray.dZ, x, y, z, r * r);
+    }
+
+    public boolean intersectsRay(Rayf ray) {
+        return Intersectionf.testRaySphere(ray.oX, ray.oY, ray.oZ, ray.dX, ray.dY, ray.dZ, x, y, z, r * r);
     }
 
     public boolean intersectsRay(double originX, double originY, double originZ, double dirX, double dirY, double dirZ, Vector2d result) {
-        return false;
+        return Intersectiond.intersectRaySphere(originX, originY, originZ, dirX, dirY, dirZ, x, y, z, r * r, result);
+    }
+
+    public boolean intersectsRay(float originX, float originY, float originZ, float dirX, float dirY, float dirZ, Vector2f result) {
+        return Intersectionf.intersectRaySphere(originX, originY, originZ, dirX, dirY, dirZ, x, y, z, r * r, result);
+    }
+
+    public boolean intersectsRay(Rayf ray, Vector2f result) {
+        return Intersectionf.intersectRaySphere(ray.oX, ray.oY, ray.oZ, ray.dX, ray.dY, ray.dZ, x, y, z, r * r, result);
     }
 
     public boolean intersectsRay(Rayd ray, Vector2d result) {
-        return false;
-    }
-
-    public int intersectsLineSegment(double p0X, double p0Y, double p0Z, double p1X, double p1Y, double p1Z, Vector2d result) {
-        return 0;
-    }
-
-    public int intersectsLineSegment(LineSegmentf lineSegment, Vector2d result) {
-        return 0;
+        return Intersectiond.intersectRaySphere(ray.oX, ray.oY, ray.oZ, ray.dX, ray.dY, ray.dZ, x, y, z, r * r, result);
     }
 
     public int hashCode() {

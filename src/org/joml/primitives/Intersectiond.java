@@ -34,7 +34,7 @@ import org.joml.Vector4d;
 
 /**
  * Contains intersection and distance tests for some 2D and 3D geometric primitives.
- * 
+ *
  * @author Kai Burjack
  */
 public class Intersectiond {
@@ -106,7 +106,7 @@ public class Intersectiond {
      * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double, double, double, double, double, Vector3d)},
      * {@link #findClosestPointOnTriangle(Vector3dc, Vector3dc, Vector3dc, Vector3dc, Vector3d)},
      * {@link #findClosestPointOnTriangle(double, double, double, double, double, double, double, double, Vector2d)} and
-     * {@link #findClosestPointOnTriangle(Vector2dc, Vector2dc, Vector2dc, Vector2dc, Vector2d)} or 
+     * {@link #findClosestPointOnTriangle(Vector2dc, Vector2dc, Vector2dc, Vector2dc, Vector2d)} or
      * {@link #intersectSweptSphereTriangle}
      * to signal that the closest point lies on the face of the triangle.
      */
@@ -266,7 +266,7 @@ public class Intersectiond {
      * The normal vector <code>(a, b, c)</code> of the plane equation needs to be normalized.
      * <p>
      * Reference: Book "Real-Time Collision Detection" chapter 5.5.3 "Intersecting Moving Sphere Against Plane"
-     * 
+     *
      * @param a
      *          the x factor in the plane equation
      * @param b
@@ -330,7 +330,7 @@ public class Intersectiond {
      * The normal vector <code>(a, b, c)</code> of the plane equation needs to be normalized.
      * <p>
      * Reference: Book "Real-Time Collision Detection" chapter 5.5.3 "Intersecting Moving Sphere Against Plane"
-     * 
+     *
      * @param a
      *          the x factor in the plane equation
      * @param b
@@ -375,7 +375,7 @@ public class Intersectiond {
      * intersects the plane with the general equation <i>a*x + b*y + c*z + d = 0</i>.
      * <p>
      * Reference: <a href="http://www.lighthouse3d.com/tutorials/view-frustum-culling/geometric-approach-testing-boxes-ii/">http://www.lighthouse3d.com</a> ("Geometric Approach - Testing Boxes II")
-     * 
+     *
      * @param minX
      *          the x coordinate of the minimum corner of the axis-aligned box
      * @param minY
@@ -433,7 +433,7 @@ public class Intersectiond {
      * Test whether the axis-aligned box intersects the plane.
      * <p>
      * Reference: <a href="http://www.lighthouse3d.com/tutorials/view-frustum-culling/geometric-approach-testing-boxes-ii/">http://www.lighthouse3d.com</a> ("Geometric Approach - Testing Boxes II")
-     * 
+     *
      * @param aabb
      *          the AABB
      * @param plane
@@ -449,7 +449,7 @@ public class Intersectiond {
      * intersects the plane with the general equation <i>a*x + b*y + c*z + d = 0</i>.
      * <p>
      * Reference: <a href="http://www.lighthouse3d.com/tutorials/view-frustum-culling/geometric-approach-testing-boxes-ii/">http://www.lighthouse3d.com</a> ("Geometric Approach - Testing Boxes II")
-     * 
+     *
      * @param min
      *          the minimum corner of the axis-aligned box
      * @param max
@@ -471,7 +471,7 @@ public class Intersectiond {
     /**
      * Test whether the axis-aligned box with minimum corner <code>(minXA, minYA, minZA)</code> and maximum corner <code>(maxXA, maxYA, maxZA)</code>
      * intersects the axis-aligned box with minimum corner <code>(minXB, minYB, minZB)</code> and maximum corner <code>(maxXB, maxYB, maxZB)</code>.
-     * 
+     *
      * @param minXA
      *              the x coordinate of the minimum corner of the first axis-aligned box
      * @param minYA
@@ -503,14 +503,14 @@ public class Intersectiond {
             double maxXA, double maxYA, double maxZA,
             double minXB, double minYB, double minZB,
             double maxXB, double maxYB, double maxZB) {
-        return maxXA >= minXB && maxYA >= minYB && maxZA >= minZB && 
+        return maxXA >= minXB && maxYA >= minYB && maxZA >= minZB &&
                minXA <= maxXB && minYA <= maxYB && minZA <= maxZB;
     }
 
     /**
      * Test whether the axis-aligned box with minimum corner <code>minA</code> and maximum corner <code>maxA</code>
      * intersects the axis-aligned box with minimum corner <code>minB</code> and maximum corner <code>maxB</code>.
-     * 
+     *
      * @param minA
      *              the minimum corner of the first axis-aligned box
      * @param maxA
@@ -527,7 +527,7 @@ public class Intersectiond {
 
     /**
      * Test whether the two axis-aligned boxes intersect.
-     * 
+     *
      * @param aabb1
      *              the first AABB
      * @param aabb2
@@ -546,7 +546,7 @@ public class Intersectiond {
      * The size is given as the half-size along each of the unit vectors defining the orthonormal basis.
      * <p>
      * Reference: Book "Real-Time Collision Detection" chapter 4.4.1 "OBB-OBB Intersection"
-     * 
+     *
      * @param b0c
      *          the center of the first box
      * @param b0uX
@@ -585,7 +585,7 @@ public class Intersectiond {
      * The size is given as the half-size along each of the unit vectors defining the orthonormal basis.
      * <p>
      * Reference: Book "Real-Time Collision Detection" chapter 4.4.1 "OBB-OBB Intersection"
-     * 
+     *
      * @param b0cX
      *          the x coordinate of the center of the first box
      * @param b0cY
@@ -749,7 +749,7 @@ public class Intersectiond {
      * The normal vector of the circle of intersection can simply be obtained by subtracting the center of either sphere from the other.
      * <p>
      * Reference: <a href="http://gamedev.stackexchange.com/questions/75756/sphere-sphere-intersection-and-circle-sphere-intersection">http://gamedev.stackexchange.com</a>
-     * 
+     *
      * @param aX
      *              the x coordinate of the first sphere's center
      * @param aY
@@ -796,7 +796,7 @@ public class Intersectiond {
      * The normal vector of the circle of intersection can simply be obtained by subtracting the center of either sphere from the other.
      * <p>
      * Reference: <a href="http://gamedev.stackexchange.com/questions/75756/sphere-sphere-intersection-and-circle-sphere-intersection">http://gamedev.stackexchange.com</a>
-     * 
+     *
      * @param centerA
      *              the first sphere's center
      * @param radiusSquaredA
@@ -820,7 +820,7 @@ public class Intersectiond {
      * The normal vector of the circle of intersection can simply be obtained by subtracting the center of either sphere from the other.
      * <p>
      * Reference: <a href="http://gamedev.stackexchange.com/questions/75756/sphere-sphere-intersection-and-circle-sphere-intersection">http://gamedev.stackexchange.com</a>
-     * 
+     *
      * @param sphereA
      *              the first sphere
      * @param sphereB
@@ -840,7 +840,7 @@ public class Intersectiond {
      * This method also returns whether the point of intersection is on one of the triangle's vertices, edges or on the face.
      * <p>
      * Reference: Book "Real-Time Collision Detection" chapter 5.2.7 "Testing Sphere Against Triangle"
-     * 
+     *
      * @param sX
      *          the x coordinate of the sphere's center
      * @param sY
@@ -893,7 +893,7 @@ public class Intersectiond {
      * sphere with center <code>(bX, bY, bZ)</code> and square radius <code>radiusSquaredB</code>.
      * <p>
      * Reference: <a href="http://gamedev.stackexchange.com/questions/75756/sphere-sphere-intersection-and-circle-sphere-intersection">http://gamedev.stackexchange.com</a>
-     * 
+     *
      * @param aX
      *              the x coordinate of the first sphere's center
      * @param aY
@@ -927,7 +927,7 @@ public class Intersectiond {
      * sphere with center <code>centerB</code> and square radius <code>radiusSquaredB</code>.
      * <p>
      * Reference: <a href="http://gamedev.stackexchange.com/questions/75756/sphere-sphere-intersection-and-circle-sphere-intersection">http://gamedev.stackexchange.com</a>
-     * 
+     *
      * @param centerA
      *              the first sphere's center
      * @param radiusSquaredA
@@ -945,7 +945,7 @@ public class Intersectiond {
     /**
      * Determine the signed distance of the given point <code>(pointX, pointY, pointZ)</code> to the plane specified via its general plane equation
      * <i>a*x + b*y + c*z + d = 0</i>.
-     * 
+     *
      * @param pointX
      *              the x coordinate of the point
      * @param pointY
@@ -973,7 +973,7 @@ public class Intersectiond {
      * <p>
      * If the point lies on the front-facing side of the triangle's plane, that is, if the triangle has counter-clockwise winding order
      * as seen from the point, then this method returns a positive number.
-     * 
+     *
      * @param pointX
      *          the x coordinate of the point
      * @param pointY
@@ -1024,7 +1024,7 @@ public class Intersectiond {
      * away from the plane or the ray's origin is on the <i>negative</i> side of the plane (i.e. the plane's normal points away from the ray's origin).
      * <p>
      * Reference: <a href="https://www.siggraph.org/education/materials/HyperGraph/raytrace/rayplane_intersection.htm">https://www.siggraph.org/</a>
-     * 
+     *
      * @param originX
      *              the x coordinate of the ray's origin
      * @param originY
@@ -1074,7 +1074,7 @@ public class Intersectiond {
      * away from the plane or the ray's origin is on the <i>negative</i> side of the plane (i.e. the plane's normal points away from the ray's origin).
      * <p>
      * Reference: <a href="https://www.siggraph.org/education/materials/HyperGraph/raytrace/rayplane_intersection.htm">https://www.siggraph.org/</a>
-     * 
+     *
      * @param origin
      *              the ray's origin
      * @param dir
@@ -1100,7 +1100,7 @@ public class Intersectiond {
      * away from the plane or the ray's origin is on the <i>negative</i> side of the plane (i.e. the plane's normal points away from the ray's origin).
      * <p>
      * Reference: <a href="https://www.siggraph.org/education/materials/HyperGraph/raytrace/rayplane_intersection.htm">https://www.siggraph.org/</a>
-     * 
+     *
      * @param ray
      *              the ray
      * @param plane
@@ -1123,7 +1123,7 @@ public class Intersectiond {
      * away from the plane or the ray's origin is on the <i>negative</i> side of the plane (i.e. the plane's normal points away from the ray's origin).
      * <p>
      * Reference: <a href="https://www.siggraph.org/education/materials/HyperGraph/raytrace/rayplane_intersection.htm">https://www.siggraph.org/</a>
-     * 
+     *
      * @param originX
      *              the x coordinate of the ray's origin
      * @param originY
@@ -1165,7 +1165,7 @@ public class Intersectiond {
      * intersects the sphere with the given center <code>(centerX, centerY, centerZ)</code> and square radius <code>radiusSquared</code>.
      * <p>
      * Reference: <a href="http://stackoverflow.com/questions/4578967/cube-sphere-intersection-test#answer-4579069">http://stackoverflow.com</a>
-     * 
+     *
      * @param minX
      *          the x coordinate of the minimum corner of the axis-aligned box
      * @param minY
@@ -1222,7 +1222,7 @@ public class Intersectiond {
      * intersects the sphere with the given <code>center</code> and square radius <code>radiusSquared</code>.
      * <p>
      * Reference: <a href="http://stackoverflow.com/questions/4578967/cube-sphere-intersection-test#answer-4579069">http://stackoverflow.com</a>
-     * 
+     *
      * @param min
      *          the minimum corner of the axis-aligned box
      * @param max
@@ -1241,20 +1241,20 @@ public class Intersectiond {
      * Test whether the given axis-aligned box intersects the given sphere.
      * <p>
      * Reference: <a href="http://stackoverflow.com/questions/4578967/cube-sphere-intersection-test#answer-4579069">http://stackoverflow.com</a>
-     * 
+     *
      * @param aabb
      *          the AABB
      * @param sphere
      *          the sphere
      * @return <code>true</code> iff the axis-aligned box intersects the sphere; <code>false</code> otherwise
      */
-    public static boolean testAabSphere(AABBd aabb, Spheref sphere) {
-        return testAabSphere(aabb.minX, aabb.minY, aabb.minZ, aabb.maxX, aabb.maxY, aabb.maxZ, sphere.x, sphere.y, sphere.z, sphere.r*sphere.r);
+    public static boolean testAabSphere(AABBdc aabb, Spheref sphere) {
+        return testAabSphere(aabb.minX(), aabb.minY(), aabb.minZ(), aabb.maxX(), aabb.maxY(), aabb.maxZ(), sphere.x, sphere.y, sphere.z, sphere.r*sphere.r);
     }
 
     /**
      * Find the point on the given plane which is closest to the specified point <code>(pX, pY, pZ)</code> and store the result in <code>result</code>.
-     * 
+     *
      * @param aX
      *          the x coordinate of one point on the plane
      * @param aY
@@ -1288,7 +1288,7 @@ public class Intersectiond {
 
     /**
      * Find the point on the given line segment which is closest to the specified point <code>(pX, pY, pZ)</code>, and store the result in <code>result</code>.
-     * 
+     *
      * @param aX
      *          the x coordinate of the first end point of the line segment
      * @param aY
@@ -1323,11 +1323,11 @@ public class Intersectiond {
     }
 
     /**
-     * Find the closest points on the two line segments, store the point on the first line segment in <code>resultA</code> and 
+     * Find the closest points on the two line segments, store the point on the first line segment in <code>resultA</code> and
      * the point on the second line segment in <code>resultB</code>, and return the square distance between both points.
      * <p>
      * Reference: Book "Real-Time Collision Detection" chapter 5.1.9 "Closest Points of Two Line Segments"
-     * 
+     *
      * @param a0X
      *          the x coordinate of the first line segment's first end point
      * @param a0Y
@@ -1422,7 +1422,7 @@ public class Intersectiond {
      * Find the closest points on a line segment and a triangle.
      * <p>
      * Reference: Book "Real-Time Collision Detection" chapter 5.1.10 "Closest Points of a Line Segment and a Triangle"
-     * 
+     *
      * @param aX
      *          the x coordinate of the line segment's first end point
      * @param aY
@@ -1549,7 +1549,7 @@ public class Intersectiond {
      * or on the {@link #POINT_ON_TRIANGLE_FACE face} of the triangle.
      * <p>
      * Reference: Book "Real-Time Collision Detection" chapter 5.1.5 "Closest Point on Triangle to Point"
-     * 
+     *
      * @param v0X
      *          the x coordinate of the first vertex of the triangle
      * @param v0Y
@@ -1657,7 +1657,7 @@ public class Intersectiond {
      * or on the {@link #POINT_ON_TRIANGLE_FACE face} of the triangle.
      * <p>
      * Reference: Book "Real-Time Collision Detection" chapter 5.1.5 "Closest Point on Triangle to Point"
-     * 
+     *
      * @param v0
      *          the first vertex of the triangle
      * @param v1
@@ -1681,7 +1681,7 @@ public class Intersectiond {
      * <code>(pX, pY, pZ)</code> and store the result into <code>res</code>.
      * <p>
      * Reference: Book "Real-Time Collision Detection" chapter 5.1.4.2 "Closest Point on 3D Rectangle to Point"
-     * 
+     *
      * @param aX
      *          the x coordinate of the first corner point of the rectangle
      * @param aY
@@ -1689,7 +1689,7 @@ public class Intersectiond {
      * @param aZ
      *          the z coordinate of the first corner point of the rectangle
      * @param bX
-     *          the x coordinate of the second corner point of the rectangle 
+     *          the x coordinate of the second corner point of the rectangle
      * @param bY
      *          the y coordinate of the second corner point of the rectangle
      * @param bZ
@@ -1756,7 +1756,7 @@ public class Intersectiond {
      * An intersection is only considered if the time of intersection is smaller than the given <code>maxT</code> value.
      * <p>
      * Reference: <a href="http://www.peroxide.dk/papers/collision/collision.pdf">Improved Collision detection and Response</a>
-     * 
+     *
      * @param centerX
      *              the x coordinate of the sphere's center
      * @param centerY
@@ -1952,7 +1952,7 @@ public class Intersectiond {
      * Compute the lowest root for <code>t</code> in the quadratic equation <code>a*t*t + b*t + c = 0</code>.
      * <p>
      * This is a helper method for {@link #intersectSweptSphereTriangle}
-     * 
+     *
      * @param a
      *              the quadratic factor
      * @param b
@@ -1989,7 +1989,7 @@ public class Intersectiond {
      * <code>(v0X, v0Y, v0Z)</code>, <code>(v1X, v1Y, v1Z)</code> and <code>(v2X, v2Y, v2Z)</code>.
      * <p>
      * Reference: <a href="http://www.peroxide.dk/papers/collision/collision.pdf">Improved Collision detection and Response</a>
-     * 
+     *
      * @param pX
      *              the x coordinate of the point to test
      * @param pY
@@ -2047,7 +2047,7 @@ public class Intersectiond {
      * This method returns <code>true</code> for a ray whose origin lies inside the sphere.
      * <p>
      * Reference: <a href="http://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-sphere-intersection">http://www.scratchapixel.com/</a>
-     * 
+     *
      * @param originX
      *              the x coordinate of the ray's origin
      * @param originY
@@ -2102,7 +2102,7 @@ public class Intersectiond {
      * This method returns <code>true</code> for a ray whose origin lies inside the sphere.
      * <p>
      * Reference: <a href="http://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-sphere-intersection">http://www.scratchapixel.com/</a>
-     * 
+     *
      * @param origin
      *              the ray's origin
      * @param dir
@@ -2128,7 +2128,7 @@ public class Intersectiond {
      * This method returns <code>true</code> for a ray whose origin lies inside the sphere.
      * <p>
      * Reference: <a href="http://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-sphere-intersection">http://www.scratchapixel.com/</a>
-     * 
+     *
      * @param ray
      *              the ray
      * @param sphere
@@ -2149,7 +2149,7 @@ public class Intersectiond {
      * This method returns <code>true</code> for a ray whose origin lies inside the sphere.
      * <p>
      * Reference: <a href="http://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-sphere-intersection">http://www.scratchapixel.com/</a>
-     * 
+     *
      * @param originX
      *              the x coordinate of the ray's origin
      * @param originY
@@ -2194,7 +2194,7 @@ public class Intersectiond {
      * This method returns <code>true</code> for a ray whose origin lies inside the sphere.
      * <p>
      * Reference: <a href="http://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-sphere-intersection">http://www.scratchapixel.com/</a>
-     * 
+     *
      * @param origin
      *              the ray's origin
      * @param dir
@@ -2215,7 +2215,7 @@ public class Intersectiond {
      * This method returns <code>true</code> for a ray whose origin lies inside the sphere.
      * <p>
      * Reference: <a href="http://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-sphere-intersection">http://www.scratchapixel.com/</a>
-     * 
+     *
      * @param ray
      *              the ray
      * @param sphere
@@ -2231,7 +2231,7 @@ public class Intersectiond {
      * intersects the given sphere with center <code>(centerX, centerY, centerZ)</code> and square radius <code>radiusSquared</code>.
      * <p>
      * Reference: <a href="http://paulbourke.net/geometry/circlesphere/index.html#linesphere">http://paulbourke.net/</a>
-     * 
+     *
      * @param p0X
      *              the x coordinate of the line segment's first end point
      * @param p0Y
@@ -2287,7 +2287,7 @@ public class Intersectiond {
      * intersects the given sphere with center <code>center</code> and square radius <code>radiusSquared</code>.
      * <p>
      * Reference: <a href="http://paulbourke.net/geometry/circlesphere/index.html#linesphere">http://paulbourke.net/</a>
-     * 
+     *
      * @param p0
      *              the line segment's first end point
      * @param p1
@@ -2312,10 +2312,10 @@ public class Intersectiond {
      * If many boxes need to be tested against the same ray, then the {@link RayAabIntersection} class is likely more efficient.
      * <p>
      * Reference: <a href="https://dl.acm.org/citation.cfm?id=1198748">An Efficient and Robust Ray–Box Intersection</a>
-     * 
+     *
      * @see #intersectRayAab(Vector3dc, Vector3dc, Vector3dc, Vector3dc, Vector2d)
      * @see RayAabIntersection
-     * 
+     *
      * @param originX
      *              the x coordinate of the ray's origin
      * @param originY
@@ -2397,10 +2397,10 @@ public class Intersectiond {
      * If many boxes need to be tested against the same ray, then the {@link RayAabIntersection} class is likely more efficient.
      * <p>
      * Reference: <a href="https://dl.acm.org/citation.cfm?id=1198748">An Efficient and Robust Ray–Box Intersection</a>
-     * 
+     *
      * @see #intersectRayAab(double, double, double, double, double, double, double, double, double, double, double, double, Vector2d)
      * @see RayAabIntersection
-     * 
+     *
      * @param origin
      *              the ray's origin
      * @param dir
@@ -2428,10 +2428,10 @@ public class Intersectiond {
      * If many boxes need to be tested against the same ray, then the {@link RayAabIntersection} class is likely more efficient.
      * <p>
      * Reference: <a href="https://dl.acm.org/citation.cfm?id=1198748">An Efficient and Robust Ray–Box Intersection</a>
-     * 
+     *
      * @see #intersectRayAab(double, double, double, double, double, double, double, double, double, double, double, double, Vector2d)
      * @see RayAabIntersection
-     * 
+     *
      * @param ray
      *              the ray
      * @param aabb
@@ -2454,9 +2454,9 @@ public class Intersectiond {
      * This method returns <code>true</code> for a line segment whose either end point lies inside the axis-aligned box.
      * <p>
      * Reference: <a href="https://dl.acm.org/citation.cfm?id=1198748">An Efficient and Robust Ray–Box Intersection</a>
-     * 
+     *
      * @see #intersectLineSegmentAab(Vector3dc, Vector3dc, Vector3dc, Vector3dc, Vector2d)
-     * 
+     *
      * @param p0X
      *              the x coordinate of the line segment's first end point
      * @param p0Y
@@ -2552,9 +2552,9 @@ public class Intersectiond {
      * This method returns <code>true</code> for a line segment whose either end point lies inside the axis-aligned box.
      * <p>
      * Reference: <a href="https://dl.acm.org/citation.cfm?id=1198748">An Efficient and Robust Ray–Box Intersection</a>
-     * 
+     *
      * @see #intersectLineSegmentAab(Vector3dc, Vector3dc, Vector3dc, Vector3dc, Vector2d)
-     * 
+     *
      * @param p0
      *              the line segment's first end point
      * @param p1
@@ -2584,9 +2584,9 @@ public class Intersectiond {
      * This method returns <code>true</code> for a line segment whose either end point lies inside the axis-aligned box.
      * <p>
      * Reference: <a href="https://dl.acm.org/citation.cfm?id=1198748">An Efficient and Robust Ray–Box Intersection</a>
-     * 
+     *
      * @see #intersectLineSegmentAab(Vector3dc, Vector3dc, Vector3dc, Vector3dc, Vector2d)
-     * 
+     *
      * @param lineSegment
      *              the line segment
      * @param aabb
@@ -2614,10 +2614,10 @@ public class Intersectiond {
      * If many boxes need to be tested against the same ray, then the {@link RayAabIntersection} class is likely more efficient.
      * <p>
      * Reference: <a href="https://dl.acm.org/citation.cfm?id=1198748">An Efficient and Robust Ray–Box Intersection</a>
-     * 
+     *
      * @see #testRayAab(Vector3dc, Vector3dc, Vector3dc, Vector3dc)
      * @see RayAabIntersection
-     * 
+     *
      * @param originX
      *              the x coordinate of the ray's origin
      * @param originY
@@ -2689,10 +2689,10 @@ public class Intersectiond {
      * If many boxes need to be tested against the same ray, then the {@link RayAabIntersection} class is likely more efficient.
      * <p>
      * Reference: <a href="https://dl.acm.org/citation.cfm?id=1198748">An Efficient and Robust Ray–Box Intersection</a>
-     *  
+     *
      * @see #testRayAab(double, double, double, double, double, double, double, double, double, double, double, double)
      * @see RayAabIntersection
-     * 
+     *
      * @param origin
      *              the ray's origin
      * @param dir
@@ -2715,10 +2715,10 @@ public class Intersectiond {
      * If many boxes need to be tested against the same ray, then the {@link RayAabIntersection} class is likely more efficient.
      * <p>
      * Reference: <a href="https://dl.acm.org/citation.cfm?id=1198748">An Efficient and Robust Ray–Box Intersection</a>
-     *  
+     *
      * @see #testRayAab(double, double, double, double, double, double, double, double, double, double, double, double)
      * @see RayAabIntersection
-     * 
+     *
      * @param ray
      *              the ray
      * @param aabb
@@ -2739,9 +2739,9 @@ public class Intersectiond {
      * This test implements backface culling, that is, it will return <code>false</code> when the triangle is in clockwise
      * winding order assuming a <i>right-handed</i> coordinate system when seen along the ray's direction, even if the ray intersects the triangle.
      * This is in compliance with how OpenGL handles backface culling with default frontface/backface settings.
-     * 
+     *
      * @see #testRayTriangleFront(Vector3dc, Vector3dc, Vector3dc, Vector3dc, Vector3dc, double)
-     * 
+     *
      * @param originX
      *              the x coordinate of the ray's origin
      * @param originY
@@ -2818,9 +2818,9 @@ public class Intersectiond {
      * This test implements backface culling, that is, it will return <code>false</code> when the triangle is in clockwise
      * winding order assuming a <i>right-handed</i> coordinate system when seen along the ray's direction, even if the ray intersects the triangle.
      * This is in compliance with how OpenGL handles backface culling with default frontface/backface settings.
-     * 
+     *
      * @see #testRayTriangleFront(double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double)
-     * 
+     *
      * @param origin
      *              the ray's origin
      * @param dir
@@ -2847,9 +2847,9 @@ public class Intersectiond {
      * Fast, Minimum Storage Ray/Triangle Intersection</a> method.
      * <p>
      * This test does not take into account the winding order of the triangle, so a ray will intersect a front-facing triangle as well as a back-facing triangle.
-     * 
+     *
      * @see #testRayTriangle(Vector3dc, Vector3dc, Vector3dc, Vector3dc, Vector3dc, double)
-     * 
+     *
      * @param originX
      *              the x coordinate of the ray's origin
      * @param originY
@@ -2924,9 +2924,9 @@ public class Intersectiond {
      * Fast, Minimum Storage Ray/Triangle Intersection</a> method.
      * <p>
      * This test does not take into account the winding order of the triangle, so a ray will intersect a front-facing triangle as well as a back-facing triangle.
-     * 
+     *
      * @see #testRayTriangle(double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double)
-     * 
+     *
      * @param origin
      *              the ray's origin
      * @param dir
@@ -2956,9 +2956,9 @@ public class Intersectiond {
      * This test implements backface culling, that is, it will return <code>false</code> when the triangle is in clockwise
      * winding order assuming a <i>right-handed</i> coordinate system when seen along the ray's direction, even if the ray intersects the triangle.
      * This is in compliance with how OpenGL handles backface culling with default frontface/backface settings.
-     * 
+     *
      * @see #testRayTriangleFront(Vector3dc, Vector3dc, Vector3dc, Vector3dc, Vector3dc, double)
-     * 
+     *
      * @param originX
      *              the x coordinate of the ray's origin
      * @param originY
@@ -3036,9 +3036,9 @@ public class Intersectiond {
      * This test implements backface culling, that is, it will return <code>false</code> when the triangle is in clockwise
      * winding order assuming a <i>right-handed</i> coordinate system when seen along the ray's direction, even if the ray intersects the triangle.
      * This is in compliance with how OpenGL handles backface culling with default frontface/backface settings.
-     * 
+     *
      * @see #intersectRayTriangleFront(double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double)
-     * 
+     *
      * @param origin
      *              the ray's origin
      * @param dir
@@ -3067,9 +3067,9 @@ public class Intersectiond {
      * Fast, Minimum Storage Ray/Triangle Intersection</a> method.
      * <p>
      * This test does not take into account the winding order of the triangle, so a ray will intersect a front-facing triangle as well as a back-facing triangle.
-     * 
+     *
      * @see #testRayTriangle(Vector3dc, Vector3dc, Vector3dc, Vector3dc, Vector3dc, double)
-     * 
+     *
      * @param originX
      *              the x coordinate of the ray's origin
      * @param originY
@@ -3145,9 +3145,9 @@ public class Intersectiond {
      * Fast, Minimum Storage Ray/Triangle Intersection</a> method.
      * <p>
      * This test does not take into account the winding order of the triangle, so a ray will intersect a front-facing triangle as well as a back-facing triangle.
-     * 
+     *
      * @see #intersectRayTriangle(double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double)
-     * 
+     *
      * @param origin
      *              the ray's origin
      * @param dir
@@ -3174,9 +3174,9 @@ public class Intersectiond {
      * <p>
      * Reference: <a href="http://www.graphics.cornell.edu/pubs/1997/MT97.pdf">
      * Fast, Minimum Storage Ray/Triangle Intersection</a>
-     * 
+     *
      * @see #testLineSegmentTriangle(Vector3dc, Vector3dc, Vector3dc, Vector3dc, Vector3dc, double)
-     * 
+     *
      * @param p0X
      *              the x coordinate of the line segment's first end point
      * @param p0Y
@@ -3228,9 +3228,9 @@ public class Intersectiond {
      * <p>
      * Reference: <a href="http://www.graphics.cornell.edu/pubs/1997/MT97.pdf">
      * Fast, Minimum Storage Ray/Triangle Intersection</a>
-     * 
+     *
      * @see #testLineSegmentTriangle(double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double)
-     * 
+     *
      * @param p0
      *              the line segment's first end point
      * @param p1
@@ -3257,9 +3257,9 @@ public class Intersectiond {
      * <p>
      * Reference: <a href="http://www.graphics.cornell.edu/pubs/1997/MT97.pdf">
      * Fast, Minimum Storage Ray/Triangle Intersection</a>
-     * 
+     *
      * @see #intersectLineSegmentTriangle(Vector3dc, Vector3dc, Vector3dc, Vector3dc, Vector3dc, double, Vector3d)
-     * 
+     *
      * @param p0X
      *              the x coordinate of the line segment's first end point
      * @param p0Y
@@ -3320,9 +3320,9 @@ public class Intersectiond {
      * <p>
      * Reference: <a href="http://www.graphics.cornell.edu/pubs/1997/MT97.pdf">
      * Fast, Minimum Storage Ray/Triangle Intersection</a>
-     * 
+     *
      * @see #intersectLineSegmentTriangle(double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, double, Vector3d)
-     * 
+     *
      * @param p0
      *              the line segment's first end point
      * @param p1
@@ -3347,7 +3347,7 @@ public class Intersectiond {
      * Determine whether the line segment with the end points <code>(p0X, p0Y, p0Z)</code> and <code>(p1X, p1Y, p1Z)</code>
      * intersects the plane given as the general plane equation <i>a*x + b*y + c*z + d = 0</i>,
      * and return the point of intersection.
-     * 
+     *
      * @param p0X
      *              the x coordinate of the line segment's first end point
      * @param p0Y
@@ -3484,7 +3484,7 @@ public class Intersectiond {
      * intersects the line with the general equation <i>a*x + b*y + c = 0</i>.
      * <p>
      * Reference: <a href="http://www.lighthouse3d.com/tutorials/view-frustum-culling/geometric-approach-testing-boxes-ii/">http://www.lighthouse3d.com</a> ("Geometric Approach - Testing Boxes II")
-     * 
+     *
      * @param minX
      *          the x coordinate of the minimum corner of the axis-aligned rectangle
      * @param minY
@@ -3527,7 +3527,7 @@ public class Intersectiond {
      * intersects the line with the general equation <i>a*x + b*y + c = 0</i>.
      * <p>
      * Reference: <a href="http://www.lighthouse3d.com/tutorials/view-frustum-culling/geometric-approach-testing-boxes-ii/">http://www.lighthouse3d.com</a> ("Geometric Approach - Testing Boxes II")
-     * 
+     *
      * @param min
      *          the minimum corner of the axis-aligned rectangle
      * @param max
@@ -3549,7 +3549,7 @@ public class Intersectiond {
      * intersects the line defined by the two points <code>(x0, y0)</code> and <code>(x1, y1)</code>.
      * <p>
      * Reference: <a href="http://www.lighthouse3d.com/tutorials/view-frustum-culling/geometric-approach-testing-boxes-ii/">http://www.lighthouse3d.com</a> ("Geometric Approach - Testing Boxes II")
-     * 
+     *
      * @param minX
      *          the x coordinate of the minimum corner of the axis-aligned rectangle
      * @param minY
@@ -3578,7 +3578,7 @@ public class Intersectiond {
     /**
      * Test whether the axis-aligned rectangle with minimum corner <code>(minXA, minYA)</code> and maximum corner <code>(maxXA, maxYA)</code>
      * intersects the axis-aligned rectangle with minimum corner <code>(minXB, minYB)</code> and maximum corner <code>(maxXB, maxYB)</code>.
-     * 
+     *
      * @param minXA
      *              the x coordinate of the minimum corner of the first axis-aligned rectangle
      * @param minYA
@@ -3604,7 +3604,7 @@ public class Intersectiond {
     /**
      * Test whether the axis-aligned rectangle with minimum corner <code>minA</code> and maximum corner <code>maxA</code>
      * intersects the axis-aligned rectangle with minimum corner <code>minB</code> and maximum corner <code>maxB</code>.
-     * 
+     *
      * @param minA
      *              the minimum corner of the first axis-aligned rectangle
      * @param maxA
@@ -3627,7 +3627,7 @@ public class Intersectiond {
      * to the other.
      * <p>
      * Reference: <a href="https://www.gamasutra.com/view/feature/131424/pool_hall_lessons_fast_accurate_.php?page=2">https://www.gamasutra.com</a>
-     * 
+     *
      * @param aX
      *              the x coordinate of the first circle's center
      * @param aY
@@ -3683,7 +3683,7 @@ public class Intersectiond {
      * to the other.
      * <p>
      * Reference: <a href="https://www.gamasutra.com/view/feature/131424/pool_hall_lessons_fast_accurate_.php?page=2">https://www.gamasutra.com</a>
-     * 
+     *
      * @param centerA
      *              the coordinates of the first circle's center
      * @param moveA
@@ -3708,7 +3708,7 @@ public class Intersectiond {
      * This method returns <code>false</code> when one circle contains the other circle.
      * <p>
      * Reference: <a href="http://gamedev.stackexchange.com/questions/75756/sphere-sphere-intersection-and-circle-sphere-intersection">http://gamedev.stackexchange.com</a>
-     * 
+     *
      * @param aX
      *              the x coordinate of the first circle's center
      * @param aY
@@ -3747,7 +3747,7 @@ public class Intersectiond {
      * This method returns <code>false</code> when one circle contains the other circle.
      * <p>
      * Reference: <a href="http://gamedev.stackexchange.com/questions/75756/sphere-sphere-intersection-and-circle-sphere-intersection">http://gamedev.stackexchange.com</a>
-     * 
+     *
      * @param centerA
      *              the first circle's center
      * @param radiusSquaredA
@@ -3770,7 +3770,7 @@ public class Intersectiond {
      * This method returns <code>true</code> when one circle contains the other circle.
      * <p>
      * Reference: <a href="http://math.stackexchange.com/questions/275514/two-circles-overlap">http://math.stackexchange.com/</a>
-     * 
+     *
      * @param aX
      *              the x coordinate of the first circle's center
      * @param aY
@@ -3797,7 +3797,7 @@ public class Intersectiond {
      * This method returns <code>true</code> when one circle contains the other circle.
      * <p>
      * Reference: <a href="http://gamedev.stackexchange.com/questions/75756/sphere-sphere-intersection-and-circle-sphere-intersection">http://gamedev.stackexchange.com</a>
-     * 
+     *
      * @param centerA
      *              the first circle's center
      * @param radiusSquaredA
@@ -3817,7 +3817,7 @@ public class Intersectiond {
      * <i>a*x + b*y + c = 0</i>.
      * <p>
      * Reference: <a href="http://mathworld.wolfram.com/Point-LineDistance2-Dimensional.html">http://mathworld.wolfram.com</a>
-     * 
+     *
      * @param pointX
      *              the x coordinate of the point
      * @param pointY
@@ -3839,7 +3839,7 @@ public class Intersectiond {
      * Determine the signed distance of the given point <code>(pointX, pointY)</code> to the line defined by the two points <code>(x0, y0)</code> and <code>(x1, y1)</code>.
      * <p>
      * Reference: <a href="http://mathworld.wolfram.com/Point-LineDistance2-Dimensional.html">http://mathworld.wolfram.com</a>
-     * 
+     *
      * @param pointX
      *              the x coordinate of the point
      * @param pointY
@@ -3865,7 +3865,7 @@ public class Intersectiond {
      * Compute the distance of the given point <code>(pX, pY, pZ)</code> to the line defined by the two points <code>(x0, y0, z0)</code> and <code>(x1, y1, z1)</code>.
      * <p>
      * Reference: <a href="http://mathworld.wolfram.com/Point-LineDistance3-Dimensional.html">http://mathworld.wolfram.com</a>
-     * 
+     *
      * @param pX
      *          the x coordinate of the point
      * @param pY
@@ -3886,7 +3886,7 @@ public class Intersectiond {
      *          the z coordinate of the second point on the line
      * @return the distance between the point and the line
      */
-    public static double distancePointLine(double pX, double pY, double pZ, 
+    public static double distancePointLine(double pX, double pY, double pZ,
             double x0, double y0, double z0, double x1, double y1, double z1) {
         double d21x = x1 - x0, d21y = y1 - y0, d21z = z1 - z0;
         double d10x = x0 - pX, d10y = y0 - pY, d10z = z0 - pZ;
@@ -3901,7 +3901,7 @@ public class Intersectiond {
      * <p>
      * This method returns <code>-1.0</code> if the ray does not intersect the line, because it is either parallel to the line or its direction points
      * away from the line or the ray's origin is on the <i>negative</i> side of the line (i.e. the line's normal points away from the ray's origin).
-     * 
+     *
      * @param originX
      *              the x coordinate of the ray's origin
      * @param originY
@@ -3940,7 +3940,7 @@ public class Intersectiond {
      * <p>
      * This method returns <code>-1.0</code> if the ray does not intersect the line, because it is either parallel to the line or its direction points
      * away from the line or the ray's origin is on the <i>negative</i> side of the line (i.e. the line's normal points away from the ray's origin).
-     * 
+     *
      * @param origin
      *              the ray's origin
      * @param dir
@@ -3964,9 +3964,9 @@ public class Intersectiond {
      * <i>p(t) = origin + t * dir</i> of the intersection point, if any.
      * <p>
      * This method returns <code>-1.0</code> if the ray does not intersect the line segment.
-     * 
+     *
      * @see #intersectRayLineSegment(Vector2dc, Vector2dc, Vector2dc, Vector2dc)
-     * 
+     *
      * @param originX
      *              the x coordinate of the ray's origin
      * @param originY
@@ -4005,9 +4005,9 @@ public class Intersectiond {
      * <i>p(t) = origin + t * dir</i> of the intersection point, if any.
      * <p>
      * This method returns <code>-1.0</code> if the ray does not intersect the line segment.
-     * 
+     *
      * @see #intersectRayLineSegment(double, double, double, double, double, double, double, double)
-     * 
+     *
      * @param origin
      *              the ray's origin
      * @param dir
@@ -4028,7 +4028,7 @@ public class Intersectiond {
      * intersects the circle with the given center <code>(centerX, centerY)</code> and square radius <code>radiusSquared</code>.
      * <p>
      * Reference: <a href="http://stackoverflow.com/questions/4578967/cube-sphere-intersection-test#answer-4579069">http://stackoverflow.com</a>
-     * 
+     *
      * @param minX
      *          the x coordinate of the minimum corner of the axis-aligned rectangle
      * @param minY
@@ -4069,7 +4069,7 @@ public class Intersectiond {
      * intersects the circle with the given <code>center</code> and square radius <code>radiusSquared</code>.
      * <p>
      * Reference: <a href="http://stackoverflow.com/questions/4578967/cube-sphere-intersection-test#answer-4579069">http://stackoverflow.com</a>
-     * 
+     *
      * @param min
      *          the minimum corner of the axis-aligned rectangle
      * @param max
@@ -4093,7 +4093,7 @@ public class Intersectiond {
      * or on the {@link #POINT_ON_TRIANGLE_FACE face} of the triangle.
      * <p>
      * Reference: Book "Real-Time Collision Detection" chapter 5.1.5 "Closest Point on Triangle to Point"
-     * 
+     *
      * @param v0X
      *          the x coordinate of the first vertex of the triangle
      * @param v0Y
@@ -4181,7 +4181,7 @@ public class Intersectiond {
      * or on the {@link #POINT_ON_TRIANGLE_FACE face} of the triangle.
      * <p>
      * Reference: Book "Real-Time Collision Detection" chapter 5.1.5 "Closest Point on Triangle to Point"
-     * 
+     *
      * @param v0
      *          the first vertex of the triangle
      * @param v1
@@ -4209,7 +4209,7 @@ public class Intersectiond {
      * This method returns <code>true</code> for a ray whose origin lies inside the circle.
      * <p>
      * Reference: <a href="http://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-sphere-intersection">http://www.scratchapixel.com/</a>
-     * 
+     *
      * @param originX
      *              the x coordinate of the ray's origin
      * @param originY
@@ -4229,7 +4229,7 @@ public class Intersectiond {
      *              <i>p(t) = origin + t * dir</i> for both points (near, far) of intersections with the circle
      * @return <code>true</code> if the ray intersects the circle; <code>false</code> otherwise
      */
-    public static boolean intersectRayCircle(double originX, double originY, double dirX, double dirY, 
+    public static boolean intersectRayCircle(double originX, double originY, double dirX, double dirY,
             double centerX, double centerY, double radiusSquared, Vector2d result) {
         double Lx = centerX - originX;
         double Ly = centerY - originY;
@@ -4257,7 +4257,7 @@ public class Intersectiond {
      * This method returns <code>true</code> for a ray whose origin lies inside the circle.
      * <p>
      * Reference: <a href="http://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-sphere-intersection">http://www.scratchapixel.com/</a>
-     * 
+     *
      * @param origin
      *              the ray's origin
      * @param dir
@@ -4282,7 +4282,7 @@ public class Intersectiond {
      * This method returns <code>true</code> for a ray whose origin lies inside the circle.
      * <p>
      * Reference: <a href="http://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-sphere-intersection">http://www.scratchapixel.com/</a>
-     * 
+     *
      * @param originX
      *              the x coordinate of the ray's origin
      * @param originY
@@ -4299,7 +4299,7 @@ public class Intersectiond {
      *              the circle radius squared
      * @return <code>true</code> if the ray intersects the circle; <code>false</code> otherwise
      */
-    public static boolean testRayCircle(double originX, double originY, double dirX, double dirY, 
+    public static boolean testRayCircle(double originX, double originY, double dirX, double dirY,
             double centerX, double centerY, double radiusSquared) {
         double Lx = centerX - originX;
         double Ly = centerY - originY;
@@ -4320,7 +4320,7 @@ public class Intersectiond {
      * This method returns <code>true</code> for a ray whose origin lies inside the circle.
      * <p>
      * Reference: <a href="http://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-sphere-intersection">http://www.scratchapixel.com/</a>
-     * 
+     *
      * @param origin
      *              the ray's origin
      * @param dir
@@ -4344,9 +4344,9 @@ public class Intersectiond {
      * This method also detects an intersection for a ray whose origin lies inside the axis-aligned rectangle.
      * <p>
      * Reference: <a href="https://dl.acm.org/citation.cfm?id=1198748">An Efficient and Robust Ray–Box Intersection</a>
-     * 
+     *
      * @see #intersectRayAar(Vector2dc, Vector2dc, Vector2dc, Vector2dc, Vector2d)
-     * 
+     *
      * @param originX
      *              the x coordinate of the ray's origin
      * @param originY
@@ -4370,7 +4370,7 @@ public class Intersectiond {
      *         {@link #AAR_SIDE_MINX}, {@link #AAR_SIDE_MINY}, {@link #AAR_SIDE_MAXX} or {@link #AAR_SIDE_MAXY};
      *         or <code>-1</code> if the ray does not intersect the axis-aligned rectangle;
      */
-    public static int intersectRayAar(double originX, double originY, double dirX, double dirY, 
+    public static int intersectRayAar(double originX, double originY, double dirX, double dirY,
             double minX, double minY, double maxX, double maxY, Vector2d result) {
         double invDirX = 1.0 / dirX, invDirY = 1.0 / dirY;
         double tNear, tFar, tymin, tymax;
@@ -4427,9 +4427,9 @@ public class Intersectiond {
      * This method also detects an intersection for a ray whose origin lies inside the axis-aligned rectangle.
      * <p>
      * Reference: <a href="https://dl.acm.org/citation.cfm?id=1198748">An Efficient and Robust Ray–Box Intersection</a>
-     * 
+     *
      * @see #intersectRayAar(double, double, double, double, double, double, double, double, Vector2d)
-     * 
+     *
      * @param origin
      *              the ray's origin
      * @param dir
@@ -4460,7 +4460,7 @@ public class Intersectiond {
      * Reference: <a href="https://dl.acm.org/citation.cfm?id=1198748">An Efficient and Robust Ray–Box Intersection</a>
      *
      * @see #intersectLineSegmentAar(Vector2dc, Vector2dc, Vector2dc, Vector2dc, Vector2d)
-     * 
+     *
      * @param p0X
      *              the x coordinate of the line segment's first end point
      * @param p0Y
@@ -4485,7 +4485,7 @@ public class Intersectiond {
      *         {@link #ONE_INTERSECTION} if one of the end points of the line segment lies inside of the axis-aligned rectangle; or
      *         {@link #TWO_INTERSECTION} if the line segment intersects two edges of the axis-aligned rectangle or lies on one edge of the rectangle
      */
-    public static int intersectLineSegmentAar(double p0X, double p0Y, double p1X, double p1Y, 
+    public static int intersectLineSegmentAar(double p0X, double p0Y, double p1X, double p1Y,
             double minX, double minY, double maxX, double maxY, Vector2d result) {
         double dirX = p1X - p0X, dirY = p1Y - p0Y;
         double invDirX = 1.0 / dirX, invDirY = 1.0 / dirY;
@@ -4538,7 +4538,7 @@ public class Intersectiond {
      * Reference: <a href="https://dl.acm.org/citation.cfm?id=1198748">An Efficient and Robust Ray–Box Intersection</a>
      *
      * #see {@link #intersectLineSegmentAar(double, double, double, double, double, double, double, double, Vector2d)}
-     * 
+     *
      * @param p0
      *              the line segment's first end point
      * @param p1
@@ -4566,9 +4566,9 @@ public class Intersectiond {
      * This method returns <code>true</code> for a ray whose origin lies inside the axis-aligned rectangle.
      * <p>
      * Reference: <a href="https://dl.acm.org/citation.cfm?id=1198748">An Efficient and Robust Ray–Box Intersection</a>
-     * 
+     *
      * @see #testRayAar(Vector2dc, Vector2dc, Vector2dc, Vector2dc)
-     * 
+     *
      * @param originX
      *              the x coordinate of the ray's origin
      * @param originY
@@ -4618,9 +4618,9 @@ public class Intersectiond {
      * This method returns <code>true</code> for a ray whose origin lies inside the axis-aligned rectangle.
      * <p>
      * Reference: <a href="https://dl.acm.org/citation.cfm?id=1198748">An Efficient and Robust Ray–Box Intersection</a>
-     * 
+     *
      * @see #testRayAar(double, double, double, double, double, double, double, double)
-     * 
+     *
      * @param origin
      *              the ray's origin
      * @param dir
@@ -4637,7 +4637,7 @@ public class Intersectiond {
 
     /**
      * Test whether the given point <code>(pX, pY)</code> lies inside the triangle with the vertices <code>(v0X, v0Y)</code>, <code>(v1X, v1Y)</code>, <code>(v2X, v2Y)</code>.
-     * 
+     *
      * @param pX
      *          the x coordinate of the point
      * @param pY
@@ -4667,7 +4667,7 @@ public class Intersectiond {
 
     /**
      * Test whether the given <code>point</code> lies inside the triangle with the vertices <code>v0</code>, <code>v1</code>, <code>v2</code>.
-     * 
+     *
      * @param v0
      *          the first vertex of the triangle
      * @param v1
@@ -4685,7 +4685,7 @@ public class Intersectiond {
     /**
      * Test whether the given point <code>(pX, pY)</code> lies inside the axis-aligned rectangle with the minimum corner <code>(minX, minY)</code>
      * and maximum corner <code>(maxX, maxY)</code>.
-     * 
+     *
      * @param pX
      *          the x coordinate of the point
      * @param pY
@@ -4706,7 +4706,7 @@ public class Intersectiond {
 
     /**
      * Test whether the point <code>(pX, pY)</code> lies inside the circle with center <code>(centerX, centerY)</code> and square radius <code>radiusSquared</code>.
-     * 
+     *
      * @param pX
      *          the x coordinate of the point
      * @param pY
@@ -4734,7 +4734,7 @@ public class Intersectiond {
      * The vertices of the triangle must be specified in counter-clockwise order.
      * <p>
      * Reference: <a href="http://www.phatcode.net/articles.php?id=459">http://www.phatcode.net/</a>
-     * 
+     *
      * @param centerX
      *          the x coordinate of the circle's center
      * @param centerY
@@ -4807,7 +4807,7 @@ public class Intersectiond {
      * The vertices of the triangle must be specified in counter-clockwise order.
      * <p>
      * Reference: <a href="http://www.phatcode.net/articles.php?id=459">http://www.phatcode.net/</a>
-     * 
+     *
      * @param center
      *          the circle's center
      * @param radiusSquared
@@ -4829,9 +4829,9 @@ public class Intersectiond {
      * with given origin <code>(originX, originY, originZ)</code> and direction <code>(dirX, dirY, dirZ)</code>, and store the point of intersection
      * into the given vector <code>p</code>.
      * <p>
-     * If the polygon intersects the ray, this method returns the index of the polygon edge intersecting the ray, that is, the index of the 
+     * If the polygon intersects the ray, this method returns the index of the polygon edge intersecting the ray, that is, the index of the
      * first vertex of the directed line segment. The second vertex is always that index + 1, modulus the number of polygon vertices.
-     * 
+     *
      * @param verticesXY
      *          the sequence of <code>(x, y)</code> coordinate pairs of all vertices of the polygon
      * @param originX
@@ -4877,9 +4877,9 @@ public class Intersectiond {
      * with given origin <code>(originX, originY, originZ)</code> and direction <code>(dirX, dirY, dirZ)</code>, and store the point of intersection
      * into the given vector <code>p</code>.
      * <p>
-     * If the polygon intersects the ray, this method returns the index of the polygon edge intersecting the ray, that is, the index of the 
+     * If the polygon intersects the ray, this method returns the index of the polygon edge intersecting the ray, that is, the index of the
      * first vertex of the directed line segment. The second vertex is always that index + 1, modulus the number of polygon vertices.
-     * 
+     *
      * @param vertices
      *          the sequence of <code>(x, y)</code> coordinate pairs of all vertices of the polygon
      * @param originX
@@ -4924,7 +4924,7 @@ public class Intersectiond {
     /**
      * Determine whether the two lines, specified via two points lying on each line, intersect each other, and store the point of intersection
      * into the given vector <code>p</code>.
-     * 
+     *
      * @param ps1x
      *          the x coordinate of the first point on the first line
      * @param ps1y
@@ -4988,7 +4988,7 @@ public class Intersectiond {
 
     /**
      * Test if the two polygons, given via their vertices, intersect.
-     * 
+     *
      * @param v1s
      *          the vertices of the first polygon
      * @param v2s
