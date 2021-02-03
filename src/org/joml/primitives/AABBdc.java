@@ -308,7 +308,7 @@ public interface AABBdc {
      *          the other AABB
      * @return <code>true</code> iff both AABBs intersect; <code>false</code> otherwise
      */
-    boolean intersectsAABB(AABBd other);
+    boolean intersectsAABB(AABBdc other);
 
     /**
      * Test whether this AABB intersects the given sphere with equation
