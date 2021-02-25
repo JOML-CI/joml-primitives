@@ -258,7 +258,7 @@ public class Rectangled implements Externalizable, Rectangledc {
      *          the other rectangle
      * @return this
      */
-    public Rectangled intersection(Rectangled other) {
+    public Rectangled intersection(Rectangledc other) {
         return intersection(other, this);
     }
 
@@ -275,11 +275,11 @@ public class Rectangled implements Externalizable, Rectangledc {
      *          will hold the result
      * @return dest
      */
-    public Rectangled intersection(Rectangled other, Rectangled dest) {
-        dest.minX = Math.max(minX, other.minX);
-        dest.minY = Math.max(minY, other.minY);
-        dest.maxX = Math.min(maxX, other.maxX);
-        dest.maxY = Math.min(maxY, other.maxY);
+    public Rectangled intersection(Rectangledc other, Rectangled dest) {
+        dest.minX = Math.max(minX, other.minX());
+        dest.minY = Math.max(minY, other.minY());
+        dest.maxX = Math.min(maxX, other.maxX());
+        dest.maxY = Math.min(maxY, other.maxY());
         return dest.validate();
     }
 
@@ -296,11 +296,11 @@ public class Rectangled implements Externalizable, Rectangledc {
      *          will hold the result
      * @return dest
      */
-    public Rectangled intersection(Rectanglef other, Rectangled dest) {
-        dest.minX = Math.max(minX, other.minX);
-        dest.minY = Math.max(minY, other.minY);
-        dest.maxX = Math.min(maxX, other.maxX);
-        dest.maxY = Math.min(maxY, other.maxY);
+    public Rectangled intersection(Rectanglefc other, Rectangled dest) {
+        dest.minX = Math.max(minX, other.minX());
+        dest.minY = Math.max(minY, other.minY());
+        dest.maxX = Math.min(maxX, other.maxX());
+        dest.maxY = Math.min(maxY, other.maxY());
         return dest.validate();
     }
 
@@ -317,11 +317,11 @@ public class Rectangled implements Externalizable, Rectangledc {
      *          will hold the result
      * @return dest
      */
-    public Rectangled intersection(Rectanglei other, Rectangled dest) {
-        dest.minX = Math.max(minX, other.minX);
-        dest.minY = Math.max(minY, other.minY);
-        dest.maxX = Math.min(maxX, other.maxX);
-        dest.maxY = Math.min(maxY, other.maxY);
+    public Rectangled intersection(Rectangleic other, Rectangled dest) {
+        dest.minX = Math.max(minX, other.minX());
+        dest.minY = Math.max(minY, other.minY());
+        dest.maxX = Math.min(maxX, other.maxX());
+        dest.maxY = Math.min(maxY, other.maxY());
         return dest.validate();
     }
 
@@ -355,9 +355,9 @@ public class Rectangled implements Externalizable, Rectangledc {
      *          the rectangle to test
      * @return <code>true</code> iff this rectangle contains the rectangle; <code>false</code> otherwise
      */
-    public boolean containsRectangle(Rectanglef rectangle) {
-        return rectangle.minX >= minX && rectangle.maxX <= maxX &&
-               rectangle.minY >= minY && rectangle.maxY <= maxY;
+    public boolean containsRectangle(Rectanglefc rectangle) {
+        return rectangle.minX() >= minX && rectangle.maxX() <= maxX &&
+               rectangle.minY() >= minY && rectangle.maxY() <= maxY;
     }
 
     /**
@@ -367,9 +367,9 @@ public class Rectangled implements Externalizable, Rectangledc {
      *          the rectangle to test
      * @return <code>true</code> iff this rectangle contains the rectangle; <code>false</code> otherwise
      */
-    public boolean containsRectangle(Rectanglei rectangle) {
-        return rectangle.minX >= minX && rectangle.maxX <= maxX &&
-               rectangle.minY >= minY && rectangle.maxY <= maxY;
+    public boolean containsRectangle(Rectangleic rectangle) {
+        return rectangle.minX() >= minX && rectangle.maxX() <= maxX &&
+               rectangle.minY() >= minY && rectangle.maxY() <= maxY;
     }
 
     /**
@@ -435,7 +435,7 @@ public class Rectangled implements Externalizable, Rectangledc {
      *          the other {@link Rectanglef}
      * @return this
      */
-    public Rectangled union(Rectangled other) {
+    public Rectangled union(Rectangledc other) {
         return this.union(other, this);
     }
 
@@ -448,11 +448,11 @@ public class Rectangled implements Externalizable, Rectangledc {
      *          will hold the result
      * @return dest
      */
-    public Rectangled union(Rectangled other, Rectangled dest) {
-        dest.minX = this.minX < other.minX ? this.minX : other.minX;
-        dest.minY = this.minY < other.minY ? this.minY : other.minY;
-        dest.maxX = this.maxX > other.maxX ? this.maxX : other.maxX;
-        dest.maxY = this.maxY > other.maxY ? this.maxY : other.maxY;
+    public Rectangled union(Rectangledc other, Rectangled dest) {
+        dest.minX = this.minX < other.minX() ? this.minX : other.minX();
+        dest.minY = this.minY < other.minY() ? this.minY : other.minY();
+        dest.maxX = this.maxX > other.maxX() ? this.maxX : other.maxX();
+        dest.maxY = this.maxY > other.maxY() ? this.maxY : other.maxY();
         return dest;
     }
 
@@ -463,9 +463,9 @@ public class Rectangled implements Externalizable, Rectangledc {
      *          the other rectangle
      * @return <code>true</code> iff both rectangles intersect; <code>false</code> otherwise
      */
-    public boolean intersectsRectangle(Rectangled other) {
-        return minX < other.maxX && maxX > other.minX &&
-               maxY > other.minY && minY < other.maxY;
+    public boolean intersectsRectangle(Rectangledc other) {
+        return minX < other.maxX() && maxX > other.minX() &&
+               maxY > other.minY() && minY < other.maxY();
     }
 
     /**
@@ -475,9 +475,9 @@ public class Rectangled implements Externalizable, Rectangledc {
      *          the other rectangle
      * @return <code>true</code> iff both rectangles intersect; <code>false</code> otherwise
      */
-    public boolean intersectsRectangle(Rectanglef other) {
-        return minX < other.maxX && maxX > other.minX &&
-               maxY > other.minY && minY < other.maxY;
+    public boolean intersectsRectangle(Rectanglefc other) {
+        return minX < other.maxX() && maxX > other.minX() &&
+               maxY > other.minY() && minY < other.maxY();
     }
 
     /**
@@ -487,9 +487,9 @@ public class Rectangled implements Externalizable, Rectangledc {
      *          the other rectangle
      * @return <code>true</code> iff both rectangles intersect; <code>false</code> otherwise
      */
-    public boolean intersectsRectangle(Rectanglei other) {
-        return minX < other.maxX && maxX > other.minX &&
-               maxY > other.minY && minY < other.maxY;
+    public boolean intersectsRectangle(Rectangleic other) {
+        return minX < other.maxX() && maxX > other.minX() &&
+               maxY > other.minY() && minY < other.maxY();
     }
 
     /**
@@ -822,14 +822,14 @@ public class Rectangled implements Externalizable, Rectangledc {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Rectangled other = (Rectangled) obj;
-        if (Double.doubleToLongBits(maxX) != Double.doubleToLongBits(other.maxX))
+        Rectangledc other = (Rectangled) obj;
+        if (Double.doubleToLongBits(maxX) != Double.doubleToLongBits(other.maxX()))
             return false;
-        if (Double.doubleToLongBits(maxY) != Double.doubleToLongBits(other.maxY))
+        if (Double.doubleToLongBits(maxY) != Double.doubleToLongBits(other.maxY()))
             return false;
-        if (Double.doubleToLongBits(minX) != Double.doubleToLongBits(other.minX))
+        if (Double.doubleToLongBits(minX) != Double.doubleToLongBits(other.minX()))
             return false;
-        if (Double.doubleToLongBits(minY) != Double.doubleToLongBits(other.minY))
+        if (Double.doubleToLongBits(minY) != Double.doubleToLongBits(other.minY()))
             return false;
         return true;
     }

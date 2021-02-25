@@ -50,7 +50,7 @@ public interface Rectangledc {
 	 * @param dest  will hold the result
 	 * @return dest
 	 */
-	Rectangled intersection(Rectangled other, Rectangled dest);
+	Rectangled intersection(Rectangledc other, Rectangled dest);
 
 	/**
 	 * Compute the rectangle of intersection between <code>this</code> and the given rectangle and
@@ -63,7 +63,7 @@ public interface Rectangledc {
 	 * @param dest  will hold the result
 	 * @return dest
 	 */
-	Rectangled intersection(Rectanglef other, Rectangled dest);
+	Rectangled intersection(Rectanglefc other, Rectangled dest);
 
 	/**
 	 * Compute the rectangle of intersection between <code>this</code> and the given rectangle and
@@ -76,7 +76,7 @@ public interface Rectangledc {
 	 * @param dest  will hold the result
 	 * @return dest
 	 */
-	Rectangled intersection(Rectanglei other, Rectangled dest);
+	Rectangled intersection(Rectangleic other, Rectangled dest);
 
 	/**
 	 * Return the length of this rectangle in the X and Y dimensions and store the result in <code>dest</code>.
@@ -100,7 +100,7 @@ public interface Rectangledc {
 	 * @param rectangle the rectangle to test
 	 * @return <code>true</code> iff this rectangle contains the rectangle; <code>false</code> otherwise
 	 */
-	boolean containsRectangle(Rectanglef rectangle);
+	boolean containsRectangle(Rectanglefc rectangle);
 
 	/**
 	 * Check if this rectangle contains the given <code>rectangle</code>.
@@ -108,7 +108,7 @@ public interface Rectangledc {
 	 * @param rectangle the rectangle to test
 	 * @return <code>true</code> iff this rectangle contains the rectangle; <code>false</code> otherwise
 	 */
-	boolean containsRectangle(Rectanglei rectangle);
+	boolean containsRectangle(Rectangleic rectangle);
 
 	/**
 	 * Compute the union of <code>this</code> and the given point <code>(x, y, z)</code> and store the result in <code>dest</code>.
@@ -136,7 +136,7 @@ public interface Rectangledc {
 	 * @param dest  will hold the result
 	 * @return dest
 	 */
-	Rectangled union(Rectangled other, Rectangled dest);
+	Rectangled union(Rectangledc other, Rectangled dest);
 
 	/**
 	 * Check if this and the given rectangle intersect.
@@ -144,7 +144,7 @@ public interface Rectangledc {
 	 * @param other the other rectangle
 	 * @return <code>true</code> iff both rectangles intersect; <code>false</code> otherwise
 	 */
-	boolean intersectsRectangle(Rectangled other);
+	boolean intersectsRectangle(Rectangledc other);
 
 	/**
 	 * Check if this and the given rectangle intersect.
@@ -152,7 +152,7 @@ public interface Rectangledc {
 	 * @param other the other rectangle
 	 * @return <code>true</code> iff both rectangles intersect; <code>false</code> otherwise
 	 */
-	boolean intersectsRectangle(Rectanglef other);
+	boolean intersectsRectangle(Rectanglefc other);
 
 	/**
 	 * Check if this and the given rectangle intersect.
@@ -160,7 +160,7 @@ public interface Rectangledc {
 	 * @param other the other rectangle
 	 * @return <code>true</code> iff both rectangles intersect; <code>false</code> otherwise
 	 */
-	boolean intersectsRectangle(Rectanglei other);
+	boolean intersectsRectangle(Rectangleic other);
 
 	/**
 	 * Check if this rectangle contains the given <code>point</code>.

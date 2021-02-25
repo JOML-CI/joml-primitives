@@ -42,7 +42,7 @@ import org.joml.Vector2ic;
  * 
  * @author Kai Burjack
  */
-public class Rectanglef implements Externalizable {
+public class Rectanglef implements Externalizable, Rectanglefc {
 
     /**
      * The x coordinate of the minimum corner.
@@ -186,6 +186,22 @@ public class Rectanglef implements Externalizable {
         return this;
     }
 
+    public float minX() {
+        return minX;
+    }
+
+    public float minY() {
+        return minY;
+    }
+
+    public float maxX() {
+        return maxX;
+    }
+
+    public float maxY() {
+        return maxY;
+    }
+
     /**
      * Return the length of the rectangle in the X dimension.
      *
@@ -276,7 +292,7 @@ public class Rectanglef implements Externalizable {
      *          the other {@link Rectanglef}
      * @return this
      */
-    public Rectanglef union(Rectanglef other) {
+    public Rectanglef union(Rectanglefc other) {
         return this.union(other, this);
     }
 
@@ -289,11 +305,11 @@ public class Rectanglef implements Externalizable {
      *          will hold the result
      * @return dest
      */
-    public Rectanglef union(Rectanglef other, Rectanglef dest) {
-        dest.minX = this.minX < other.minX ? this.minX : other.minX;
-        dest.minY = this.minY < other.minY ? this.minY : other.minY;
-        dest.maxX = this.maxX > other.maxX ? this.maxX : other.maxX;
-        dest.maxY = this.maxY > other.maxY ? this.maxY : other.maxY;
+    public Rectanglef union(Rectanglefc other, Rectanglef dest) {
+        dest.minX = this.minX < other.minX() ? this.minX : other.minX();
+        dest.minY = this.minY < other.minY() ? this.minY : other.minY();
+        dest.maxX = this.maxX > other.maxX() ? this.maxX : other.maxX();
+        dest.maxY = this.maxY > other.maxY() ? this.maxY : other.maxY();
         return dest;
     }
 
@@ -304,9 +320,9 @@ public class Rectanglef implements Externalizable {
      *          the other rectangle
      * @return <code>true</code> iff both rectangles intersect; <code>false</code> otherwise
      */
-    public boolean intersectsRectangle(Rectangled other) {
-        return minX < other.maxX && maxX > other.minX &&
-               maxY > other.minY && minY < other.maxY;
+    public boolean intersectsRectangle(Rectangledc other) {
+        return minX < other.maxX() && maxX > other.minX() &&
+               maxY > other.minY() && minY < other.maxY();
     }
 
     /**
@@ -316,9 +332,9 @@ public class Rectanglef implements Externalizable {
      *          the other rectangle
      * @return <code>true</code> iff both rectangles intersect; <code>false</code> otherwise
      */
-    public boolean intersectsRectangle(Rectanglef other) {
-        return minX < other.maxX && maxX > other.minX &&
-               maxY > other.minY && minY < other.maxY;
+    public boolean intersectsRectangle(Rectanglefc other) {
+        return minX < other.maxX() && maxX > other.minX() &&
+               maxY > other.minY() && minY < other.maxY();
     }
 
     /**
@@ -328,9 +344,9 @@ public class Rectanglef implements Externalizable {
      *          the other rectangle
      * @return <code>true</code> iff both rectangles intersect; <code>false</code> otherwise
      */
-    public boolean intersectsRectangle(Rectanglei other) {
-        return minX < other.maxX && maxX > other.minX &&
-               maxY > other.minY && minY < other.maxY;
+    public boolean intersectsRectangle(Rectangleic other) {
+        return minX < other.maxX() && maxX > other.minX() &&
+               maxY > other.minY() && minY < other.maxY();
     }
 
     private Rectanglef validate() {
@@ -362,7 +378,7 @@ public class Rectanglef implements Externalizable {
      *          the other rectangle
      * @return this
      */
-    public Rectanglef intersection(Rectanglef other) {
+    public Rectanglef intersection(Rectanglefc other) {
         return intersection(other, this);
     }
 
@@ -376,7 +392,7 @@ public class Rectanglef implements Externalizable {
      *          the other rectangle
      * @return this
      */
-    public Rectanglef intersection(Rectanglei other) {
+    public Rectanglef intersection(Rectangleic other) {
         return intersection(other, this);
     }
 
@@ -393,11 +409,11 @@ public class Rectanglef implements Externalizable {
      *          will hold the result
      * @return dest
      */
-    public Rectanglef intersection(Rectanglef other, Rectanglef dest) {
-        dest.minX = Math.max(minX, other.minX);
-        dest.minY = Math.max(minY, other.minY);
-        dest.maxX = Math.min(maxX, other.maxX);
-        dest.maxY = Math.min(maxY, other.maxY);
+    public Rectanglef intersection(Rectanglefc other, Rectanglef dest) {
+        dest.minX = Math.max(minX, other.minX());
+        dest.minY = Math.max(minY, other.minY());
+        dest.maxX = Math.min(maxX, other.maxX());
+        dest.maxY = Math.min(maxY, other.maxY());
         return dest.validate();
     }
 
@@ -414,11 +430,11 @@ public class Rectanglef implements Externalizable {
      *          will hold the result
      * @return dest
      */
-    public Rectanglef intersection(Rectanglei other, Rectanglef dest) {
-        dest.minX = Math.max(minX, other.minX);
-        dest.minY = Math.max(minY, other.minY);
-        dest.maxX = Math.min(maxX, other.maxX);
-        dest.maxY = Math.min(maxY, other.maxY);
+    public Rectanglef intersection(Rectangleic other, Rectanglef dest) {
+        dest.minX = Math.max(minX, other.minX());
+        dest.minY = Math.max(minY, other.minY());
+        dest.maxX = Math.min(maxX, other.maxX());
+        dest.maxY = Math.min(maxY, other.maxY());
         return dest.validate();
     }
 
@@ -440,9 +456,9 @@ public class Rectanglef implements Externalizable {
      *          the rectangle to test
      * @return <code>true</code> iff this rectangle contains the rectangle; <code>false</code> otherwise
      */
-    public boolean containsRectangle(Rectangled rectangle) {
-        return rectangle.minX >= minX && rectangle.maxX <= maxX &&
-               rectangle.minY >= minY && rectangle.maxY <= maxY;
+    public boolean containsRectangle(Rectangledc rectangle) {
+        return rectangle.minX() >= minX && rectangle.maxX() <= maxX &&
+               rectangle.minY() >= minY && rectangle.maxY() <= maxY;
     }
 
     /**
@@ -452,9 +468,9 @@ public class Rectanglef implements Externalizable {
      *          the rectangle to test
      * @return <code>true</code> iff this rectangle contains the rectangle; <code>false</code> otherwise
      */
-    public boolean containsRectangle(Rectanglef rectangle) {
-        return rectangle.minX >= minX && rectangle.maxX <= maxX &&
-               rectangle.minY >= minY && rectangle.maxY <= maxY;
+    public boolean containsRectangle(Rectanglefc rectangle) {
+        return rectangle.minX() >= minX && rectangle.maxX() <= maxX &&
+               rectangle.minY() >= minY && rectangle.maxY() <= maxY;
     }
 
     /**
@@ -464,9 +480,9 @@ public class Rectanglef implements Externalizable {
      *          the rectangle to test
      * @return <code>true</code> iff this rectangle contains the rectangle; <code>false</code> otherwise
      */
-    public boolean containsRectangle(Rectanglei rectangle) {
-        return rectangle.minX >= minX && rectangle.maxX <= maxX &&
-               rectangle.minY >= minY && rectangle.maxY <= maxY;
+    public boolean containsRectangle(Rectangleic rectangle) {
+        return rectangle.minX() >= minX && rectangle.maxX() <= maxX &&
+               rectangle.minY() >= minY && rectangle.maxY() <= maxY;
     }
 
     /**
@@ -770,14 +786,14 @@ public class Rectanglef implements Externalizable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Rectanglef other = (Rectanglef) obj;
-        if (Float.floatToIntBits(maxX) != Float.floatToIntBits(other.maxX))
+        Rectanglefc other = (Rectanglef) obj;
+        if (Float.floatToIntBits(maxX) != Float.floatToIntBits(other.maxX()))
             return false;
-        if (Float.floatToIntBits(maxY) != Float.floatToIntBits(other.maxY))
+        if (Float.floatToIntBits(maxY) != Float.floatToIntBits(other.maxY()))
             return false;
-        if (Float.floatToIntBits(minX) != Float.floatToIntBits(other.minX))
+        if (Float.floatToIntBits(minX) != Float.floatToIntBits(other.minX()))
             return false;
-        if (Float.floatToIntBits(minY) != Float.floatToIntBits(other.minY))
+        if (Float.floatToIntBits(minY) != Float.floatToIntBits(other.minY()))
             return false;
         return true;
     }

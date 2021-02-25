@@ -42,7 +42,7 @@ import org.joml.Vector2ic;
  * 
  * @author Kai Burjack
  */
-public class Rectanglei implements Externalizable {
+public class Rectanglei implements Externalizable, Rectangleic {
 
     /**
      * The x coordinate of the minimum corner.
@@ -186,6 +186,22 @@ public class Rectanglei implements Externalizable {
         return this;
     }
 
+    public int minX() {
+        return minX;
+    }
+
+    public int minY() {
+        return minY;
+    }
+
+    public int maxX() {
+        return maxX;
+    }
+
+    public int maxY() {
+        return maxY;
+    }
+
     /**
      * Return the length of the rectangle in the X dimension.
      *
@@ -277,7 +293,7 @@ public class Rectanglei implements Externalizable {
      *          the other {@link Rectanglei}
      * @return this
      */
-    public Rectanglei union(Rectanglei other) {
+    public Rectanglei union(Rectangleic other) {
         return this.union(other, this);
     }
 
@@ -290,11 +306,11 @@ public class Rectanglei implements Externalizable {
      *          will hold the result
      * @return dest
      */
-    public Rectanglei union(Rectanglei other, Rectanglei dest) {
-        dest.minX = this.minX < other.minX ? this.minX : other.minX;
-        dest.minY = this.minY < other.minY ? this.minY : other.minY;
-        dest.maxX = this.maxX > other.maxX ? this.maxX : other.maxX;
-        dest.maxY = this.maxY > other.maxY ? this.maxY : other.maxY;
+    public Rectanglei union(Rectangleic other, Rectanglei dest) {
+        dest.minX = this.minX < other.minX() ? this.minX : other.minX();
+        dest.minY = this.minY < other.minY() ? this.minY : other.minY();
+        dest.maxX = this.maxX > other.maxX() ? this.maxX : other.maxX();
+        dest.maxY = this.maxY > other.maxY() ? this.maxY : other.maxY();
         return dest;
     }
 
@@ -306,9 +322,9 @@ public class Rectanglei implements Externalizable {
      *          the other rectangle
      * @return <code>true</code> iff both rectangles intersect; <code>false</code> otherwise
      */
-    public boolean intersectsRectangle(Rectangled other) {
-        return minX <= other.maxX && maxX >= other.minX &&
-               maxY >= other.minY && minY <= other.maxY;
+    public boolean intersectsRectangle(Rectangledc other) {
+        return minX <= other.maxX() && maxX >= other.minX() &&
+               maxY >= other.minY() && minY <= other.maxY();
     }
 
     /**
@@ -318,9 +334,9 @@ public class Rectanglei implements Externalizable {
      *          the other rectangle
      * @return <code>true</code> iff both rectangles intersect; <code>false</code> otherwise
      */
-    public boolean intersectsRectangle(Rectanglef other) {
-        return minX <= other.maxX && maxX >= other.minX &&
-               maxY >= other.minY && minY <= other.maxY;
+    public boolean intersectsRectangle(Rectanglefc other) {
+        return minX <= other.maxX() && maxX >= other.minX() &&
+               maxY >= other.minY() && minY <= other.maxY();
     }
 
     /**
@@ -330,9 +346,9 @@ public class Rectanglei implements Externalizable {
      *          the other rectangle
      * @return <code>true</code> iff both rectangles intersect; <code>false</code> otherwise
      */
-    public boolean intersectsRectangle(Rectanglei other) {
-        return minX <= other.maxX && maxX >= other.minX &&
-               maxY >= other.minY && minY <= other.maxY;
+    public boolean intersectsRectangle(Rectangleic other) {
+        return minX <= other.maxX() && maxX >= other.minX() &&
+               maxY >= other.minY() && minY <= other.maxY();
     }
 
     private Rectanglei validate() {
@@ -365,7 +381,7 @@ public class Rectanglei implements Externalizable {
      *          the other rectangle
      * @return this
      */
-    public Rectanglei intersection(Rectanglei other) {
+    public Rectanglei intersection(Rectangleic other) {
         return intersection(other, this);
     }
 
@@ -383,11 +399,11 @@ public class Rectanglei implements Externalizable {
      *          will hold the result
      * @return dest
      */
-    public Rectanglei intersection(Rectanglei other, Rectanglei dest) {
-        dest.minX = Math.max(minX, other.minX);
-        dest.minY = Math.max(minY, other.minY);
-        dest.maxX = Math.min(maxX, other.maxX);
-        dest.maxY = Math.min(maxY, other.maxY);
+    public Rectanglei intersection(Rectangleic other, Rectanglei dest) {
+        dest.minX = Math.max(minX, other.minX());
+        dest.minY = Math.max(minY, other.minY());
+        dest.maxX = Math.min(maxX, other.maxX());
+        dest.maxY = Math.min(maxY, other.maxY());
         return dest.validate();
     }
 
@@ -409,9 +425,9 @@ public class Rectanglei implements Externalizable {
      *          the rectangle to test
      * @return <code>true</code> iff this rectangle contains the rectangle; <code>false</code> otherwise
      */
-    public boolean containsRectangle(Rectangled rectangle) {
-        return rectangle.minX >= minX && rectangle.maxX <= maxX &&
-               rectangle.minY >= minY && rectangle.maxY <= maxY;
+    public boolean containsRectangle(Rectangledc rectangle) {
+        return rectangle.minX() >= minX && rectangle.maxX() <= maxX &&
+               rectangle.minY() >= minY && rectangle.maxY() <= maxY;
     }
 
     /**
@@ -421,9 +437,9 @@ public class Rectanglei implements Externalizable {
      *          the rectangle to test
      * @return <code>true</code> iff this rectangle contains the rectangle; <code>false</code> otherwise
      */
-    public boolean containsRectangle(Rectanglef rectangle) {
-        return rectangle.minX >= minX && rectangle.maxX <= maxX &&
-               rectangle.minY >= minY && rectangle.maxY <= maxY;
+    public boolean containsRectangle(Rectanglefc rectangle) {
+        return rectangle.minX() >= minX && rectangle.maxX() <= maxX &&
+               rectangle.minY() >= minY && rectangle.maxY() <= maxY;
     }
 
     /**
@@ -433,9 +449,9 @@ public class Rectanglei implements Externalizable {
      *          the rectangle to test
      * @return <code>true</code> iff this rectangle contains the rectangle; <code>false</code> otherwise
      */
-    public boolean containsRectangle(Rectanglei rectangle) {
-        return rectangle.minX >= minX && rectangle.maxX <= maxX &&
-               rectangle.minY >= minY && rectangle.maxY <= maxY;
+    public boolean containsRectangle(Rectangleic rectangle) {
+        return rectangle.minX() >= minX && rectangle.maxX() <= maxX &&
+               rectangle.minY() >= minY && rectangle.maxY() <= maxY;
     }
 
     /**
@@ -801,14 +817,14 @@ public class Rectanglei implements Externalizable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Rectanglei other = (Rectanglei) obj;
-        if (maxX != other.maxX)
+        Rectangleic other = (Rectanglei) obj;
+        if (maxX != other.maxX())
             return false;
-        if (maxY != other.maxY)
+        if (maxY != other.maxY())
             return false;
-        if (minX != other.minX)
+        if (minX != other.minX())
             return false;
-        if (minY != other.minY)
+        if (minY != other.minY())
             return false;
         return true;
     }

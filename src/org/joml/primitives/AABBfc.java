@@ -161,7 +161,7 @@ public interface AABBfc {
      *          will hold the result
      * @return dest
      */
-    AABBf union(AABBf other, AABBf dest);
+    AABBf union(AABBfc other, AABBf dest);
 
     /**
      * Translate <code>this</code> by the given vector <code>xyz</code> and store the result in <code>dest</code>.
