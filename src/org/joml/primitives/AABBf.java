@@ -389,17 +389,17 @@ public class AABBf implements Externalizable, AABBfc {
      *          the other {@link AABBf}
      * @return this
      */
-    public AABBf union(AABBf other) {
+    public AABBf union(AABBfc other) {
         return this.union(other, this);
     }
 
-    public AABBf union(AABBf other, AABBf dest) {
-        dest.minX = this.minX < other.minX ? this.minX : other.minX;
-        dest.minY = this.minY < other.minY ? this.minY : other.minY;
-        dest.minZ = this.minZ < other.minZ ? this.minZ : other.minZ;
-        dest.maxX = this.maxX > other.maxX ? this.maxX : other.maxX;
-        dest.maxY = this.maxY > other.maxY ? this.maxY : other.maxY;
-        dest.maxZ = this.maxZ > other.maxZ ? this.maxZ : other.maxZ;
+    public AABBf union(AABBfc other, AABBf dest) {
+        dest.minX = this.minX < other.minX() ? this.minX : other.minX();
+        dest.minY = this.minY < other.minY() ? this.minY : other.minY();
+        dest.minZ = this.minZ < other.minZ() ? this.minZ : other.minZ();
+        dest.maxX = this.maxX > other.maxX() ? this.maxX : other.maxX();
+        dest.maxY = this.maxY > other.maxY() ? this.maxY : other.maxY();
+        dest.maxZ = this.maxZ > other.maxZ() ? this.maxZ : other.maxZ();
         return dest;
     }
 

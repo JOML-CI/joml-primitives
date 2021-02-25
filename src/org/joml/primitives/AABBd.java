@@ -563,9 +563,9 @@ public class AABBd implements Externalizable, AABBdc {
         return Intersectiond.testAabPlane(this, plane);
     }
 
-    public boolean intersectsAABB(AABBd other) {
-        return this.maxX > other.minX && this.maxY > other.minY && this.maxZ > other.minZ &&
-               this.minX < other.maxX && this.minY < other.maxY && this.minZ < other.maxZ;
+    public boolean intersectsAABB(AABBdc other) {
+        return this.maxX > other.minX() && this.maxY > other.minY() && this.maxZ > other.minZ() &&
+               this.minX < other.maxX() && this.minY < other.maxY() && this.minZ < other.maxZ();
     }
 
     public boolean intersectsSphere(double centerX, double centerY, double centerZ, double radiusSquared) {

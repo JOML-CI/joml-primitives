@@ -39,15 +39,15 @@ import org.joml.Vector2fc;
  * 
  * @author Kai Burjack
  */
-public class Circlef implements Externalizable {
+public class Circlef implements Externalizable, Circlefc {
 
     /**
-     * The x coordiante of the circle's center.
+     * The x coordinate of the circle's center.
      */
     public float x;
     
     /**
-     * The y coordiante of the circle's center.
+     * The y coordinate of the circle's center.
      */
     public float y;
     
@@ -91,13 +91,34 @@ public class Circlef implements Externalizable {
     }
 
     /**
+     * The x coordinate of the circle's center.
+     */
+    public float x() {
+        return x;
+    }
+
+    /**
+     * The y coordinate of the circle's center.
+     */
+    public float y() {
+        return y;
+    }
+
+    /**
+     * The radius of the circle.
+     */
+    public float r() {
+        return r;
+    }
+
+    /**
      * Translate <code>this</code> by the given vector <code>xy</code>.
      * 
      * @param xy
      *          the vector to translate by
      * @return this
      */
-    public Circlef translate(Vector2fc xy) {
+    public Circlefc translate(Vector2fc xy) {
         return translate(xy.x(), xy.y(), this);
     }
 
@@ -123,7 +144,7 @@ public class Circlef implements Externalizable {
      *          the y coordinate to translate by
      * @return this
      */
-    public Circlef translate(float x, float y) {
+    public Circlefc translate(float x, float y) {
         return translate(x, y, this);
     }
 

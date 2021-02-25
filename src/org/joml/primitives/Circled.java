@@ -40,15 +40,15 @@ import org.joml.Vector2fc;
  * 
  * @author Kai Burjack
  */
-public class Circled implements Externalizable {
+public class Circled implements Externalizable, Circledc {
 
     /**
-     * The x coordiante of the circle's center.
+     * The x coordinate of the circle's center.
      */
     public double x;
     
     /**
-     * The y coordiante of the circle's center.
+     * The y coordinate of the circle's center.
      */
     public double y;
     
@@ -73,6 +73,27 @@ public class Circled implements Externalizable {
         this.x = source.x;
         this.y = source.y;
         this.r = source.r;
+    }
+
+    /**
+     * The x coordinate of the circle's center.
+     */
+    public double x() {
+        return x;
+    }
+
+    /**
+     * The y coordinate of the circle's center.
+     */
+    public double y() {
+        return y;
+    }
+
+    /**
+     * The radius of the circle.
+     */
+    public double r() {
+        return r;
     }
 
     /**
