@@ -42,7 +42,7 @@ import org.joml.Vector2fc;
  * 
  * @author Kai Burjack
  */
-public class Rectangled implements Externalizable {
+public class Rectangled implements Externalizable, Rectangledc {
 
     /**
      * The x coordinate of the minimum corner.
@@ -186,6 +186,22 @@ public class Rectangled implements Externalizable {
         return this;
     }
 
+    public double minX() {
+        return minX;
+    }
+
+    public double minY() {
+        return minY;
+    }
+
+    public double maxX() {
+        return maxX;
+    }
+
+    public double maxY() {
+        return maxY;
+    }
+
     /**
      * Return the length of the rectangle in the X dimension.
      *
@@ -327,9 +343,9 @@ public class Rectangled implements Externalizable {
      *          the rectangle to test
      * @return <code>true</code> iff this rectangle contains the rectangle; <code>false</code> otherwise
      */
-    public boolean containsRectangle(Rectangled rectangle) {
-        return rectangle.minX >= minX && rectangle.maxX <= maxX &&
-               rectangle.minY >= minY && rectangle.maxY <= maxY;
+    public boolean containsRectangle(Rectangledc rectangle) {
+        return rectangle.minX() >= minX && rectangle.maxX() <= maxX &&
+               rectangle.minY() >= minY && rectangle.maxY() <= maxY;
     }
 
     /**
