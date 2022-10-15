@@ -322,6 +322,13 @@ public class AABBi implements Externalizable, AABBic {
     }
 
     /**
+     * @return the volume of the AABB
+     */
+    public double volume() {
+        return lengthX() * lengthY() * lengthZ();
+    }
+
+    /**
      * Get the size of the aabb.
      *
      * @param dest

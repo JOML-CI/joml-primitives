@@ -340,6 +340,13 @@ public class AABBd implements Externalizable, AABBdc {
     }
 
     /**
+     * @return the volume of the AABB
+     */
+    public double volume() {
+        return lengthX() * lengthY() * lengthZ();
+    }
+
+    /**
      * Get the size of the aabb.
      *
      * @param dest

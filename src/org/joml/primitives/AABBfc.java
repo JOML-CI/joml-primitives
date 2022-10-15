@@ -148,6 +148,11 @@ public interface AABBfc {
     float lengthZ();
 
     /**
+     * @return the volume of the AABB
+     */
+    double volume();
+
+    /**
      * Get the size of the aabb.
      *
      * @param dest
