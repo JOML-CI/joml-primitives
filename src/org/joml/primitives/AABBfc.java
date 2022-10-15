@@ -126,6 +126,18 @@ public interface AABBfc {
      */
     Vector3f extent(Vector3f dest);
 
+    AABBf expand(float expansion, AABBf dest);
+
+    /**
+     * @return the signed distance from a point to this AABB. Negative if the point is inside the AABB.
+     */
+    float signedDistanceTo(Vector3fc point);
+
+    /**
+     * @return the signed distance from a point to this AABB. Negative if the point is inside the AABB.
+     */
+    float signedDistanceTo(float x, float y, float z);
+
     /**
      * Return the length along the x component
      *

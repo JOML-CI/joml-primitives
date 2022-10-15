@@ -169,6 +169,103 @@ public class Intersectiond {
     public static final int INSIDE = 3;
 
     /**
+     * Returns the signed distance from a point to an AABB. Negative if it is on the inside, positive otherwise.
+     * 
+     * @param minX the minX of the AABB
+     * @param minY the minY of the AABB
+     * @param minZ the minZ of the AABB
+     * @param maxX the maxX of the AABB
+     * @param maxY the maxY of the AABB
+     * @param maxZ the maxZ of the AABB
+     * @param x the x coordinate of the point
+     * @param y the y coordinate of the point
+     * @param z the z coordinate of the point
+     * @return the signed distance from the point to the AABB
+     */
+    public static double distancePointAABB(double minX, double minY, double minZ, double maxX, double maxY, double maxZ, double x, double y, double z) {
+        boolean isPointInside = x > minX && y > minY && z > minZ && x < maxX && y < maxY && z < maxZ;
+        
+        if (isPointInside) {
+            double centerX = (minX + maxX) / 2.0;
+            double centerY = (minY + maxY) / 2.0;
+            double centerZ = (minZ + maxZ) / 2.0;
+
+            // The AABB extends from [-lenX, -lenY, -lenZ] to [lenX, lenY, lenZ]
+            double lenX = (maxX - minX) / 2.0;
+            double lenY = (maxX - minX) / 2.0;
+            double lenZ = (maxX - minX) / 2.0;
+
+            double relPosX = x - centerX;
+            double relPosY = y - centerY;
+            double relPosZ = z - centerZ;
+
+            double xDist = lenX - Math.abs(relPosX); // Dist to x-side
+            double yDist = lenY - Math.abs(relPosY); // Dist to y-side
+            double zDist = lenZ - Math.abs(relPosZ); // Dist to z-side
+            return -Math.min(xDist, Math.min(yDist, zDist)); // Make minDistToSides negative because we are inside the AABB
+        } else {
+            double closestSurfacePointX = Math.max(minX, Math.min(maxX, x));
+            double closestSurfacePointY = Math.max(minY, Math.min(maxY, y));
+            double closestSurfacePointZ = Math.max(minZ, Math.min(maxZ, z));
+            
+            double dX = closestSurfacePointX - x;
+            double dY = closestSurfacePointY - y;
+            double dZ = closestSurfacePointZ - z;
+            
+            return Math.sqrt(dX * dX + dY * dY + dZ * dZ);
+        }
+    }
+
+    /**
+     * Returns the signed distance from a point to an AABB. Negative if it is on the inside, positive otherwise.
+     *
+     * @param minX the minX of the AABB
+     * @param minY the minY of the AABB
+     * @param minZ the minZ of the AABB
+     * @param maxX the maxX of the AABB
+     * @param maxY the maxY of the AABB
+     * @param maxZ the maxZ of the AABB
+     * @param x the x coordinate of the point
+     * @param y the y coordinate of the point
+     * @param z the z coordinate of the point
+     * @return the signed distance from the point to the AABB
+     */
+    public static float distancePointAABB(float minX, float minY, float minZ, float maxX, float maxY, float maxZ, float x, float y, float z) {
+        boolean isPointInside = x > minX && y > minY && z > minZ && x < maxX && y < maxY && z < maxZ;
+
+        if (isPointInside) {
+            float centerX = (minX + maxX) / 2.0f;
+            float centerY = (minY + maxY) / 2.0f;
+            float centerZ = (minZ + maxZ) / 2.0f;
+
+            // The AABB extends from [-lenX, -lenY, -lenZ] to [lenX, lenY, lenZ]
+            float lenX = (maxX - minX) / 2.0f;
+            float lenY = (maxX - minX) / 2.0f;
+            float lenZ = (maxX - minX) / 2.0f;
+
+            float relPosX = x - centerX;
+            float relPosY = y - centerY;
+            float relPosZ = z - centerZ;
+
+            float xDist = lenX - Math.abs(relPosX); // Dist to x-side
+            float yDist = lenY - Math.abs(relPosY); // Dist to y-side
+            float zDist = lenZ - Math.abs(relPosZ); // Dist to z-side
+            return -Math.min(xDist, Math.min(yDist, zDist)); // Make minDistToSides negative because we are inside the AABB
+        } else {
+            float closestSurfacePointX = Math.max(minX, Math.min(maxX, x));
+            float closestSurfacePointY = Math.max(minY, Math.min(maxY, y));
+            float closestSurfacePointZ = Math.max(minZ, Math.min(maxZ, z));
+
+            float dX = closestSurfacePointX - x;
+            float dY = closestSurfacePointY - y;
+            float dZ = closestSurfacePointZ - z;
+
+            return Math.sqrt(dX * dX + dY * dY + dZ * dZ);
+        }
+    }
+    
+    
+    /**
      * Test whether the plane with the general plane equation <i>a*x + b*y + c*z + d = 0</i> intersects the sphere with center
      * <code>(centerX, centerY, centerZ)</code> and <code>radius</code>.
      * <p>
