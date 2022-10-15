@@ -125,6 +125,62 @@ public interface AABBdc {
      */
     Vector3f extent(Vector3f dest);
 
+    AABBd expand(double expansion, AABBd dest);
+
+    /**
+     * @return the signed distance from a point to this AABB. Negative if the point is inside the AABB.
+     */
+    double signedDistanceTo(Vector3dc point);
+
+    /**
+     * @return the signed distance from a point to this AABB. Negative if the point is inside the AABB.
+     */
+    double signedDistanceTo(double x, double y, double z);
+
+    /**
+     * Return the length along the x component
+     *
+     * @return length in the x dimension
+     */
+    double lengthX();
+
+    /**
+     * Return the length along the y component
+     *
+     * @return length in the y dimension
+     */
+    double lengthY();
+
+    /**
+     * Return the length along the z component
+     *
+     * @return length in the z dimension
+     */
+    double lengthZ();
+
+    /**
+     * @return the volume of the AABB
+     */
+    double volume();
+
+    /**
+     * Get the size of the aabb.
+     *
+     * @param dest
+     *         will hold the result
+     * @return dest
+     */
+    Vector3f getSize(Vector3f dest);
+
+    /**
+     * Get the size of the aabb.
+     *
+     * @param dest
+     *         will hold the result
+     * @return dest
+     */
+    Vector3d getSize(Vector3d dest);
+
     /**
      * Compute the union of <code>this</code> and the given point <code>(x, y, z)</code> and store the result in <code>dest</code>.
      *
@@ -308,7 +364,7 @@ public interface AABBdc {
      *          the other AABB
      * @return <code>true</code> iff both AABBs intersect; <code>false</code> otherwise
      */
-    boolean intersectsAABB(AABBd other);
+    boolean intersectsAABB(AABBdc other);
 
     /**
      * Test whether this AABB intersects the given sphere with equation

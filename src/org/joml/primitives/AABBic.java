@@ -23,12 +23,7 @@
  */
 package org.joml.primitives;
 
-import org.joml.Matrix4fc;
-import org.joml.Vector2f;
-import org.joml.Vector3d;
-import org.joml.Vector3f;
-import org.joml.Vector3fc;
-import org.joml.Vector3ic;
+import org.joml.*;
 
 /**
  * Interface to a read-only view of an axis-aligned box defined via the minimum
@@ -131,6 +126,71 @@ public interface AABBic {
     Vector3f extent(Vector3f dest);
 
 
+    AABBi expand(int expansion, AABBi dest);
+
+    /**
+     * @return the signed distance from a point to this AABB. Negative if the point is inside the AABB.
+     */
+    double signedDistanceTo(Vector3dc point);
+
+    /**
+     * @return the signed distance from a point to this AABB. Negative if the point is inside the AABB.
+     */
+    double signedDistanceTo(double x, double y, double z);
+
+    /**
+     * Return the length along the x component
+     *
+     * @return length in the x dimension
+     */
+    int lengthX();
+
+    /**
+     * Return the length along the y component
+     *
+     * @return length in the y dimension
+     */
+    int lengthY();
+
+    /**
+     * Return the length along the z component.
+     *
+     * @return length in the z dimension
+     */
+    int lengthZ();
+
+    /**
+     * @return the volume of the AABB
+     */
+    double volume();
+
+    /**
+     * Get the size of the aabb.
+     *
+     * @param dest
+     *         will hold the result
+     * @return dest
+     */
+    Vector3i getSize(Vector3i dest);
+
+    /**
+     * Get the size of the aabb.
+     *
+     * @param dest
+     *         will hold the result
+     * @return dest
+     */
+    Vector3f getSize(Vector3f dest);
+
+    /**
+     * Get the size of the aabb.
+     *
+     * @param dest
+     *         will hold the result
+     * @return dest
+     */
+    Vector3d getSize(Vector3d dest);
+
     /**
      * Compute the union of <code>this</code> and the given point <code>(x, y, z)</code> and store the result in <code>dest</code>.
      *
@@ -169,6 +229,17 @@ public interface AABBic {
      * @return dest
      */
     AABBi union(AABBic other, AABBi dest);
+
+    /**
+     * Translate <code>this</code> by the given vector <code>xyz</code> and store the result in <code>dest</code>.
+     *
+     * @param xyz
+     *          the vector to translate by
+     * @param dest
+     *          will hold the result
+     * @return dest
+     */
+    AABBi translate(Vector3ic xyz, AABBi dest);
 
     /**
      * Translate <code>this</code> by the vector <code>(x, y, z)</code> and store the result in <code>dest</code>.

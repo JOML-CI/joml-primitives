@@ -312,6 +312,34 @@ public class AABBd implements Externalizable, AABBdc {
         return dest.set((maxX - minX) / 2.0f, (maxY - minY) / 2.0f, (maxZ - minZ) / 2.0f);
     }
 
+    public AABBd expand(double expansion) {
+        return expand(expansion, this);
+    }
+
+    public AABBd expand(double expansion, AABBd dest) {
+        dest.minX = minX - expansion;
+        dest.minY = minY - expansion;
+        dest.minZ = minZ - expansion;
+        dest.maxX = maxX + expansion;
+        dest.maxY = maxY + expansion;
+        dest.maxZ = maxZ + expansion;
+        return dest;
+    }
+
+    /**
+     * @return the signed distance from a point to this AABB. Negative if the point is inside the AABB.
+     */
+    public double signedDistanceTo(Vector3dc point) {
+        return signedDistanceTo(point.x(), point.y(), point.z());
+    }
+
+    /**
+     * @return the signed distance from a point to this AABB. Negative if the point is inside the AABB.
+     */
+    public double signedDistanceTo(double x, double y, double z) {
+        return Intersectiond.distancePointAABB(minX, minY, minZ, maxX, maxY, maxZ, x, y, z);
+    }
+
     /**
      * Return the length along the x component
      *
@@ -337,6 +365,13 @@ public class AABBd implements Externalizable, AABBdc {
      */
     public double lengthZ(){
         return maxZ - minZ;
+    }
+
+    /**
+     * @return the volume of the AABB
+     */
+    public double volume() {
+        return lengthX() * lengthY() * lengthZ();
     }
 
     /**
@@ -563,9 +598,9 @@ public class AABBd implements Externalizable, AABBdc {
         return Intersectiond.testAabPlane(this, plane);
     }
 
-    public boolean intersectsAABB(AABBd other) {
-        return this.maxX > other.minX && this.maxY > other.minY && this.maxZ > other.minZ &&
-               this.minX < other.maxX && this.minY < other.maxY && this.minZ < other.maxZ;
+    public boolean intersectsAABB(AABBdc other) {
+        return this.maxX > other.minX() && this.maxY > other.minY() && this.maxZ > other.minZ() &&
+               this.minX < other.maxX() && this.minY < other.maxY() && this.minZ < other.maxZ();
     }
 
     public boolean intersectsSphere(double centerX, double centerY, double centerZ, double radiusSquared) {

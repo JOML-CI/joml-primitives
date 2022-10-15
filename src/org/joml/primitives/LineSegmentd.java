@@ -39,7 +39,7 @@ import org.joml.Vector3dc;
  * 
  * @author Kai Burjack
  */
-public class LineSegmentd implements Externalizable {
+public class LineSegmentd implements Externalizable, LineSegmentdc {
 
     /**
      * The x coordinate of the first point.
@@ -213,4 +213,27 @@ public class LineSegmentd implements Externalizable {
         bZ = in.readDouble();
     }
 
+    public double aX() {
+        return aX;
+    }
+
+    public double aY() {
+        return aY;
+    }
+
+    public double aZ() {
+        return aZ;
+    }
+
+    public double bX() {
+        return bX;
+    }
+
+    public double bY() {
+        return bY;
+    }
+
+    public double bZ() {
+        return bZ;
+    }
 }

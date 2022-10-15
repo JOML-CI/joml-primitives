@@ -30,14 +30,9 @@ import java.io.ObjectOutput;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
+import org.joml.*;
 import org.joml.Math;
-import org.joml.Matrix4fc;
-import org.joml.Options;
 import org.joml.Runtime;
-import org.joml.Vector2f;
-import org.joml.Vector3d;
-import org.joml.Vector3f;
-import org.joml.Vector3fc;
 
 /**
  * Represents an axis-aligned box defined via the minimum and maximum corner coordinates as single-precision floats.
@@ -293,6 +288,35 @@ public class AABBf implements Externalizable, AABBfc {
         return dest.set((maxX - minX) / 2.0f, (maxY - minY) / 2.0f, (maxZ - minZ) / 2.0f);
     }
 
+    public AABBf expand(float expansion) {
+        return expand(expansion, this);
+    }
+
+    public AABBf expand(float expansion, AABBf dest) {
+        dest.minX = minX - expansion;
+        dest.minY = minY - expansion;
+        dest.minZ = minZ - expansion;
+        dest.maxX = maxX + expansion;
+        dest.maxY = maxY + expansion;
+        dest.maxZ = maxZ + expansion;
+        return dest;
+    }
+    
+    /**
+     * @return the signed distance from a point to this AABB. Negative if the point is inside the AABB.
+     */
+    public float signedDistanceTo(Vector3fc point) {
+        return signedDistanceTo(point.x(), point.y(), point.z());
+    }
+
+    /**
+     * @return the signed distance from a point to this AABB. Negative if the point is inside the AABB.
+     */
+    public float signedDistanceTo(float x, float y, float z) {
+        return Intersectiond.distancePointAABB(minX, minY, minZ, maxX, maxY, maxZ, x, y, z);
+    }
+
+
     /**
      * Return the length along the x component
      *
@@ -318,6 +342,13 @@ public class AABBf implements Externalizable, AABBfc {
      */
     public float lengthZ(){
         return maxZ - minZ;
+    }
+
+    /**
+     * @return the volume of the AABB
+     */
+    public double volume() {
+        return lengthX() * lengthY() * lengthZ();
     }
 
     /**
@@ -389,17 +420,17 @@ public class AABBf implements Externalizable, AABBfc {
      *          the other {@link AABBf}
      * @return this
      */
-    public AABBf union(AABBf other) {
+    public AABBf union(AABBfc other) {
         return this.union(other, this);
     }
 
-    public AABBf union(AABBf other, AABBf dest) {
-        dest.minX = this.minX < other.minX ? this.minX : other.minX;
-        dest.minY = this.minY < other.minY ? this.minY : other.minY;
-        dest.minZ = this.minZ < other.minZ ? this.minZ : other.minZ;
-        dest.maxX = this.maxX > other.maxX ? this.maxX : other.maxX;
-        dest.maxY = this.maxY > other.maxY ? this.maxY : other.maxY;
-        dest.maxZ = this.maxZ > other.maxZ ? this.maxZ : other.maxZ;
+    public AABBf union(AABBfc other, AABBf dest) {
+        dest.minX = this.minX < other.minX() ? this.minX : other.minX();
+        dest.minY = this.minY < other.minY() ? this.minY : other.minY();
+        dest.minZ = this.minZ < other.minZ() ? this.minZ : other.minZ();
+        dest.maxX = this.maxX > other.maxX() ? this.maxX : other.maxX();
+        dest.maxY = this.maxY > other.maxY() ? this.maxY : other.maxY();
+        dest.maxZ = this.maxZ > other.maxZ() ? this.maxZ : other.maxZ();
         return dest;
     }
 

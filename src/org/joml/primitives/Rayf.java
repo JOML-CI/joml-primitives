@@ -39,7 +39,7 @@ import org.joml.Vector3fc;
  *
  * @author Kai Burjack
  */
-public class Rayf implements Externalizable {
+public class Rayf implements Externalizable, Rayfc {
 
     /**
      * The x coordinate of the ray's origin.
@@ -205,4 +205,27 @@ public class Rayf implements Externalizable {
         dZ = in.readFloat();
     }
 
+    public float oX() {
+        return oX;
+    }
+
+    public float oY() {
+        return oY;
+    }
+
+    public float oZ() {
+        return oZ;
+    }
+
+    public float dX() {
+        return dX;
+    }
+
+    public float dY() {
+        return dY;
+    }
+
+    public float dZ() {
+        return dZ;
+    }
 }

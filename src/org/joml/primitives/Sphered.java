@@ -40,7 +40,7 @@ import org.joml.Vector3fc;
  * 
  * @author Kai Burjack
  */
-public class Sphered implements Externalizable {
+public class Sphered implements Externalizable, Spheredc {
 
     /**
      * The x coordinate of the sphere's center.
@@ -280,4 +280,19 @@ public class Sphered implements Externalizable {
         r = in.readDouble();
     }
 
+    public double x() {
+        return x;
+    }
+
+    public double y() {
+        return y;
+    }
+
+    public double z() {
+        return z;
+    }
+
+    public double r() {
+        return r;
+    }
 }

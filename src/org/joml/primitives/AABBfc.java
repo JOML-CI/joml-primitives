@@ -126,6 +126,62 @@ public interface AABBfc {
      */
     Vector3f extent(Vector3f dest);
 
+    AABBf expand(float expansion, AABBf dest);
+
+    /**
+     * @return the signed distance from a point to this AABB. Negative if the point is inside the AABB.
+     */
+    float signedDistanceTo(Vector3fc point);
+
+    /**
+     * @return the signed distance from a point to this AABB. Negative if the point is inside the AABB.
+     */
+    float signedDistanceTo(float x, float y, float z);
+
+    /**
+     * Return the length along the x component
+     *
+     * @return length in the x dimension
+     */
+    float lengthX();
+
+    /**
+     * Return the length along the y component
+     *
+     * @return length in the y dimension
+     */
+    float lengthY();
+
+    /**
+     * Return the length along the z component
+     *
+     * @return length in the z dimension
+     */
+    float lengthZ();
+
+    /**
+     * @return the volume of the AABB
+     */
+    double volume();
+
+    /**
+     * Get the size of the aabb.
+     *
+     * @param dest
+     *         will hold the result
+     * @return dest
+     */
+    Vector3f getSize(Vector3f dest);
+
+    /**
+     * Get the size of the aabb.
+     *
+     * @param dest
+     *         will hold the result
+     * @return dest
+     */
+    Vector3d getSize(Vector3d dest);
+
     /**
      * Compute the union of <code>this</code> and the given point <code>(x, y, z)</code> and store the result in <code>dest</code>.
      *
@@ -161,7 +217,7 @@ public interface AABBfc {
      *          will hold the result
      * @return dest
      */
-    AABBf union(AABBf other, AABBf dest);
+    AABBf union(AABBfc other, AABBf dest);
 
     /**
      * Translate <code>this</code> by the given vector <code>xyz</code> and store the result in <code>dest</code>.

@@ -28,15 +28,8 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
+import org.joml.*;
 import org.joml.Math;
-import org.joml.Matrix4fc;
-import org.joml.RoundingMode;
-import org.joml.Vector2f;
-import org.joml.Vector3d;
-import org.joml.Vector3f;
-import org.joml.Vector3fc;
-import org.joml.Vector3i;
-import org.joml.Vector3ic;
 
 /**
  * Represents an axis-aligned box defined via the minimum and maximum corner coordinates as ints.
@@ -294,6 +287,34 @@ public class AABBi implements Externalizable, AABBic {
         return dest.set((maxX - minX) / 2.0f, (maxY - minY) / 2.0f, (maxZ - minZ) / 2.0f);
     }
 
+    public AABBi expand(int expansion) {
+        return expand(expansion, this);
+    }
+
+    public AABBi expand(int expansion, AABBi dest) {
+        dest.minX = minX - expansion;
+        dest.minY = minY - expansion;
+        dest.minZ = minZ - expansion;
+        dest.maxX = maxX + expansion;
+        dest.maxY = maxY + expansion;
+        dest.maxZ = maxZ + expansion;
+        return dest;
+    }
+
+    /**
+     * @return the signed distance from a point to this AABB. Negative if the point is inside the AABB.
+     */
+    public double signedDistanceTo(Vector3dc point) {
+        return signedDistanceTo(point.x(), point.y(), point.z());
+    }
+
+    /**
+     * @return the signed distance from a point to this AABB. Negative if the point is inside the AABB.
+     */
+    public double signedDistanceTo(double x, double y, double z) {
+        return Intersectiond.distancePointAABB(minX, minY, minZ, maxX, maxY, maxZ, x, y, z);
+    }
+
     /**
      * Return the length along the x component
      *
@@ -319,6 +340,13 @@ public class AABBi implements Externalizable, AABBic {
      */
     public int lengthZ(){
         return maxZ - minZ;
+    }
+
+    /**
+     * @return the volume of the AABB
+     */
+    public double volume() {
+        return lengthX() * lengthY() * lengthZ();
     }
 
     /**

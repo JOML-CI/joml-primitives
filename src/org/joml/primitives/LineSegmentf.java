@@ -39,7 +39,7 @@ import org.joml.Vector3fc;
  * 
  * @author Kai Burjack
  */
-public class LineSegmentf implements Externalizable {
+public class LineSegmentf implements Externalizable, LineSegmentfc {
 
     /**
      * The x coordinate of the first point.
@@ -206,4 +206,27 @@ public class LineSegmentf implements Externalizable {
         bZ = in.readFloat();
     }
 
+    public float aX() {
+        return aX;
+    }
+
+    public float aY() {
+        return aY;
+    }
+
+    public float aZ() {
+        return aZ;
+    }
+
+    public float bX() {
+        return bX;
+    }
+
+    public float bY() {
+        return bY;
+    }
+
+    public float bZ() {
+        return bZ;
+    }
 }

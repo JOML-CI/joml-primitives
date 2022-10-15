@@ -39,7 +39,7 @@ import org.joml.Vector3dc;
  *
  * @author Kai Burjack
  */
-public class Rayd implements Externalizable {
+public class Rayd implements Externalizable, Raydc {
 
     /**
      * The x coordinate of the ray's origin.
@@ -212,4 +212,27 @@ public class Rayd implements Externalizable {
         dZ = in.readDouble();
     }
 
+    public double oX() {
+        return oX;
+    }
+
+    public double oY() {
+        return oY;
+    }
+
+    public double oZ() {
+        return oZ;
+    }
+
+    public double dX() {
+        return dX;
+    }
+
+    public double dY() {
+        return dY;
+    }
+
+    public double dZ() {
+        return dZ;
+    }
 }
