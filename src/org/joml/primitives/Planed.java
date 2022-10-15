@@ -43,7 +43,7 @@ import org.joml.Vector4d;
  * 
  * @author Kai Burjack
  */
-public class Planed implements Externalizable {
+public class Planed implements Externalizable, Planedc {
 
     /**
      * The factor <code>a</code> in the plane equation <code>a*x + b*y + c*z + d = 0</code>.
@@ -358,4 +358,19 @@ public class Planed implements Externalizable {
         d = in.readDouble();
     }
 
+    public double a() {
+        return a;
+    }
+
+    public double b() {
+        return b;
+    }
+
+    public double c() {
+        return c;
+    }
+
+    public double d() {
+        return d;
+    }
 }

@@ -42,7 +42,7 @@ import org.joml.Vector4f;
  * 
  * @author Kai Burjack
  */
-public class Planef implements Externalizable {
+public class Planef implements Externalizable, Planefc {
 
     /**
      * The factor <code>a</code> in the plane equation <code>a*x + b*y + c*z + d = 0</code>.
@@ -331,4 +331,19 @@ public class Planef implements Externalizable {
         d = in.readFloat();
     }
 
+    public float a() {
+        return a;
+    }
+
+    public float b() {
+        return b;
+    }
+
+    public float c() {
+        return c;
+    }
+
+    public float d() {
+        return d;
+    }
 }
