@@ -127,6 +127,45 @@ public interface AABBfc {
     Vector3f extent(Vector3f dest);
 
     /**
+     * Return the length along the x component
+     *
+     * @return length in the x dimension
+     */
+    float lengthX();
+
+    /**
+     * Return the length along the y component
+     *
+     * @return length in the y dimension
+     */
+    float lengthY();
+
+    /**
+     * Return the length along the z component
+     *
+     * @return length in the z dimension
+     */
+    float lengthZ();
+
+    /**
+     * Get the size of the aabb.
+     *
+     * @param dest
+     *         will hold the result
+     * @return dest
+     */
+    Vector3f getSize(Vector3f dest);
+
+    /**
+     * Get the size of the aabb.
+     *
+     * @param dest
+     *         will hold the result
+     * @return dest
+     */
+    Vector3d getSize(Vector3d dest);
+
+    /**
      * Compute the union of <code>this</code> and the given point <code>(x, y, z)</code> and store the result in <code>dest</code>.
      *
      * @param x
