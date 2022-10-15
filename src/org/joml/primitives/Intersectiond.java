@@ -211,8 +211,8 @@ public class Intersectiond {
      *          the sphere
      * @return <code>true</code> iff the plane intersects the sphere; <code>false</code> otherwise
      */
-    public static boolean testPlaneSphere(Planed plane, Spheref sphere) {
-        return testPlaneSphere(plane.a, plane.b, plane.c, plane.d, sphere.x, sphere.y, sphere.z, sphere.r);
+    public static boolean testPlaneSphere(Planed plane, Spherefc sphere) {
+        return testPlaneSphere(plane.a, plane.b, plane.c, plane.d, sphere.x(), sphere.y(), sphere.z(), sphere.r());
     }
 
     /**
@@ -829,8 +829,9 @@ public class Intersectiond {
      *              will hold the center of the circle of intersection in the <code>(x, y, z)</code> components and the radius in the w component
      * @return <code>true</code> iff both spheres intersect; <code>false</code> otherwise
      */
-    public static boolean intersectSphereSphere(Spheref sphereA, Spheref sphereB, Vector4d centerAndRadiusOfIntersectionCircle) {
-        return intersectSphereSphere(sphereA.x, sphereA.y, sphereA.z, sphereA.r*sphereA.r, sphereB.x, sphereB.y, sphereB.z, sphereB.r*sphereB.r, centerAndRadiusOfIntersectionCircle);
+    public static boolean intersectSphereSphere(Spherefc sphereA, Spherefc sphereB, Vector4d centerAndRadiusOfIntersectionCircle) {
+        return intersectSphereSphere(sphereA.x(), sphereA.y(), sphereA.z(),
+            sphereA.r()*sphereA.r(), sphereB.x(), sphereB.y(), sphereB.z(), sphereB.r()*sphereB.r(), centerAndRadiusOfIntersectionCircle);
     }
 
     /**

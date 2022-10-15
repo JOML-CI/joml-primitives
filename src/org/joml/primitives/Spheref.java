@@ -39,7 +39,7 @@ import org.joml.Vector3fc;
  * 
  * @author Kai Burjack
  */
-public class Spheref implements Externalizable {
+public class Spheref implements Externalizable, Spherefc {
 
     /**
      * The x coordinate of the sphere's center.
@@ -109,6 +109,22 @@ public class Spheref implements Externalizable {
         this.y = y;
         this.z = z;
         this.r = r;
+    }
+
+    public float x() {
+        return x;
+    }
+
+    public float y() {
+        return y;
+    }
+
+    public float z() {
+        return z;
+    }
+
+    public float r() {
+        return r;
     }
 
     /**
